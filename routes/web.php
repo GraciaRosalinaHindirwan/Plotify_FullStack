@@ -33,3 +33,7 @@ Route::get('/admin/user', function () {
 Route::get('/pemilik/choose/agent', function () {
     return view('pemilik/choose-agent');
 });
+
+Route::get('/pemilik/property/add', function () {
+    return view('pemilik/add-property');
+});

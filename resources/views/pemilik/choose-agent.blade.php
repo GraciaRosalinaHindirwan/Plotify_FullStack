@@ -39,5 +39,35 @@
                 </button>
             </div>
     </div>
+
+    <div class="main-container">
+        <div class="agent-card-layout">
+
+        @for($i = 0; $i < 10; $i++)
+        <article class="agent-card">
+            <div class="profile">
+                <div class="avatar" style="width: 80px;height: 80px;">
+                AU
+                </div>
+            </div>
+            <h1 class="">Rizki Pratama</h1>
+
+            <div class="agent-card-item-wrapper">
+                <img src="/img/call.png" alt="call icon">
+                <span>088225357849</span>
+            </div>
+            <div class="agent-card-item-wrapper">
+                <img src="/img/location.png" alt="location icon">
+                <span>Bantul - Yogyakarta</span>
+            </div>
+
+            <div class="gradient-divider">
+            </div>
+
+            <a class="btn btn-outline-primary" style="width: 100%;" href="google.com">Buat Janji Temu</a>
+        </article>
+        @endfor
+    </div>
+    </div>
 </body>
 </html>

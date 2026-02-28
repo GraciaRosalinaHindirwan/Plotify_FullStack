@@ -93,27 +93,6 @@ body {
         0 0 20px rgba(243, 117, 194, 0.4) !important;
 }
 
-.btn-outline-primary {
-    border: 3px solid transparent;
-
-    background:
-        linear-gradient(var(--color-surface), var(--color-surface)) padding-box,
-        var(--btn-gradient) border-box;
-
-    color: var(--color-text);
-    border-radius: 10px;
-    transition: all 0.25s ease;
-}
-
-.btn-outline-primary:hover {
-    border: 2px solid transparent;
-    background: var(--btn-gradient2);
-    color: white;
-    box-shadow: 
-        0 0 0 2px rgba(243, 117, 194, 0.3),
-        0 0 12px rgba(243, 117, 194, 0.7),
-        0 0 20px rgba(243, 117, 194, 0.4) !important;
-}
 
 .link {
     color: var(--color-accent);

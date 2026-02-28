@@ -1,5 +1,4 @@
 <header class="header">
-  <img src="/img/logo.png" alt="logo" class="logo_image">
   <nav class="navbar">
     <img src="/img/arrow.png" alt="arrow" class="arrow_logo">
     <div class="navbar_menu">
