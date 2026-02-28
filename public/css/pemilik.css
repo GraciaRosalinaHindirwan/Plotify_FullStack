@@ -78,12 +78,11 @@ body {
 }
 
 .form-control{
-  background-color: var(--color-bg);
-  color: var(--color-text);
-  border: 2px solid transparent;
-  border-radius: 8px;
-  background: linear-gradient(var(--color-surface)) padding-box,
-    var(--btn-gradient2) border-box;
+    background: linear-gradient(var(--color-surface)) padding-box,
+                var(--btn-gradient2) border-box;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    padding: 12px;
 }
 
 .form-control:focus{
@@ -92,7 +91,7 @@ body {
   background:
     linear-gradient(var(--color-surface), var(--color-surface)) padding-box,
     var(--btn-gradient2) border-box;
-  /* glow luar */
+
   box-shadow:
     0 0 0 2px rgba(243, 117, 194, 0.3),
     0 0 12px rgba(243, 117, 194, 0.7),
@@ -100,9 +99,6 @@ body {
   color: var(--color-text);
 }
 
-.form-control::placeholder{
-  color: var(--color-text);
-}
 
 .input-group-text{
   background-color: var(--color-bg);
@@ -354,3 +350,4 @@ body {
         0 0 12px rgba(243, 117, 194, 0.7),
         0 0 20px rgba(243, 117, 194, 0.4) !important;
 }
+

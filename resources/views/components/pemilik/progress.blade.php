@@ -20,7 +20,12 @@
 
     <div class="step">
         <div class="circle">3</div>
-        <div class="label">review</div>
+        <div class="label">Janji Temu</div>
+    </div>
+
+     <div class="step">
+        <div class="circle">4</div>
+        <div class="label">Review</div>
     </div>
 
 </div>

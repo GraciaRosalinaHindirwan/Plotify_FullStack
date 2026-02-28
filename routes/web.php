@@ -37,3 +37,7 @@ Route::get('/pemilik/choose/agent', function () {
 Route::get('/pemilik/property/add', function () {
     return view('pemilik/add-property');
 });
+
+Route::get('/pemilik/appoinment', function () {
+    return view('pemilik/appoinment');
+});
