@@ -41,3 +41,11 @@ Route::get('/pemilik/property/add', function () {
 Route::get('/pemilik/appoinment', function () {
     return view('pemilik/appoinment');
 });
+
+Route::get('/admin/home', function () {
+    return view('admin/home-admin');
+});
+
+Route::get('/admin/test', function () {
+    return view('admin/test');
+});
