@@ -35,20 +35,7 @@
     <!-- CONTENT -->
     <div class="main-content">
 
-      <div class="content-header">
-        <h3 class="title">Registrasi Agen dan Notaris</h3>
-        <div class="header-right">
-          <div class="profile">
-            <h3 class="admin-name">Admin User</h3>
-            <p class="admin-role">Administrator</p>
-          </div>
-
-          <div class="avatar">
-            AU
-          </div>
-        </div>
-      </div>
-      <hr class="divider">
+      @include("components/admin/header")
 
       <div class="header-right">
         <img src="/img/formulir.png" alt="" id="dashboard-logo">

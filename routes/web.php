@@ -18,12 +18,14 @@ Route::get('/admin/login', function () {
     return view('admin/login');
 });
 
-Route::get('/admin/dashboard', function () {
-    return view('admin/dashboard');
+Route::get('/admin/home', function () {
+    return view('admin/home-admin', ["pageTitle" => "Dashboard"]);
 });
 
 Route::get('/admin/account/manage', function () {
-    return view('admin/manage-acc');
+    return view('admin/manage-acc', [
+        "pageTitle" => "Registrasi Agen dan Notaris"
+    ]);
 });
 
 Route::get('/admin/user', function () {
@@ -40,12 +42,4 @@ Route::get('/pemilik/property/add', function () {
 
 Route::get('/pemilik/appoinment', function () {
     return view('pemilik/appoinment');
-});
-
-Route::get('/admin/home', function () {
-    return view('admin/home-admin');
-});
-
-Route::get('/admin/test', function () {
-    return view('admin/test');
 });

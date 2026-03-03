@@ -20,10 +20,10 @@ bg-[linear-gradient(var(--color-bg),var(--color-bg)),linear-gradient(180deg,#7c3
       flex
       items-center
       gap-[16px]
-      m-0
+      m-0s
       ">
         <img src="/img/Logo.png" alt="Logo" class="m-0 w-[80px] h-auto">
-        <h2 class="text-[var(--h3-size)] font-[var(--fw-semibold)] text-[var(--color-text)] tracking-[0.3px]">Admin </h2>
+        <h2 class="">Admin</h2>
       </div>
 
       <hr class="border-0 h-[2px] bg-none [background:var(--btn-gradient2)] my-[15px] opacity-50">
@@ -54,27 +54,31 @@ bg-[linear-gradient(var(--color-bg),var(--color-bg)),linear-gradient(180deg,#7c3
           </div>
 
           <ul class="list-none pt-[10px] pl-[34px] m-0 hidden" id="submenu">
+            @php
+                $manajemenAccountLists = [
+                  [
+                    "link" => "/admin/account/manage",
+                    "name" => "Registrasi Agen dan Notaris"
+                  ],
+                  [
+                    "link" => "/admin/user",
+                    "name" => "Daftar Pengguna"
+                  ],
+                ]
+            @endphp
+
+            @foreach($manajemenAccountLists as $manajemenAccountList)
             <li class="px-[14px] py-[12px] mb-[10px] rounded-[10px]
            border-2 border-[var(--color-highlight)]
            bg-[#050505]
            transition-all duration-200
            hover:bg-[var(--color-surface)] 
            hover:shadow-[0_0_10px_var(--color-highlight)]">
-              <a class="!no-underline !text-[var(--color-text)]" href="/admin/account/manage">
-              Registrasi Agen dan Notaris 
+              <a class="!no-underline !text-[var(--color-text)]" href="{{ $manajemenAccountList["link"] }}">
+              {{ $manajemenAccountList["name"] }} 
               </a>
             </li>
-            
-            <li class="px-[14px] py-[12px] mb-[10px] rounded-[10px]
-           border-2 border-[var(--color-highlight)]
-           bg-[#050505]
-           transition-all duration-200
-           hover:bg-[var(--color-surface)] 
-           hover:shadow-[0_0_10px_var(--color-highlight)]">
-              <a href="/admin/user" class="!no-underline !text-[var(--color-text)]">
-              Daftar Pengguna
-              </a>
-            </li>
+            @endforeach
           </ul>
         </li>
       </ul>

@@ -75,6 +75,11 @@
 
 }
 
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--color-bg);
+}
+
 
 .btn-outline-primary {
     border: 1px solid transparent;
