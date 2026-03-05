@@ -43,3 +43,9 @@ Route::get('/pemilik/property/add', function () {
 Route::get('/pemilik/appoinment', function () {
     return view('pemilik/appoinment');
 });
+
+Route::prefix('/agent')->group(function () {
+    Route::get('/appointment', function () {
+        return view("agent/appointment");
+    });
+});
