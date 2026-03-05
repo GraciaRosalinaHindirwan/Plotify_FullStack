@@ -48,4 +48,8 @@ Route::prefix('/agent')->group(function () {
     Route::get('/appointment', function () {
         return view("agent/appointment");
     });
+
+    Route::get('/appointment/{id}', function () {
+        return view("agent/appointment-detail");
+    });
 });
