@@ -23,7 +23,7 @@ bg-[linear-gradient(var(--color-bg),var(--color-bg)),linear-gradient(180deg,#7c3
       m-0s
       ">
         <img src="/img/Logo.png" alt="Logo" class="m-0 w-[80px] h-auto">
-        <h2 class="">Admin</h2>
+        <h2 class="font-semibold" style="font-size: var(--h2-size)">Admin</h2>
       </div>
 
       <hr class="border-0 h-[2px] bg-none [background:var(--btn-gradient2)] my-[15px] opacity-50">

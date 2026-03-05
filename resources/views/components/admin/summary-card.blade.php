@@ -15,7 +15,7 @@
                 box-shadow:0 0 20px rgba(168,85,247,0.15);">
                     <div class="flex items-center gap-[12px] text-[var(--color-text)] font-medium">
                         <div class="size-[40px] rounded-md flex items-center justify-center border border-[var(--btn-primary)] text-[var(--btn-gradient-logo)]" style="font-size: 20px;">
-                            <i class="bi bi-people"></i>
+                            <i class="fa-solid fa-people-line"></i>
                         </div>
                         <span>Total Agen</span>
                     </div>

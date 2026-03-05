@@ -1,12 +1,12 @@
 <div class="flex w-full justify-between items-center">
     <h3 class="text-[var(--color-text)] font-semibold" style="font-size: var(--h2-size);">{{ $pageTitle }}</h3>
-    <div class="header-right">
-        <div class="profile">
-            <h3 class="admin-name">Admin User</h3>
-            <p class="admin-role">Administrator</p>
+    <div class="flex items-center gap-[12px]">
+        <div class="flex flex-col gap-[4px] text-right">
+            <h3 class="font-semibold text-[var(--color-text)]" style="font-size: var(--h4-size);">Admin User</h3>
+            <p class="font-[var(--body-md)] text-[var(--color-text)]">Administrator</p>
         </div>
 
-        <div class="avatar">
+        <div class="size-[50px] rounded-full text-[var(--color-text)] flex items-center justify-center font-semibold" style="background:var(--btn-gradient-logo);">
             AU
         </div>
     </div>
