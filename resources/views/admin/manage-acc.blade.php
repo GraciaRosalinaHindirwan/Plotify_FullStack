@@ -1,52 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends("layouts/admin")
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard Admin</title>
-  <!-- Bootstrap -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
-    integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
-    crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-  <!-- font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,400;1,600&display=swap"
-    rel="stylesheet">
-  <!-- link -->
-  <link rel="stylesheet" href="/css/design-system.css">
-  <link rel="stylesheet" href="/css/manajemen-akun.css">
-
-</head>
-
-<body>
-
-  <div class="layout">
-    @include('components/admin/sidebar')
-
+@section("content")
     <!-- CONTENT -->
-    <div class="main-content">
-
+    <div class="w-full px-6 py-4">
       @include("components/admin/header")
 
-      <div class="header-right">
+      <div class="flex items-center gap-[12px]">
         <img src="/img/formulir.png" alt="" id="dashboard-logo">
-        <div class="content-body">
-          <p class="body-text-title">Formulir Registrasi Akun</p>
+        <div>
+          <p class="text-[var(--color-text)] font-semibold" style="font-size: var(--h2-size)">Formulir Registrasi Akun</p>
         </div>
       </div>
 
       <form action="">
-        <div class="body-form">
-          <div class="row-form">
+        <div class="p-8 flex flex-col gap-4">
+          <div class="flex gap-[24px]">
+            <div class="relative w-full">
+            
+            <input 
+              type="text"
+              name="namaLengkap"
+              class="peer w-full border border-transparent rounded-lg p-3 pt-5 outline-none focus:border-pink-500 text-[var(--color-text)]
+              focus:shadow-[0_0_0_2px_rgba(243,117,194,0.3),0_0_12px_rgba(243,117,194,0.7),0_0_20px_rgba(243,117,194,0.4)]" 
+              style="background: linear-gradient(var(--color-surface)) padding-box,
+              var(--btn-gradient2) border-box ;"
+            />
+
+            <label 
+              class="absolute left-3 top-3 text-[var(--color-text)] text-sm transition-all 
+                    peer-placeholder-shown:top-3 
+                    peer-placeholder-shown:text-base 
+                    peer-focus:top-1 
+                    peer-focus:text-xs 
+                    peer-focus:text-[var(--color-text)]">
+              Nama Lengkap
+            </label>
+
+          </div>
             <div class="form-floating mb-3">
               <input type="text" class="form-control" id="floatingNama" placeholder="nama">
               <label for="floatingNama" style="color:var(--color-text); font-size: var(--body-sm)">Nama Lengkap</label>
@@ -115,8 +105,9 @@
       </form>
     </div>
   </div>
+@endsection
 
-</body>
+@push("scripts")
 <script src="/scripts/manajemen-akun.js"></script>
 <script>
   function toggleDropdown() {
@@ -151,6 +142,5 @@
     }
   });
 </script>
+@endpush
 
-
-</html>
