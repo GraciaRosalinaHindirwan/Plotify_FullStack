@@ -52,4 +52,8 @@ Route::prefix('/agent')->group(function () {
     Route::get('/appointment/{id}', function () {
         return view("agent/appointment-detail");
     });
+
+    Route::get('/property', function () {
+        return view("agent/property");
+    });
 });
