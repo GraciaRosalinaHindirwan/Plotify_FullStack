@@ -31,6 +31,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     function toggleDropdown() {
         document.getElementById("submenu").classList.toggle("hidden");
     }
+
 </script>
 @stack("scripts")
 </html>  
