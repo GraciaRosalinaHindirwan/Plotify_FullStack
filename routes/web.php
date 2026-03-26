@@ -60,4 +60,16 @@ Route::prefix('/agent')->group(function () {
     Route::get('/property', function () {
         return view("agent/property");
     });
+
+    Route::get('/property/{id}', function () {
+        return view("agent/detail-property");
+    });
+
+    Route::get('/property/{id}/publication', function () {
+        return view("agent/publication-property");
+    });
+
+    Route::get('/offer', function () {
+        return view("agent/offer");
+    });
 });
