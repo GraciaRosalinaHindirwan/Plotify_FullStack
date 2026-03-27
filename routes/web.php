@@ -29,7 +29,9 @@ Route::get('/admin/account/manage', function () {
 });
 
 Route::get('/admin/user', function () {
-    return view('admin/user');
+    return view('admin/user', [
+        "pageTitle" => "Daftar Pengguna"
+    ]);
 });
 
 Route::get('/pemilik/choose/agent', function () {
