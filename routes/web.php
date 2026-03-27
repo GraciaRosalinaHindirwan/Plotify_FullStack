@@ -15,7 +15,10 @@ Route::get('/register', function () {
 });
 
 Route::get('/admin/login', function () {
-    return view('admin/login');
+    return view('admin/login', [
+        "title" => "Welcome Admin",
+        "subtitle" => "Masukkan kredensialmu untuk akses akunmu."
+    ]);
 });
 
 Route::get('/admin/home', function () {
