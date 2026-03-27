@@ -72,10 +72,10 @@ bg-[linear-gradient(var(--color-bg),var(--color-bg)),linear-gradient(180deg,#7c3
            border-2 border-[var(--color-highlight)]
            bg-[#050505]
            transition-all duration-200
-           hover:bg-[var(--color-surface)] 
+           hover:bg-[var(--color-surface)]
            hover:shadow-[0_0_10px_var(--color-highlight)]">
               <a class="!no-underline !text-[var(--color-text)]" href="{{ $manajemenAccountList["link"] }}">
-              {{ $manajemenAccountList["name"] }} 
+              {{ $manajemenAccountList["name"] }}
               </a>
             </li>
             @endforeach
@@ -85,10 +85,14 @@ bg-[linear-gradient(var(--color-bg),var(--color-bg)),linear-gradient(180deg,#7c3
 
       <!-- Logout -->
       <hr class="border-0 h-[2px] bg-none [background:var(--btn-gradient2)] my-[15px] opacity-50">
-      <div class="flex items-center p-[8px] rounded-[10px] cursor-pointer text-[var(--color-highlight)] transition-all duration-200
-      hover:bg-[var(--color-surface)] 
-      hover:shadow-[0_0_10px_var(--color-highlight)]">
-        <img src="/img/logout.png" class="mx-[8px]">
-        <span>Logout</span>
-      </div>
+      <form method="POST" action="/admin/logout">
+        @csrf
+
+        <button type="submit" class="w-full flex items-center p-[8px] rounded-[10px] cursor-pointer text-[var(--color-highlight)] transition-all duration-200
+        hover:bg-[var(--color-surface)]
+        hover:shadow-[0_0_10px_var(--color-highlight)]">
+            <img src="/img/logout.png" class="mx-[8px]">
+            <span>Logout</span>
+        </button>
+      </form>
     </div>

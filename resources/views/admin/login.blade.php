@@ -6,7 +6,8 @@
         ['type' => 'password','name' => 'password', 'label' => 'Password']
     ];
 @endphp
-<form action="" method="POST">
+<form method="POST">
+    @csrf
 
     <div class="grid grid-cols-1 md:grid-cols-1 gap-4 w-full">
     @foreach ($fields as $field)

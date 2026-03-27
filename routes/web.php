@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,28 +15,30 @@ Route::get('/register', function () {
     return view('register');
 });
 
-Route::get('/admin/login', function () {
-    return view('admin/login', [
-        "title" => "Welcome Admin",
-        "subtitle" => "Masukkan kredensialmu untuk akses akunmu."
-    ]);
+Route::prefix("/admin")->group(function () {
+    Route::get('/login', [AdminController::class, 'login'])->name("login");
+
+    Route::post('/login', [AdminController::class, 'loginPost']);
+
+    Route::post("/logout", [AdminController::class, 'logout']);
+
+    Route::get('/home', function () {
+        return view('admin/home-admin', ["pageTitle" => "Dashboard"]);
+    })->middleware("auth");
+
+    Route::get('/account/manage', function () {
+        return view('admin/manage-acc', [
+            "pageTitle" => "Registrasi Agen dan Notaris"
+        ]);
+    })->middleware("auth");
+
+    Route::get('/user', function () {
+        return view('admin/user', [
+            "pageTitle" => "Daftar Pengguna"
+        ]);
+    })->middleware("auth");
 });
 
-Route::get('/admin/home', function () {
-    return view('admin/home-admin', ["pageTitle" => "Dashboard"]);
-});
-
-Route::get('/admin/account/manage', function () {
-    return view('admin/manage-acc', [
-        "pageTitle" => "Registrasi Agen dan Notaris"
-    ]);
-});
-
-Route::get('/admin/user', function () {
-    return view('admin/user', [
-        "pageTitle" => "Daftar Pengguna"
-    ]);
-});
 
 Route::get('/pemilik/choose/agent', function () {
     return view('pemilik/choose-agent');
