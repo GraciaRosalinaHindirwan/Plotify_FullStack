@@ -48,3 +48,33 @@ Route::get('/pemilik/property/add', function () {
 Route::get('/pemilik/appoinment', function () {
     return view('pemilik/appoinment');
 });
+
+Route::prefix('/agent')->group(function () {
+    Route::get('/appointment', function () {
+        return view("agent/appointment");
+    });
+
+    Route::get('/appointment/{id}', function () {
+        return view("agent/appointment-detail");
+    });
+
+    Route::get('/appointment/{id}/create-property', function () {
+        return view("agent/create-property");
+    });
+
+    Route::get('/property', function () {
+        return view("agent/property");
+    });
+
+    Route::get('/property/{id}', function () {
+        return view("agent/detail-property");
+    });
+
+    Route::get('/property/{id}/publication', function () {
+        return view("agent/publication-property");
+    });
+
+    Route::get('/offer', function () {
+        return view("agent/offer");
+    });
+});
