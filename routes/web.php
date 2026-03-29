@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AgentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -17,28 +18,12 @@ Route::get('/register', function () {
 
 Route::prefix("/admin")->group(function () {
     Route::get('/login', [AdminController::class, 'login'])->name("login");
-
     Route::post('/login', [AdminController::class, 'loginPost']);
-
     Route::post("/logout", [AdminController::class, 'logout']);
-
-    Route::get('/home', function () {
-        return view('admin/home-admin', ["pageTitle" => "Dashboard"]);
-    })->middleware("auth");
-
-    Route::get('/account/manage', function () {
-        return view('admin/manage-acc', [
-            "pageTitle" => "Registrasi Agen dan Notaris"
-        ]);
-    })->middleware("auth");
-
-    Route::get('/user', function () {
-        return view('admin/user', [
-            "pageTitle" => "Daftar Pengguna"
-        ]);
-    })->middleware("auth");
+    Route::get('/home', [AdminController::class, 'home'])->middleware("auth");
+    Route::get('/account/manage', [AdminController::class, 'accountManage'])->middleware("auth");
+    Route::get('/user', [AdminController::class, 'user'])->middleware("auth");
 });
-
 
 Route::get('/pemilik/choose/agent', function () {
     return view('pemilik/choose-agent');
@@ -53,31 +38,11 @@ Route::get('/pemilik/appoinment', function () {
 });
 
 Route::prefix('/agent')->group(function () {
-    Route::get('/appointment', function () {
-        return view("agent/appointment");
-    });
-
-    Route::get('/appointment/{id}', function () {
-        return view("agent/appointment-detail");
-    });
-
-    Route::get('/appointment/{id}/create-property', function () {
-        return view("agent/create-property");
-    });
-
-    Route::get('/property', function () {
-        return view("agent/property");
-    });
-
-    Route::get('/property/{id}', function () {
-        return view("agent/detail-property");
-    });
-
-    Route::get('/property/{id}/publication', function () {
-        return view("agent/publication-property");
-    });
-
-    Route::get('/offer', function () {
-        return view("agent/offer");
-    });
+    Route::get('/appointment', [AgentController::class, 'appointment']);
+    Route::get('/appointment/{id}', [AgentController::class, 'appointmentDetail']);
+    Route::get('/appointment/{id}/create-property', [AgentController::class, 'createProperty']);
+    Route::get('/property', [AgentController::class, 'property']);
+    Route::get('/property/{id}', [AgentController::class, 'detailProperty']);
+    Route::get('/property/{id}/publication', [AgentController::class, 'publication']);
+    Route::get('/offer', [AgentController::class, 'offer']);
 });

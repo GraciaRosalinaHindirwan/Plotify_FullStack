@@ -54,9 +54,19 @@ class AdminController extends Controller
             ->with("loginStatus", "Logout berhasil");
     }
 
-    public function accountManage() {}
+    public function accountManage() {
+         return view('admin/manage-acc', [
+            "pageTitle" => "Registrasi Agen dan Notaris"
+        ]);
+    }
 
-    public function home() {}
+    public function home() {
+        return view('admin/home-admin', ["pageTitle" => "Dashboard"]);
+    }
 
-    public function user() {}
+    public function user() {
+         return view('admin/user', [
+            "pageTitle" => "Daftar Pengguna"
+        ]);
+    }
 }

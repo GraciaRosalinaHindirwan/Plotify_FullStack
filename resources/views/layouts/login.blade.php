@@ -20,13 +20,13 @@
     shadow-[0_8px_32px_rgba(0,0,0,0.2)]"
     style="border: 1px solid var(--color-accent);">
 
-    @if(session()->has("loginStatus"))
-        <p class="text-red-600">{{ session("loginStatus") }}</p>
-    @endif
-
+    
     <h1 class="text-[32px] font-semibold
     mb-[10px]" style=" color: var(--color-text);">{{ $title }}</h1>
     <p class="text-[var(--body-sm)] text-[var(--color-text)] mb-[30px]">{{ $subtitle}}</p>
+    @if(session()->has("loginStatus"))
+        <p class="text-red-600">{{ session("loginStatus") }}</p>
+    @endif
     @yield("content")
     </div>
 </body>
