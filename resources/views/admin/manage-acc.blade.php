@@ -6,9 +6,9 @@
       @include("components/admin/header")
       @php 
       $fields = [
-        ['type' => 'text','name' => 'namaLengkap', 'label' => 'Nama Lengkap'],
+        ['type' => 'text','name' => 'fullname', 'label' => 'Nama Lengkap'],
         ['type' => 'email', 'name' => 'email', 'label' => 'email'],
-        ['type' => 'text', 'name' => 'noTelp', 'label' => 'Nomor Telepon'],
+        ['type' => 'text', 'name' => 'call', 'label' => 'Nomor Telepon'],
         ['type' => 'text', 'name' => 'username', 'label' => 'username'],
         ['type' => 'password', 'name' => 'password', 'label' => 'password'],
       ];
@@ -24,7 +24,8 @@
 </div>
 
 {{-- form registration --}}
-<form action="" method="POST">
+<form action="" method="POST" enctype="multipart/form-data">
+  @csrf
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
 @foreach ($fields as $field)
   @include("components/admin/field")

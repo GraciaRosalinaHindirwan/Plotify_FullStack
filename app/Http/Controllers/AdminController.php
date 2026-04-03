@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\User;
 class AdminController extends Controller
 {
     public function login()
@@ -14,6 +14,7 @@ class AdminController extends Controller
             "subtitle" => "Masukkan kredensialmu untuk akses akunmu."
         ]);
     }
+
 
     public function loginPost(Request $request)
     {
@@ -67,6 +68,35 @@ class AdminController extends Controller
     public function user() {
          return view('admin/user', [
             "pageTitle" => "Daftar Pengguna"
+        ]);
+    }
+
+    public function homePost(Request $request){
+        $fullname = $request->input("fullname");
+        $email = $request->input("email");
+        $call = $request->input("call");
+        $username = $request->input("username");
+        $password = $request->input("password");
+        $role = $request->input("role");
+
+        if($request->hasFile("profile_image")){
+            $file = $request->file("profile_image");
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('profile'), $filename);
+        } else{
+            $filename = 'default.png';     
+        }
+       
+
+
+        User::create([
+            "fullname" => $fullname,
+            "email" => $email,
+            "telp_number" => $call,
+            "username" => $username,
+            "password" => bcrypt($password),
+            "role" => $role,
+            "profile" => $filename
         ]);
     }
 }

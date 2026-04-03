@@ -11,8 +11,8 @@
       style="background: linear-gradient(var(--color-surface)) padding-box,var(--btn-gradient2) border-box ;"
     >
       <option value="" class="bg">Pilih Role</option>
-      <option value="agen" {{ old('role') == 'agen' ? 'selected' : '' }}>Agen</option>
-      <option value="notaris" {{ old('role') == 'notaris' ? 'selected' : '' }}>Notaris</option>
+      <option value="agent" {{ old('role') == 'agen' ? 'selected' : '' }}>Agen</option>
+      <option value="notary" {{ old('role') == 'notaris' ? 'selected' : '' }}>Notaris</option>
     </select>
      <img 
     src="/img/drop-down.png" 

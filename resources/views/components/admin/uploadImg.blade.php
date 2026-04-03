@@ -37,7 +37,7 @@
   </div>
 
   <!-- INPUT DIPISAH -->
-  <input id="fileInput" type="file" class="hidden" accept="image/*">
+  <input id="fileInput" name="profile_image" type="file" class="hidden" accept="image/*">
 
 </div>
 
