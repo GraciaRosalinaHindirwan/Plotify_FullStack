@@ -12,9 +12,9 @@
                     <p class="text-[var(--color-text)]" style="font-size: var(--caption)">Ringkasan data sistem platform properti</p>                </div>
                 </div>
                 
-
-            @include("components/admin/summary-card")
-             @include("components/admin/summary-card")
+                @foreach ($stat as $stat)
+                    @include("components/admin/summary-card")
+                @endforeach
              
 
             </div>

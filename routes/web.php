@@ -21,7 +21,7 @@ Route::prefix("/admin")->group(function () {
     Route::post('/login', [AdminController::class, 'loginPost']);
     Route::post("/logout", [AdminController::class, 'logout']);
 
-    
+    Route::get('/home', [AdminController::class, 'home'])->middleware("auth");
     Route::get('/account/manage', [AdminController::class, 'accountManage'])->middleware("auth");
     Route::post('/account/manage', [AdminController::class, 'homePost'])->middleware("auth");
     

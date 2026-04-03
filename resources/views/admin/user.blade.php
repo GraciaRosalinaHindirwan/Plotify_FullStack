@@ -5,23 +5,6 @@
 <div class="w-full px-6 py-4">
 @include("components/admin/header")
 <div class="header-right">
-@php
-   $users = [
-        [
-            'name' => 'Budi Santoso',
-            'email' => 'budi.santoso@gmail.com',
-            'role' => 'Agen',
-            'created_at' => '2026-01-15'
-        ],
-        [
-            'name' => 'Siti Nurhaliza',
-            'email' => 'siti.nurhaliza@gmail.com',
-            'role' => 'Notaris',
-            'created_at' => '2026-01-12'
-        ]
-    ];  
-@endphp
-
 <div class="w-full border-separate border-spacing-0 table-fixed
 rounded-lg px-[32px] py-[16px] text-[var(--color-text)] border-2 border-transparent"
 style=" background:
@@ -51,10 +34,10 @@ background-clip: padding-box, border-box;">
         <table class="w-full table-fixed">
              @foreach ($users as $user)
             <tr>
-                <td class="border-none bg-transparent py-3 px-5 text-[var(--color-text)] text-center">{{ $user['name'] }}</td>
-                <td class="border-none bg-transparent py-3 px-5 text-[var(--color-text)] text-center">{{ $user['email'] }}</td>
-                <td class="border-none bg-transparent py-3 px-20 text-[var(--color-text)] text-center">{{ $user['role'] }}</td>
-                <td class="border-none bg-transparent py-3 px-5 text-[var(--color-text)] text-center">{{ $user['created_at'] }}</td>
+                <td class="border-none bg-transparent py-3 px-5 text-[var(--color-text)] text-center">{{ $user->fullname }}</td>
+                <td class="border-none bg-transparent py-3 px-5 text-[var(--color-text)] text-center">{{ $user->email }}</td>
+                <td class="border-none bg-transparent py-3 px-20 text-[var(--color-text)] text-center">{{ $user->role }}</td>
+                <td class="border-none bg-transparent py-3 px-5 text-[var(--color-text)] text-center">{{ $user->created_at }}</td>
             </tr>
             @endforeach
         </table>

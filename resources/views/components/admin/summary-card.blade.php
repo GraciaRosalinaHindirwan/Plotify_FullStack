@@ -17,11 +17,11 @@
                         <div class="size-[40px] rounded-md flex items-center justify-center border border-[var(--btn-primary)] text-[var(--btn-gradient-logo)]" style="font-size: 20px;">
                             <i class="fa-solid fa-people-line"></i>
                         </div>
-                        <span>Total Agen</span>
+                        <span>{{ $stat['title'] }}</span>
                     </div>
 
                     <div class="font-semibold mt-[20px] text-[var(--color-text)]" style="font-size:48px;">
-                        124
+                        {{ $stat['count'] }}
                     </div>
                 </div>
             </div>

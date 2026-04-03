@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Agent;
 class AdminController extends Controller
 {
     public function login()
@@ -62,13 +63,31 @@ class AdminController extends Controller
     }
 
     public function home() {
-        return view('admin/home-admin', ["pageTitle" => "Dashboard"]);
+        $stat = [
+            [
+                "title" => "Total Agen",
+                "count" => Agent::count()
+            ],
+            [
+                "title" => "Total Notaris",
+                "count" => 0
+            ]
+        ];
+
+        return view('admin/home-admin', [
+            "pageTitle" => "Dashboard",
+            "stat" => $stat
+        ]);
     }
 
     public function user() {
+        $users = User::all();
+    
          return view('admin/user', [
-            "pageTitle" => "Daftar Pengguna"
+            "pageTitle" => "Daftar Pengguna",
+            "users" => $users
         ]);
+
     }
 
     public function homePost(Request $request){
@@ -87,9 +106,7 @@ class AdminController extends Controller
             $filename = 'default.png';     
         }
        
-
-
-        User::create([
+        $user = User::create([
             "fullname" => $fullname,
             "email" => $email,
             "telp_number" => $call,
@@ -97,6 +114,10 @@ class AdminController extends Controller
             "password" => bcrypt($password),
             "role" => $role,
             "profile" => $filename
+        ]);
+
+        $agent = Agent::Create([
+            "user_id" => $user->id
         ]);
     }
 }
