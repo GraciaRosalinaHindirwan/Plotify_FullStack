@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use app\Models\User;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -12,9 +12,10 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        user::firstOrCreate([
+        User::firstOrCreate(
+            ['email' => 'admin@gmail.com'],
+            [
             'fullname' => 'Admin',
-            'email' => 'admin@gmail.com',
             'username' => 'admin',
             'telp_number' => '081234567890',
             'profile' => 'default.png',

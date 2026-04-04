@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Agent;
+use App\Models\Notary;
 class AdminController extends Controller
 {
     public function login()
@@ -70,7 +71,7 @@ class AdminController extends Controller
             ],
             [
                 "title" => "Total Notaris",
-                "count" => 0
+                "count" => Notary::count()
             ]
         ];
 

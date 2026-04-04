@@ -24,12 +24,37 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'fullname' => fake()->name(),
+            'username' => fake()->unique()->userName(),
+            'telp_number' => fake()->phoneNumber(),
+            'profile' => fake()->imageUrl(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
+            'role' => 'users',
         ];
+    }
+
+    public function agen()
+    {
+        return $this->state([
+            'role' => 'agent',
+        ]);
+    }
+
+    public function notaris()
+    {
+        return $this->state([
+            'role' => 'notary',
+        ]);
+    }
+
+    public function admin()
+    {
+        return $this->state([
+            'role' => 'admin',
+        ]);
     }
 
     /**

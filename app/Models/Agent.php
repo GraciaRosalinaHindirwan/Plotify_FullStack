@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Agent extends Model
 {
-    protected $fillabel = [
-        'id_user',
+    use HasFactory;
+
+    protected $fillable = [
+        'user_id',
     ];
 }

@@ -29,13 +29,15 @@ bg-[linear-gradient(var(--color-bg),var(--color-bg)),linear-gradient(180deg,#7c3
       <hr class="border-0 h-[2px] bg-none [background:var(--btn-gradient2)] my-[15px] opacity-50">
       <!-- Menu -->
       <ul class="w-full flex flex-col gap-4 p-0 m-0 list-none">
-        <li class="w-full flex flex-row items-center gap-4 px-2 py-2 rounded-xl transition-all
+        <li class="w-full">
+        <a href="/admin/home" class="flex flex-row items-center gap-4 px-2 py-2 rounded-xl transition-all
         hover:bg-[var(--color-surface)]
         hover:shadow-[0_0_10px_var(--color-highlight)]
         /*active*/
-        bg-[var(--color-surface)] shadow-[0_0_0_2px_rgba(243,117,194,0.3),0_0_12px_rgba(243,117,194,0.7),0_0_20px_rgba(243,117,194,0.4)]">
+        {{ request()->is('admin/home') ? 'bg-[var(--color-surface)] shadow-[0_0_0_2px_rgba(243,117,194,0.3),0_0_12px_rgba(243,117,194,0.7),0_0_20px_rgba(243,117,194,0.4)]' : '' }}">
           <img src="/img/dashboard.png">
           <span>Dashboard</span>
+        </a>
         </li>
 
         <li class="w-full box-border flex flex-col items-stretch gap-4 px-2 py-2 rounded-xl
@@ -53,7 +55,8 @@ bg-[linear-gradient(var(--color-bg),var(--color-bg)),linear-gradient(180deg,#7c3
 
           </div>
 
-          <ul class="list-none pt-[10px] pl-[34px] m-0 hidden" id="submenu">
+          <ul class="list-none pt-[10px] pl-[34px] m-0 hidden" 
+          {{ request()->is('admin/account/*') ? '' : 'hidden' }}" id="submenu">
             @php
                 $manajemenAccountLists = [
                   [
@@ -69,8 +72,10 @@ bg-[linear-gradient(var(--color-bg),var(--color-bg)),linear-gradient(180deg,#7c3
 
             @foreach($manajemenAccountLists as $manajemenAccountList)
             <li class="px-[14px] py-[12px] mb-[10px] rounded-[10px]
-           border-2 border-[var(--color-highlight)]
-           bg-[#050505]
+           border-2 
+           {{ request()->is(ltrim($manajemenAccountList['link'], '/')) 
+            ? 'border-[var(--color-highlight)] bg-[var(--color-surface)] shadow-[0_0_10px_var(--color-highlight)]' 
+            : 'border-transparent bg-[#050505]'}}
            transition-all duration-200
            hover:bg-[var(--color-surface)]
            hover:shadow-[0_0_10px_var(--color-highlight)]">
