@@ -8,6 +8,12 @@
             <li><a class="font-bold text-xl" href="">Publikasi</a></li>
             <li><a class="font-bold text-xl" href="">Dokumen</a></li>
             <li><a class="font-bold text-xl" href="">Penawaran</a></li>
+            <li>
+                <form method="POST" action="/agent/logout">
+                    @csrf
+                    <button class="font-bold text-xl cursor-pointer" type="submit">Logout</button>
+                </form>
+            </li>
         </ul>
         <div class="size-[50px] bg-[#999] rounded-full flex justify-center items-center">MK</div>
     </nav>

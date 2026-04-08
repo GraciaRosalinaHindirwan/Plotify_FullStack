@@ -2,19 +2,18 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AgentController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login', function () {
-    return view('login');
-});
+Route::get('/register', [AuthController::class, 'register']);
+Route::post('/register', [AuthController::class, 'registerPost']);
 
-Route::get('/register', function () {
-    return view('register');
-});
+Route::get('/login', [AuthController::class, 'login'])->name("login");
+Route::post('/login', [AuthController::class, 'loginPost']);
 
 Route::prefix("/admin")->group(function () {
     Route::get('/login', [AdminController::class, 'login'])->name("login");
@@ -28,6 +27,15 @@ Route::prefix("/admin")->group(function () {
     Route::get('/user', [AdminController::class, 'user'])->middleware("auth");
 });
 
+Route::get('/users/home', function () {
+    return view('users/home');
+});
+
+Route::get('notary/home', function () {
+    return view('notary/home');
+});
+
+
 Route::get('/pemilik/choose/agent', function () {
     return view('pemilik/choose-agent');
 });
@@ -40,9 +48,13 @@ Route::get('/pemilik/appoinment', function () {
     return view('pemilik/appoinment');
 });
 
-Route::prefix('/agent')->group(function () {
+Route::prefix('/agent')
+->middleware("auth")
+->group(function () {
     Route::get('/appointment', [AgentController::class, 'appointment']);
     Route::get('/appointment/{id}', [AgentController::class, 'appointmentDetail']);
+    Route::post("/logout", [AuthController::class, 'logout']);
+
     Route::get('/appointment/{id}/create-property', [AgentController::class, 'createProperty']);
     Route::get('/property', [AgentController::class, 'property']);
     Route::get('/property/{id}', [AgentController::class, 'detailProperty']);

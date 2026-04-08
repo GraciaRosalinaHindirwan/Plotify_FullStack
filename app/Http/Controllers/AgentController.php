@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\AuthController;
 
 class AgentController extends Controller
 {
     public function appointment(){
+        $user = Auth::user();
        return view("agent/appointment");
     }
 

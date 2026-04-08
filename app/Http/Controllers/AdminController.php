@@ -117,6 +117,7 @@ class AdminController extends Controller
             "profile" => $filename
         ]);
 
+        return redirect('/admin/user');
         $agent = Agent::Create([
             "user_id" => $user->id
         ]);
