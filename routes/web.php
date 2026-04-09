@@ -27,14 +27,19 @@ Route::prefix("/admin")->group(function () {
     Route::get('/user', [AdminController::class, 'user'])->middleware("auth");
 });
 
-Route::get('/users/home', function () {
-    return view('users/home');
-});
-
 Route::get('notary/home', function () {
     return view('notary/home');
 });
 
+Route::prefix('/users')->group(function (){
+    Route::get('property', function () {
+        return view('users/property');
+    });
+     Route::get('property/detail/{id}', function ($id) {
+        return view('users/detail-property', compact('id'));
+    })->name('property.detail');
+
+});
 
 Route::get('/users/choose/agent', function () {
     return view('users/choose-agent');
