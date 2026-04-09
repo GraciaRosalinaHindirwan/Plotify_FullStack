@@ -36,16 +36,16 @@ Route::get('notary/home', function () {
 });
 
 
-Route::get('/pemilik/choose/agent', function () {
-    return view('pemilik/choose-agent');
+Route::get('/users/choose/agent', function () {
+    return view('users/choose-agent');
 });
 
-Route::get('/pemilik/property/add', function () {
-    return view('pemilik/add-property');
+Route::get('/users/property/add', function () {
+    return view('users/add-property');
 });
 
-Route::get('/pemilik/appoinment', function () {
-    return view('pemilik/appoinment');
+Route::get('/users/appoinment', function () {
+    return view('users/appoinment');
 });
 
 Route::prefix('/agent')
