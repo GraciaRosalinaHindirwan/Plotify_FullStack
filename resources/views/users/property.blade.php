@@ -13,5 +13,6 @@
     @include("components/common/card-property")
     @include("components/common/card-property")
     @include("components/common/card-property")
+    @include("components/users/btn-add")
 </div>
 @endsection
