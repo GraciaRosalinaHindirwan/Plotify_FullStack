@@ -88,6 +88,17 @@ bg-[linear-gradient(var(--color-bg),var(--color-bg)),linear-gradient(180deg,#7c3
         </li>
       </ul>
 
+      <li class="w-full">
+        <a href="/admin/region" class="flex flex-row items-center gap-4 px-2 py-2 rounded-xl transition-all
+        hover:bg-[var(--color-surface)]
+        hover:shadow-[0_0_10px_var(--color-highlight)]
+        /*active*/
+        {{ request()->is('admin/region') ? 'bg-[var(--color-surface)] shadow-[0_0_0_2px_rgba(243,117,194,0.3),0_0_12px_rgba(243,117,194,0.7),0_0_20px_rgba(243,117,194,0.4)]' : '' }}">
+          <img src="/img/dashboard.png">
+          <span>Region Management</span>
+        </a>
+        </li>
+
       <!-- Logout -->
       <hr class="border-0 h-[2px] bg-none [background:var(--btn-gradient2)] my-[15px] opacity-50">
       <form method="POST" action="/admin/logout">

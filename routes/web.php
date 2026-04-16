@@ -23,6 +23,11 @@ Route::prefix("/admin")->group(function () {
     Route::get('/home', [AdminController::class, 'home'])->middleware("auth");
     Route::get('/account/manage', [AdminController::class, 'accountManage'])->middleware("auth");
     Route::post('/account/manage', [AdminController::class, 'homePost'])->middleware("auth");
+    Route::get('/region', function () {
+        return view('admin/region', [
+            "pageTitle" => "Region Management"
+        ]);
+    })->middleware("auth");
     
     Route::get('/user', [AdminController::class, 'user'])->middleware("auth");
 });
@@ -65,4 +70,8 @@ Route::prefix('/agent')
     Route::get('/property/{id}', [AgentController::class, 'detailProperty']);
     Route::get('/property/{id}/publication', [AgentController::class, 'publication']);
     Route::get('/offer', [AgentController::class, 'offer']);
+});
+
+Route::get('/notary/home', function () {
+    return view('notary/home');
 });
