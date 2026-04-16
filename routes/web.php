@@ -44,6 +44,14 @@ Route::prefix('/users')->group(function (){
         return view('users/detail-property', compact('id'));
     })->name('property.detail');
 
+    Route::get('transaction', function () {
+    return view('users/transaction', [
+        "propertyName" => "Modern Building House",
+        "transactionType" => "Pembayaran Langsung",
+        "price" => "IDR 500.000.000,00"
+    ]);
+});
+
 });
 
 Route::get('/users/choose/agent', function () {
@@ -57,6 +65,8 @@ Route::get('/users/property/add', function () {
 Route::get('/users/appoinment', function () {
     return view('users/appoinment');
 });
+
+
 
 Route::prefix('/agent')
 ->middleware("auth")
