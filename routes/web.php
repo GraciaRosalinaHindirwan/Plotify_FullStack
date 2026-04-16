@@ -44,7 +44,11 @@ Route::prefix('/users')->group(function (){
 Route::get('/users/choose/agent', function () {
     return view('users/choose-agent', [
         "link" => '/users/choose/agent',
-        "title" => 'Pilih Agen Properti'
+        "title" => 'Pilih Agen Properti',
+        'currentStep' => 2,
+        "agentName" => "Rizki Pratama",
+        "phone" => "088225357849",
+        "location" => "Bantul - Yogyakarta"
     ]);
 });
 
@@ -58,7 +62,7 @@ Route::get('/users/property/add', function () {
 
 Route::get('/users/appoinment', function () {
     return view('users/appoinment', [
-        "link" => '/users/appoinment',
+        "link" => '/users/choose/agent',
         "title" => 'Jadwal Pertemuan',
         'currentStep' => 3
     ]);
