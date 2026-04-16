@@ -20,8 +20,8 @@
     <link rel="stylesheet" href="/css/pemilik.css">
 </head>
 <body>
-    @include('components/pemilik/header')
-    @include('/components/pemilik/progress')
+    @include('components/users/header')
+    @include('/components/users/progress')
 
     <!--Search bar n filter-->
     <div class="container-search-filter mt-4">

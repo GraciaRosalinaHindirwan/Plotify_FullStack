@@ -42,11 +42,18 @@ Route::prefix('/users')->group(function (){
 });
 
 Route::get('/users/choose/agent', function () {
-    return view('users/choose-agent');
+    return view('users/choose-agent', [
+        "link" => '/users/choose/agent',
+        "title" => 'Pilih Agen Properti'
+    ]);
 });
 
 Route::get('/users/property/add', function () {
-    return view('users/add-property');
+    return view('users.add-property', [
+        "link" => '/users/property',
+        "title" => 'Pengajuan Penjualan Properti',
+        'currentStep' => 1
+    ]);
 });
 
 Route::get('/users/appoinment', function () {
