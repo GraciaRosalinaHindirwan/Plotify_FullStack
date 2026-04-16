@@ -1,4 +1,4 @@
-@extends("layouts/users")
+@extends("layouts/users") 
 
 @section("content")
 <div class="p-[80px] bg-black">
@@ -36,10 +36,11 @@
 
                 </div>
 
-            <a href="http://" 
-            class="mt-2 block border border-blue-500 rounded-lg py-2 text-pink-400 text-center">
-                Ajukan Penawaran
-            </a>
+            @include("components/admin/button", [
+            'type' => 'submit',
+            'id' => NULL,
+            'slot' => 'Lanjutkan'
+            ])
         </div>
 
         <div class="w-[500px] bg-[#1E1E1E] border border-[#0E21A0] rounded-2xl p-6 flex flex-col gap-6">
@@ -71,11 +72,17 @@
                 <img src="/img/star-icon.png" class="w-5 h-5">
                 <span>Cocok untuk diskusi harga</span>
             </div>
-                </div>
-            <a href="http://" 
-            class="mt-10 block border border-blue-500 rounded-lg py-2 text-pink-400 text-center">
-                Ajukan Penawaran
-            </a>
+
+            </div>
+            
+            <div class="mt-8">
+                @include("components/admin/button", [
+                'type' => 'submit',
+                'id' => NULL,
+                'slot' => 'Ajukan Penawaran'
+                ])
+            </div>
+            
         </div>
 
     </div>
