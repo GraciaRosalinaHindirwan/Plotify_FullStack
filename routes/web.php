@@ -60,6 +60,10 @@ Route::get('/users/appoinment', function () {
     return view('users/appoinment');
 });
 
+Route::get('/users/negotiation', function () {
+    return view('users/negotiation');
+});
+
 Route::prefix('/agent')
 ->middleware("auth")
 ->group(function () {
