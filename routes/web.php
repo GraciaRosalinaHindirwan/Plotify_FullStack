@@ -57,7 +57,11 @@ Route::get('/users/property/add', function () {
 });
 
 Route::get('/users/appoinment', function () {
-    return view('users/appoinment');
+    return view('users/appoinment', [
+        "link" => '/users/appoinment',
+        "title" => 'Jadwal Pertemuan',
+        'currentStep' => 3
+    ]);
 });
 
 Route::get('/users/negotiation', function () {
