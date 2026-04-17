@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -32,59 +33,17 @@ Route::get('notary/home', function () {
 });
 
 Route::prefix('/users')->group(function (){
-    Route::get('property', function () {
-        return view('users/property');
-    });
-     Route::get('property/detail/{id}', function ($id) {
-        return view('users/detail-property', compact('id'));
-    })->name('property.detail');
+    Route::get('property', [UsersController::class, 'property'])->middleware("auth");
+    Route::get('property/detail/{id}', [UsersController::class, 'propertyDetail'])->name('property.detail');
 
-});
+    Route::get('property/add', [UsersController::class, 'addProperty'])->middleware("auth");
+    Route::get('choose/agent', [UsersController::class, 'chooseAgent'])->middleware("auth");
+    Route::get('appoinment', [UsersController::class, 'appoinment'])->middleware("auth");
+    Route::get('review', [UsersController::class, 'review'])->middleware("auth");
 
-Route::get('/users/choose/agent', function () {
-    return view('users/choose-agent', [
-        "link" => '/users/choose/agent',
-        "title" => 'Pilih Agen Properti',
-        'currentStep' => 2,
-        "agentName" => "Rizki Pratama",
-        "phone" => "088225357849",
-        "location" => "Bantul - Yogyakarta"
-    ]);
-});
+    Route::get('negotiation', [UsersController::class, 'negotiation'])->middleware("auth");
+    Route::get('negotiation/detail/{id}', [UsersController::class, 'negotiationDetail'])->name('negotiation.detail')->middleware("auth");
 
-Route::get('/users/property/add', function () {
-    return view('users.add-property', [
-        "link" => '/users/property',
-        "title" => 'Pengajuan Penjualan Properti',
-        'currentStep' => 1
-    ]);
-});
-
-Route::get('/users/appoinment', function () {
-    return view('users/appoinment', [
-        "link" => '/users/choose/agent',
-        "title" => 'Jadwal Pertemuan',
-        'currentStep' => 3
-    ]);
-});
-
-Route::get('/users/review',function(){
-    return view('users/review', [
-        "link" => '/users/appoinment',
-        "title" => 'Review Jadwal',
-        'currentStep' => 4
-    ]);
-});
-
-Route::get('/users/negotiation', function () {
-    return view('users/negotiation');
-});
-
-Route::get('/users/negotiation/detail', function () {
-    return view('users/negotiation-detail', [
-        "link" => '/users/negotiation',
-        "title" => 'Detail Negosiasi'
-    ]);
 });
 
 Route::prefix('/agent')
