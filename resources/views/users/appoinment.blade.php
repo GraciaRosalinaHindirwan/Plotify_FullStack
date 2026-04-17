@@ -19,7 +19,7 @@
                     @include("components/admin/button", [
                         'type' => 'submit',
                         'id' => NULL,
-                        'slot' => 'Submit'
+                        'slot' => 'Selanjutnya'
                         ])
                 </div>
             </div>

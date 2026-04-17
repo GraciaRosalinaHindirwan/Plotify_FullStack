@@ -68,6 +68,14 @@ Route::get('/users/appoinment', function () {
     ]);
 });
 
+Route::get('/users/review',function(){
+    return view('users/review', [
+        "link" => '/users/appoinment',
+        "title" => 'Review Jadwal',
+        'currentStep' => 4
+    ]);
+});
+
 Route::get('/users/negotiation', function () {
     return view('users/negotiation');
 });
