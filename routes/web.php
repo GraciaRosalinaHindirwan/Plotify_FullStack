@@ -80,6 +80,13 @@ Route::get('/users/negotiation', function () {
     return view('users/negotiation');
 });
 
+Route::get('/users/negotiation/detail', function () {
+    return view('users/negotiation-detail', [
+        "link" => '/users/negotiation',
+        "title" => 'Detail Negosiasi'
+    ]);
+});
+
 Route::prefix('/agent')
 ->middleware("auth")
 ->group(function () {
