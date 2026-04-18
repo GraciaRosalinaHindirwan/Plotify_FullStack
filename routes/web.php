@@ -38,15 +38,14 @@ Route::get('notary/home', function () {
 });
 
 Route::prefix('/users')->group(function (){
-    Route::get('property', [UsersController::class, 'property'])->middleware("auth");
+    Route::get('property', [UsersController::class, 'property']);
     Route::get('property/detail/{id}', [UsersController::class, 'propertyDetail'])->name('property.detail');
-     Route::get('property/add', [UsersController::class, 'addProperty'])->middleware("auth");
-    Route::get('choose/agent', [UsersController::class, 'chooseAgent'])->middleware("auth");
-    Route::get('appoinment', [UsersController::class, 'appoinment'])->middleware("auth");
-    Route::get('review', [UsersController::class, 'review'])->middleware("auth");
+    Route::get('choose/agent', [UsersController::class, 'chooseAgent']);
+    Route::get('appoinment', [UsersController::class, 'appoinment']);
+    Route::get('review', [UsersController::class, 'review']);
 
-    Route::get('negotiation', [UsersController::class, 'negotiation'])->middleware("auth");
-    Route::get('negotiation/detail/{id}', [UsersController::class, 'negotiationDetail'])->name('negotiation.detail')->middleware("auth");
+    Route::get('negotiation', [UsersController::class, 'negotiation']);
+    Route::get('negotiation/detail/{id}', [UsersController::class, 'negotiationDetail'])->name('negotiation.detail');
   
     Route::get('/transaction', [UsersController::class, 'transaction']);
     Route::get('/transaction/method', [UsersController::class, 'transactionMethod']);
@@ -56,7 +55,7 @@ Route::prefix('/users')->group(function (){
 
 
 Route::prefix('/agent')
-->middleware("auth")
+// ->middleware("auth")
 ->group(function () {
     Route::get('/appointment', [AgentController::class, 'appointment']);
     Route::get('/appointment/{id}', [AgentController::class, 'appointmentDetail']);

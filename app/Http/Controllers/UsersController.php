@@ -14,19 +14,11 @@ class UsersController extends Controller
         return view('users/detail-property', compact('id'));
     }
 
-    public function addProperty(){
-        return view('users.add-property', [
-            "link" => '/users/property',
-            "title" => 'Pengajuan Penjualan Properti',
-            'currentStep' => 1
-        ]);
-    }
-
     public function chooseAgent(){
         return view('users/choose-agent', [
-            "link" => '/users/choose/agent',
+            "link" => '/users/property',
             "title" => 'Pilih Agen Properti',
-            'currentStep' => 2,
+            'currentStep' => 1,
             "agentName" => "Rizki Pratama",
             "phone" => "088225357849",
             "location" => "Bantul - Yogyakarta"
@@ -37,14 +29,14 @@ class UsersController extends Controller
         return view('users/appoinment', [
             "link" => '/users/choose/agent',
             "title" => 'Jadwal Pertemuan',
-            'currentStep' => 3
+            'currentStep' => 2
         ]);
     }
     public function review(){
         return view('users/review', [
             "link" => '/users/appoinment',
             "title" => 'Review Jadwal',
-            'currentStep' => 4
+            'currentStep' => 3
         ]);
     }
 

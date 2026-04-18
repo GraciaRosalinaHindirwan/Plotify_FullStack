@@ -2,8 +2,6 @@
 @section("content")
 @php 
     $fields = [
-        ['type' => 'text','name' => 'name', 'label' => 'Nama Properti' ],
-        ['type' => 'text','name' => 'address', 'label' => 'Alamat Properti' ],
         ['type' => "datetime-local", 'name' => 'actual_time_schedule', 'label' => 'Tanggal Pertemuan' ] 
     ];
 @endphp
