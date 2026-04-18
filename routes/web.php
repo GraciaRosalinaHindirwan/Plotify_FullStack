@@ -48,19 +48,10 @@ Route::prefix('/users')->group(function (){
     Route::get('negotiation', [UsersController::class, 'negotiation'])->middleware("auth");
     Route::get('negotiation/detail/{id}', [UsersController::class, 'negotiationDetail'])->name('negotiation.detail')->middleware("auth");
   
-    Route::get('/transaction', function () {
-        return view('users/transaction', [
-        "propertyName" => "Modern Building House",
-        "transactionType" => "Pembayaran Langsung",
-        "price" => "IDR 500.000.000,00"
-    ]);
-    });
+    Route::get('/transaction', [UsersController::class, 'transaction']);
+    Route::get('/transaction/method', [UsersController::class, 'transactionMethod']);
+});
 
-    Route::get('/transaction/method', function () {
-        return view('users/method-transaction');
-    });
-});
-});
 
 
 

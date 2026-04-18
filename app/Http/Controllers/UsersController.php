@@ -59,4 +59,16 @@ class UsersController extends Controller
             "negotiationId" => $id
         ]);
     }
+
+    public function transaction(){
+        return view('users/transaction', [
+        "propertyName" => "Modern Building House",
+        "transactionType" => "Pembayaran Langsung",
+        "price" => "IDR 500.000.000,00"
+        ]);
+    }
+
+    public function transactionMethod(){
+        return view('users/method-transaction');
+    }
 }
