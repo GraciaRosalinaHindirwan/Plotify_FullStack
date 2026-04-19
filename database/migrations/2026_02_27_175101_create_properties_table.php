@@ -18,6 +18,7 @@ return new class extends Migration
              $table->string('address');
              $table->float('price');
              $table->float('area_in_hectare');
+             $table->text('description')->nullable();
             $table->timestamps();
         });
     }

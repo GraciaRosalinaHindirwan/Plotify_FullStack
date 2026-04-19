@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('property_images', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('property_id');
             $table->string('name');
             $table->string('url');
             $table->boolean('is_banner');

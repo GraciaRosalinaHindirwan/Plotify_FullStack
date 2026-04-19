@@ -42,6 +42,7 @@ Route::prefix('/users')->group(function (){
     Route::get('property/detail/{id}', [UsersController::class, 'propertyDetail'])->name('property.detail');
     Route::get('choose/agent', [UsersController::class, 'chooseAgent']);
     Route::get('appoinment', [UsersController::class, 'appoinment']);
+    Route::post('appoinment', [UsersController::class, 'appoinmentPost']);
     Route::get('review', [UsersController::class, 'review']);
 
     Route::get('negotiation', [UsersController::class, 'negotiation']);

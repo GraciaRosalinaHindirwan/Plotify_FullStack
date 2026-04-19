@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Appoinment_schedule;
 
 class UsersController extends Controller
 {
@@ -32,6 +33,13 @@ class UsersController extends Controller
             'currentStep' => 2
         ]);
     }
+
+    public function appoinmentPost(Request $request){
+       Appoinment_schedule::create([
+            'schedule' => $request->schedule,
+       ]);
+    }
+
     public function review(){
         return view('users/review', [
             "link" => '/users/appoinment',
