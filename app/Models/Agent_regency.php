@@ -11,10 +11,12 @@ class Agent_regency extends Model
         'agent_id',
         'regency_id',
     ];
-    public function agent(){
+    public function agent()
+    {
         return $this->BelongsTo(Agent::class, 'agent_id');
     }
-    public function regency(){
+    public function regency()
+    {
         return $this->BelongsTo(Regency::class, 'regency_id');
     }
 }

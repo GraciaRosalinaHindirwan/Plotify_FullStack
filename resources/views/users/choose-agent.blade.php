@@ -18,7 +18,7 @@
         <p class="text-gray-600">Hasil pencarian untuk: "{{ $searchQuery }}", <a href="{{ route('users.chooseAgent') }}" class="text-blue-500 hover:underline">Lihat semua agen</a></p>
     </div>
 @endif
-  
+
 {{-- card-loop --}}
 <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[64px] px-6 md:px-20 mt-12">
     @foreach ($agents as $agent)
