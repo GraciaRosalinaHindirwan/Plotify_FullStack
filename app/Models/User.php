@@ -50,4 +50,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    //user punya 1 data agent 
+    public function agent(){
+        return $this->hasOne(Agent::class, 'user_id');
+    }
 }

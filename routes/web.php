@@ -40,7 +40,8 @@ Route::get('notary/home', function () {
 Route::prefix('/users')->group(function (){
     Route::get('property', [UsersController::class, 'property']);
     Route::get('property/detail/{id}', [UsersController::class, 'propertyDetail'])->name('property.detail');
-    Route::get('choose/agent', [UsersController::class, 'chooseAgent']);
+    Route::get('choose/agent', [UsersController::class, 'chooseAgent'])->name('users.chooseAgent');
+    Route::post('choose/agent', [UsersController::class, 'chooseAgent']);
     Route::get('appoinment', [UsersController::class, 'appoinment']);
     Route::post('appoinment', [UsersController::class, 'appoinmentPost']);
     Route::get('review', [UsersController::class, 'review']);

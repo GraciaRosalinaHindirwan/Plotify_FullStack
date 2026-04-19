@@ -12,4 +12,12 @@ class Agent extends Model
     protected $fillable = [
         'user_id',
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function agentRegency(){
+        return $this->hasMany(Agent_regency::class, 'agen_id');
+    }
 }

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Appoinment_schedule;
+use App\Models\User;
+use App\Models\Agent_regency;
+use App\Models\Regency;
 
 class UsersController extends Controller
 {
@@ -15,14 +18,41 @@ class UsersController extends Controller
         return view('users/detail-property', compact('id'));
     }
 
-    public function chooseAgent(){
+    public function chooseAgent(Request $request){
+        $search = $request->input('search');
+        $locationFilter = $request->input('location'); 
+        if(empty($search)){
+            $users = User::where('role', 'agent')->get();
+        } else {
+            $users = User::where('role', 'agent')
+                    ->where('fullname', 'like', '%' . $search . '%')->get();
+        }
+dd($users[0]);
+        if(!empty($locationFilter)){
+            $users->whereHas('agent->agent_regencies', function ($query) use ($locationFilter) {
+                $query->where('regency_id', $locationFilter);
+            });
+        }
+
+        $agents = [];
+        foreach ($users as $user) {
+                $agentRegencies = Agent_regency::where('agent_id', $user->agent->id)->with('regency')->first();
+                $agents[] = [
+                    "agentName" => $user->fullname,
+                    "phone" => $user->telp_number,
+                    "location" => $agentRegencies?->regency?->name ?? 'Lokasi tidak tersedia',
+                    "profile" => $user->profile
+                ];
+            }
+
+        $regencies = Regency::orderBy('name')->get();
         return view('users/choose-agent', [
             "link" => '/users/property',
             "title" => 'Pilih Agen Properti',
             'currentStep' => 1,
-            "agentName" => "Rizki Pratama",
-            "phone" => "088225357849",
-            "location" => "Bantul - Yogyakarta"
+            'agents' => $agents,
+            'regencies' => $regencies,
+            'searchQuery' => $search,
         ]);
     }
 
