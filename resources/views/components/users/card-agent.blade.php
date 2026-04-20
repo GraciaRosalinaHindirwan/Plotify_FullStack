@@ -4,7 +4,10 @@ style="background: linear-gradient(var(--color-surface)) padding-box, var(--btn-
 
 <img src="{{ asset($agent->user->profile) }}" alt="building" class="w-full rounded-[16px] mb-[16px]">
 
-<form action="" method="POST">
+<form action="{{ route('users.chooseAgentAction') }}" method="post">
+    @csrf
+
+    <input type="hidden" name="agent_id" value="{{ $agent->id }}" />
     <h1 class="text-[var(--color-text)] mb-[16px] font-[var(--fw-bold)] text-[18px] text-center">{{ $agent->user->fullname }}</h1>
 
     <div class="w-full flex text-[var(--color-text)] gap-[8px] items-center pb-[8px]">

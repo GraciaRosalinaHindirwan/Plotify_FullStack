@@ -51,20 +51,42 @@ class UsersController extends Controller
         ]);
     }
 
+    public function chooseAgentAction(Request $request)
+    {
+        $agentId = $request->input('agent_id');
+
+        session([
+            'agentId' => $agentId
+        ]);
+
+        return redirect()->route('users.appointment');
+    }
+
     public function appoinment()
     {
+        if (!session()->has('agentId')) {
+            return redirect()->route('users.chooseAgent');
+        }
+
+        $agent = Agent::find(6);
+
         return view('users/appoinment', [
             "link" => '/users/choose/agent',
             "title" => 'Jadwal Pertemuan',
+            'agent' => $agent,
             'currentStep' => 2
         ]);
     }
 
     public function appoinmentPost(Request $request)
     {
+        $datetime = $request->input('actual_time_schedule');
+
         Appoinment_schedule::create([
-            'schedule' => $request->schedule,
+            'schedule' => $datetime,
         ]);
+
+        return redirect()->route('users.review');
     }
 
     public function review()
