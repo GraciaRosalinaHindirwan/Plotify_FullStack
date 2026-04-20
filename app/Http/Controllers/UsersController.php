@@ -8,6 +8,9 @@ use App\Models\Appoinment_schedule;
 use App\Models\User;
 use App\Models\Agent_regency;
 use App\Models\Regency;
+use App\Models\Province;
+use App\Models\District;
+use Termwind\Components\Raw;
 
 class UsersController extends Controller
 {
@@ -70,11 +73,21 @@ class UsersController extends Controller
 
         $agent = Agent::find(6);
 
+          $regions = [
+                ['label' => 'provinsi',
+                'area' => Province::select('name')->get()->toArray()],
+                ['label' => 'kabupaten',
+                'area' => Regency::select('name')->get()->toArray()],
+                ['label' => 'kecamatan',
+                'area' => District::select('name')->get()->toArray()]
+            ];
+
         return view('users/appoinment', [
             "link" => '/users/choose/agent',
             "title" => 'Jadwal Pertemuan',
             'agent' => $agent,
-            'currentStep' => 2
+            'currentStep' => 2,
+            'regions' => $regions,
         ]);
     }
 

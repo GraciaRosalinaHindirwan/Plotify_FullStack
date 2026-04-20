@@ -22,7 +22,7 @@ Route::prefix("/admin")->group(function () {
     Route::post("/logout", [AdminController::class, 'logout']);
 
     Route::get('/home', [AdminController::class, 'home'])->middleware("auth");
-    Route::get('/account/manage', [AdminController::class, 'accountManage'])->middleware("auth");
+    Route::get('/account/manage', [AdminController::class, 'accountManage']);
     Route::post('/account/manage', [AdminController::class, 'homePost'])->middleware("auth");
     Route::get('/region', function () {
         return view('admin/region', [
