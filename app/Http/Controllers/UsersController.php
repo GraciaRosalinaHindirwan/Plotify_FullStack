@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Agent;
 use Illuminate\Http\Request;
 use App\Models\Appoinment_schedule;
+use App\Models\Appoinment;
 use App\Models\User;
 use App\Models\Agent_regency;
 use App\Models\Regency;
@@ -75,13 +76,16 @@ class UsersController extends Controller
 
           $regions = [
                 ['label' => 'provinsi',
-                'area' => Province::select('name')->get()->toArray()],
+                'area' => Province::select('name')->get()->toArray(),
+                'wilayah' => 'province',],
+                
                 ['label' => 'kabupaten',
-                'area' => Regency::select('name')->get()->toArray()],
+                'area' => Regency::select('name')->get()->toArray(),
+                'wilayah' => 'regency',],
                 ['label' => 'kecamatan',
-                'area' => District::select('name')->get()->toArray()]
+                'area' => District::select('name')->get()->toArray(),
+                'wilayah' => 'district']
             ];
-
         return view('users/appoinment', [
             "link" => '/users/choose/agent',
             "title" => 'Jadwal Pertemuan',
@@ -94,6 +98,8 @@ class UsersController extends Controller
     public function appoinmentPost(Request $request)
     {
         $datetime = $request->input('actual_time_schedule');
+        $data = $request->all();
+        dd($data);
 
         Appoinment_schedule::create([
             'schedule' => $datetime,

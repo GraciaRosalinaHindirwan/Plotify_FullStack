@@ -20,6 +20,7 @@
                   @foreach ($regions as $region)
                     @include("components/admin/field-wilayah", [
                       'works' => $region['area'],
+                      'wilayah' => $region['wilayah']
                     ])
                   @endforeach
                 </div>

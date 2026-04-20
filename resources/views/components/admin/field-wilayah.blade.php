@@ -4,7 +4,7 @@
   <div class="relative dropdown-wrapper">
 
     <!-- input hidden (buat kirim ke Laravel) -->
-    <input type="hidden" name="wilayah" class="hidden-input">
+    <input type="hidden" name="{{ $region['wilayah'] }}" class="hidden-input">
 
     <!-- box utama -->
     <div class="peer w-full border border-transparent rounded-lg 
