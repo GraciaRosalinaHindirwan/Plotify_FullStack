@@ -14,4 +14,12 @@ class Appoinment extends Model
         'property_address',
         'is_approved_by_agen',
     ];
+
+    public function agent(){
+        return $this->belongsTo(Agent::class);
+    }
+
+    public function appoinment_schedules(){
+        return $this->hasMany(Appoinment_schedule::class, 'appointment_id');
+    }
 }

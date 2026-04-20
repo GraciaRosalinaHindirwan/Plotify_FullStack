@@ -22,4 +22,8 @@ class Agent extends Model
     {
         return $this->hasMany(Agent_regency::class, 'agent_id');
     }
+
+    public function appoinment(){
+        return $this->hasMany(Appoinment::class);
+    }
 }

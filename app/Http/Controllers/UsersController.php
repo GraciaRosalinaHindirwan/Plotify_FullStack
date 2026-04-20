@@ -119,15 +119,28 @@ class UsersController extends Controller
             'is_seller_approve_schedule' => false,
             'appointment_id' => $id,
         ]);
-        return redirect()->route('users.review');
+        return redirect()->route('users.review')->with('appoinment_id', $id);
     }
 
     public function review()
     {
+        $appoinmentId = session('appoinment_id');
+        $appoinment = Appoinment::with([
+            'agent',
+            'appoinment_schedules'=>function($q){
+                $q->latest()->limit(1);
+            }
+        ])->findorFail($appoinmentId);
+        $latestSchedule = $appoinment->appoinment_schedules->first();
         return view('users/review', [
             "link" => '/users/appoinment',
             "title" => 'Review Jadwal',
-            'currentStep' => 3
+            'currentStep' => 3,
+            'href' => route('user.listAppoinment'),
+            'id' => null,
+            'slot' => "Lihat Janji Temu",
+            'appoinment' => $appoinment,
+            'schedule' => $latestSchedule,
         ]);
     }
 

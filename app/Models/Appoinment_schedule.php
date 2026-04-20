@@ -12,4 +12,8 @@ class Appoinment_schedule extends Model
         'is_agen_approve_schedule',
         'is_seller_approve_schedule',
     ];
+
+    public function appoinment(){
+        return $this->belongsTo(Appoinment::class);
+    }
 }
