@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Appoinment_schedule extends Model
 {
     protected $fillable = [
-        'schedule'
+        'appointment_id',
+        'schedule',
+        'is_agen_approve_schedule',
+        'is_seller_approve_schedule',
     ];
 }

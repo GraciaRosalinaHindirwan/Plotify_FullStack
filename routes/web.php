@@ -37,7 +37,9 @@ Route::get('notary/home', function () {
     return view('notary/home');
 });
 
-Route::prefix('/users')->group(function () {
+Route::prefix('/users')
+->middleware("auth")
+->group(function () {
     Route::get('property', [UsersController::class, 'property']);
     Route::get('property/detail/{id}', [UsersController::class, 'propertyDetail'])->name('property.detail');
     Route::get('choose/agent', [UsersController::class, 'chooseAgent'])->name('users.chooseAgent');
@@ -57,7 +59,7 @@ Route::prefix('/users')->group(function () {
 
 
 Route::prefix('/agent')
-    // ->middleware("auth")
+    ->middleware("auth")
     ->group(function () {
         Route::get('/appointment', [AgentController::class, 'appointment']);
         Route::get('/appointment/{id}', [AgentController::class, 'appointmentDetail']);

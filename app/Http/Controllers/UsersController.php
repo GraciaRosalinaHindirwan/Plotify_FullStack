@@ -12,6 +12,7 @@ use App\Models\Regency;
 use App\Models\Province;
 use App\Models\District;
 use Termwind\Components\Raw;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
@@ -92,20 +93,32 @@ class UsersController extends Controller
     public function appoinmentPost(Request $request)
     {
         // kita butuh data agentId, sellerId, districtId, propertyName, propertyAddress, dll
-        $datetime = $request->input('actual_time_schedule');
-        $data = $request->all();
+        $schedule = $request->input('actual_time_schedule');
 
         // get session
         // ngambil agentId dari session
         $agentId = session()->get("agentId");
-        $sellerId = auth()->id();
-        dd($sellerId);
+        $sellerId = Auth::user()->id;
+        $namaProperti = $request->input('property_name');
+        $alamatProperti = $request->input('property_address');
+        $districtId = $request->input('district_id');
 
+        $appoinment = Appoinment::create([
+            'agent_id' => $agentId,
+            'seller_id' => $sellerId,
+            'district_id' => $districtId,
+            'property_name' => $namaProperti,
+            'property_address' => $alamatProperti,
+            'is_approved_by_agen' => false,
+        ]);
+        $id = $appoinment->id;
 
-        /* Appoinment_schedule::create([ */
-        /*     'schedule' => $datetime, */
-        /* ]); */
-
+        Appoinment_schedule::create([
+            'schedule' => $schedule,
+            'is_agen_approve_schedule' => false,
+            'is_seller_approve_schedule' => false,
+            'appointment_id' => $id,
+        ]);
         return redirect()->route('users.review');
     }
 
