@@ -29,7 +29,7 @@ Route::prefix("/admin")->group(function () {
             "pageTitle" => "Region Management"
         ]);
     })->middleware("auth");
-    
+
     Route::get('/user', [AdminController::class, 'user'])->middleware("auth");
 });
 
@@ -37,18 +37,18 @@ Route::get('notary/home', function () {
     return view('notary/home');
 });
 
-Route::prefix('/users')->group(function (){
+Route::prefix('/users')->group(function () {
     Route::get('property', [UsersController::class, 'property']);
     Route::get('property/detail/{id}', [UsersController::class, 'propertyDetail'])->name('property.detail');
     Route::get('choose/agent', [UsersController::class, 'chooseAgent'])->name('users.chooseAgent');
-    Route::post('choose/agent', [UsersController::class, 'chooseAgent']);
-    Route::get('appoinment', [UsersController::class, 'appoinment']);
-    Route::post('appoinment', [UsersController::class, 'appoinmentPost']);
-    Route::get('review', [UsersController::class, 'review']);
+    Route::post('choose/agent', [UsersController::class, 'chooseAgentAction'])->name('users.chooseAgentAction');
+    Route::get('appoinment', [UsersController::class, 'appoinment'])->name('users.appointment');
+    Route::post('appoinment', [UsersController::class, 'appoinmentPost'])->name('users.appointmentAction');
+    Route::get('review', [UsersController::class, 'review'])->name('users.review');
 
     Route::get('negotiation', [UsersController::class, 'negotiation']);
     Route::get('negotiation/detail/{id}', [UsersController::class, 'negotiationDetail'])->name('negotiation.detail');
-  
+
     Route::get('/transaction', [UsersController::class, 'transaction']);
     Route::get('/transaction/method', [UsersController::class, 'transactionMethod']);
 });
@@ -57,18 +57,18 @@ Route::prefix('/users')->group(function (){
 
 
 Route::prefix('/agent')
-// ->middleware("auth")
-->group(function () {
-    Route::get('/appointment', [AgentController::class, 'appointment']);
-    Route::get('/appointment/{id}', [AgentController::class, 'appointmentDetail']);
-    Route::post("/logout", [AuthController::class, 'logout']);
+    // ->middleware("auth")
+    ->group(function () {
+        Route::get('/appointment', [AgentController::class, 'appointment']);
+        Route::get('/appointment/{id}', [AgentController::class, 'appointmentDetail']);
+        Route::post("/logout", [AuthController::class, 'logout']);
 
-    Route::get('/appointment/{id}/create-property', [AgentController::class, 'createProperty']);
-    Route::get('/property', [AgentController::class, 'property']);
-    Route::get('/property/{id}', [AgentController::class, 'detailProperty']);
-    Route::get('/property/{id}/publication', [AgentController::class, 'publication']);
-    Route::get('/offer', [AgentController::class, 'offer']);
-});
+        Route::get('/appointment/{id}/create-property', [AgentController::class, 'createProperty']);
+        Route::get('/property', [AgentController::class, 'property']);
+        Route::get('/property/{id}', [AgentController::class, 'detailProperty']);
+        Route::get('/property/{id}/publication', [AgentController::class, 'publication']);
+        Route::get('/offer', [AgentController::class, 'offer']);
+    });
 
 Route::get('/notary/home', function () {
     return view('notary/home');

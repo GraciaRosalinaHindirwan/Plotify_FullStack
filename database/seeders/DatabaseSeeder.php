@@ -16,11 +16,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-         $this->call([
+        $this->call([
             UserSeeder::class,
-            notarySeeder::class,
+            /* NotarySeeder::class, */
             LocationSeeder::class,
             AgentSeeder::class,
-            ]);
+        ]);
     }
 }
