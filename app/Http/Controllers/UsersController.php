@@ -57,12 +57,15 @@ class UsersController extends Controller
 
     public function chooseAgentAction(Request $request)
     {
+        // ambil agent id dari input hidden di agent card
         $agentId = $request->input('agent_id');
 
+        // set session supaya nanti agentId bisa diambil waktu insert appointment
         session([
             'agentId' => $agentId
         ]);
 
+        // redirect ke step ke-2(appointment)
         return redirect()->route('users.appointment');
     }
 
@@ -74,36 +77,34 @@ class UsersController extends Controller
 
         $agent = Agent::find(6);
 
-          $regions = [
-                ['label' => 'provinsi',
-                'area' => Province::select('name')->get()->toArray(),
-                'wilayah' => 'province',],
-                
-                ['label' => 'kabupaten',
-                'area' => Regency::select('name')->get()->toArray(),
-                'wilayah' => 'regency',],
-                ['label' => 'kecamatan',
-                'area' => District::select('name')->get()->toArray(),
-                'wilayah' => 'district']
-            ];
+        // ambil semua districts untuk ngisi dropdown
+        $districts = District::all();
+
         return view('users/appoinment', [
             "link" => '/users/choose/agent',
             "title" => 'Jadwal Pertemuan',
             'agent' => $agent,
             'currentStep' => 2,
-            'regions' => $regions,
+            'districts' => $districts,
         ]);
     }
 
     public function appoinmentPost(Request $request)
     {
+        // kita butuh data agentId, sellerId, districtId, propertyName, propertyAddress, dll
         $datetime = $request->input('actual_time_schedule');
         $data = $request->all();
-        dd($data);
 
-        Appoinment_schedule::create([
-            'schedule' => $datetime,
-        ]);
+        // get session
+        // ngambil agentId dari session
+        $agentId = session()->get("agentId");
+        $sellerId = auth()->id();
+        dd($sellerId);
+
+
+        /* Appoinment_schedule::create([ */
+        /*     'schedule' => $datetime, */
+        /* ]); */
 
         return redirect()->route('users.review');
     }
