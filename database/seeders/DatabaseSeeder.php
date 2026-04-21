@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             /* NotarySeeder::class, */
             LocationSeeder::class,
             AgentSeeder::class,
+            AppoinmentSeeder::class,
         ]);
     }
 }

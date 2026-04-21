@@ -3,20 +3,23 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Appoinment extends Model
 {
+    use HasFactory;
     protected $fillable = [
         'agent_id',
         'seller_id',
         'district_id',
         'property_name',
         'property_address',
+        'actual_time_schedule',
         'is_approved_by_agen',
     ];
 
     public function agent(){
-        return $this->belongsTo(Agent::class);
+        return $this->belongsTo(User::class, 'agent_id');
     }
 
     public function appoinment_schedules(){
@@ -24,7 +27,7 @@ class Appoinment extends Model
     }
 
     public function district(){
-        return $this->belongsTo(District::class);
+        return $this->belongsTo(District::class, 'district_id');
     }
 
     public function seller(){
