@@ -19,7 +19,7 @@ class Appoinment extends Model
     ];
 
     public function agent(){
-        return $this->belongsTo(User::class, 'agent_id');
+        return $this->belongsTo(Agent::class);
     }
 
     public function appoinment_schedules(){

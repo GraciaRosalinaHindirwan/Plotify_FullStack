@@ -8,7 +8,7 @@
             <div>
                 <p class="text-[18px] text-[var(--color-text)] pb-[8px]">{{ $appoinment->actual_time_schedule ?? 'No schedule set' }}</p>
                 <h2 class="text-[22px] font-semibold">{{ $appoinment->property_name }}</h2>
-                <p class="text-[16px] text-[var(--color-text)]">{{ $appoinment->agent->user->fullname }}</p>
+                <p class="text-[16px] text-[var(--color-text)]">{{ $appoinment->agent->user->fullname ?? 'tidak ada nama'}}</p>
             </div>
             <a href="{{ route('users.AppoinmentDetail', ['id' => $appoinment->id]) }}">
                 <i class="fa-solid fa-angle-right text-4xl"></i>

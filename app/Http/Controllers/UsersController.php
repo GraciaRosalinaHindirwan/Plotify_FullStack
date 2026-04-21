@@ -190,7 +190,7 @@ class UsersController extends Controller
             $appoinment->is_approved_by_agen = null;
         }
         $appoinment->save();
-        return redirect()->route('users.AppoinmentDetail', ['id' => $appoinmentId]);
+        
     }
 
     public function negotiation()
