@@ -22,4 +22,12 @@ class Appoinment extends Model
     public function appoinment_schedules(){
         return $this->hasMany(Appoinment_schedule::class, 'appointment_id');
     }
+
+    public function district(){
+        return $this->belongsTo(District::class);
+    }
+
+    public function seller(){
+        return $this->belongsTo(User::class, 'seller_id');
+    }
 }

@@ -47,10 +47,9 @@ Route::prefix('/users')
     Route::get('appoinment', [UsersController::class, 'appoinment'])->name('users.appointment');
     Route::post('appoinment', [UsersController::class, 'appoinmentPost'])->name('users.appointmentAction');
     Route::get('review', [UsersController::class, 'review'])->name('users.review');
-    Route::get('listAppoinment', function(){
-        return view('null');
-    })->name('user.listAppoinment');
-
+    Route::get('appoinment/list', [UsersController::class, 'listAppoinment'])->name('users.listAppoinment');
+    Route::get('appoinment/detail/{id}', [UsersController::class, 'appoinmentDetail'])->name('users.AppoinmentDetail');
+    Route::post('appoinment/detail/{id}', [UsersController::class, 'appoinmentDetailPost'])->name('users.appoinmentDetailPost');
     Route::get('negotiation', [UsersController::class, 'negotiation']);
     Route::get('negotiation/detail/{id}', [UsersController::class, 'negotiationDetail'])->name('negotiation.detail');
 

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('property_name');
             $table->string('property_address');
             $table->datetime('actual_time_schedule')->nullable();
-            $table->boolean('is_approved_by_agen');
+            $table->boolean('is_approved_by_agen')->nullable();
             $table->timestamps();
         });
     }

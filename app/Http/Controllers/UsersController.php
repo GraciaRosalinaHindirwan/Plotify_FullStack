@@ -109,14 +109,14 @@ class UsersController extends Controller
             'district_id' => $districtId,
             'property_name' => $namaProperti,
             'property_address' => $alamatProperti,
-            'is_approved_by_agen' => false,
+            'is_approved_by_agen' => null,
         ]);
         $id = $appoinment->id;
 
         Appoinment_schedule::create([
             'schedule' => $schedule,
-            'is_agen_approve_schedule' => false,
-            'is_seller_approve_schedule' => false,
+            'is_agen_approve_schedule' => null,
+            'is_seller_approve_schedule' => null,
             'appointment_id' => $id,
         ]);
         return redirect()->route('users.review')->with('appoinment_id', $id);
@@ -136,12 +136,61 @@ class UsersController extends Controller
             "link" => '/users/appoinment',
             "title" => 'Review Jadwal',
             'currentStep' => 3,
-            'href' => route('user.listAppoinment'),
+            'href' => route('users.listAppoinment'),
             'id' => null,
             'slot' => "Lihat Janji Temu",
             'appoinment' => $appoinment,
             'schedule' => $latestSchedule,
         ]);
+    }
+
+    public function listAppoinment()
+    {
+        $sellerId = Auth::user()->id;
+        $appoinments = Appoinment::with([
+            'agent',
+            'appoinment_schedules'=>function($q){
+                $q->latest()->limit(1);
+            }
+        ])->where('seller_id', $sellerId)->get();
+    
+        return view('users/listAppoinment',[
+            'appoinments' => $appoinments,
+            
+        ]);
+    }
+
+    public function appoinmentDetail($appoinmentId)
+    {
+        $appoinment = Appoinment::with([
+            'agent',
+            'appoinment_schedules'=>function($q){
+                $q->latest()->limit(1);
+            },
+            'district',
+            'seller',
+        ])->findOrFail($appoinmentId);
+        // dd($appoinment);
+
+        return view('users/AppoinmentDetail', [
+            "link" => route('users.listAppoinment'),
+            "title" => 'Detail Negosiasi',
+            'appoinment' => $appoinment,
+        ]);
+    }
+
+    public function appoinmentDetailPost($appoinmentId, Request $request){
+        $status = $request->input('status');
+        $appoinment = Appoinment::find($appoinmentId);
+        if($status == '0'){
+            $appoinment->is_approved_by_agen = 0;
+        } else if($status == '1'){
+            $appoinment->is_approved_by_agen = 1;
+        } else if($status == '2'){
+            $appoinment->is_approved_by_agen = null;
+        }
+        $appoinment->save();
+        return redirect()->route('users.AppoinmentDetail', ['id' => $appoinmentId]);
     }
 
     public function negotiation()
