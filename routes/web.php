@@ -38,24 +38,24 @@ Route::get('notary/home', function () {
 });
 
 Route::prefix('/users')
-->middleware("auth")
-->group(function () {
-    Route::get('property', [UsersController::class, 'property']);
-    Route::get('property/detail/{id}', [UsersController::class, 'propertyDetail'])->name('property.detail');
-    Route::get('choose/agent', [UsersController::class, 'chooseAgent'])->name('users.chooseAgent');
-    Route::post('choose/agent', [UsersController::class, 'chooseAgentAction'])->name('users.chooseAgentAction');
-    Route::get('appoinment', [UsersController::class, 'appoinment'])->name('users.appointment');
-    Route::post('appoinment', [UsersController::class, 'appoinmentPost'])->name('users.appointmentAction');
-    Route::get('review', [UsersController::class, 'review'])->name('users.review');
-    Route::get('appoinment/list', [UsersController::class, 'listAppoinment'])->name('users.listAppoinment');
-    Route::get('appoinment/detail/{id}', [UsersController::class, 'appoinmentDetail'])->name('users.AppoinmentDetail');
-    Route::post('appoinment/detail/{id}', [UsersController::class, 'appoinmentDetailPost'])->name('users.appoinmentDetailPost');
-    Route::get('negotiation', [UsersController::class, 'negotiation']);
-    Route::get('negotiation/detail/{id}', [UsersController::class, 'negotiationDetail'])->name('negotiation.detail');
+    ->middleware("auth")
+    ->group(function () {
+        Route::get('property', [UsersController::class, 'property']);
+        Route::get('property/detail/{id}', [UsersController::class, 'propertyDetail'])->name('property.detail');
+        Route::get('choose/agent', [UsersController::class, 'chooseAgent'])->name('users.chooseAgent');
+        Route::post('choose/agent', [UsersController::class, 'chooseAgentAction'])->name('users.chooseAgentAction');
+        Route::get('appoinment', [UsersController::class, 'appoinment'])->name('users.appointment');
+        Route::post('appoinment', [UsersController::class, 'appoinmentPost'])->name('users.appointmentAction');
+        Route::get('review', [UsersController::class, 'review'])->name('users.review');
+        Route::get('appoinment/list', [UsersController::class, 'listAppoinment'])->name('users.listAppoinment');
+        Route::get('appoinment/detail/{id}', [UsersController::class, 'appoinmentDetail'])->name('users.AppoinmentDetail');
+        Route::post('appoinment/detail/{id}', [UsersController::class, 'appoinmentDetailPost'])->name('users.appoinmentDetailPost');
+        Route::get('negotiation', [UsersController::class, 'negotiation']);
+        Route::get('negotiation/detail/{id}', [UsersController::class, 'negotiationDetail'])->name('negotiation.detail');
 
-    Route::get('/transaction', [UsersController::class, 'transaction']);
-    Route::get('/transaction/method', [UsersController::class, 'transactionMethod']);
-});
+        Route::get('/transaction', [UsersController::class, 'transaction']);
+        Route::get('/transaction/method', [UsersController::class, 'transactionMethod']);
+    });
 
 
 
@@ -64,7 +64,7 @@ Route::prefix('/agent')
     ->middleware("auth")
     ->group(function () {
         Route::get('/appointment', [AgentController::class, 'appointment']);
-        Route::get('/appointment/{id}', [AgentController::class, 'appointmentDetail']);
+        Route::get('/appointment/{id}', [AgentController::class, 'appointmentDetail'])->name("agent.appointmentDetail");
         Route::post("/logout", [AuthController::class, 'logout']);
 
         Route::get('/appointment/{id}/create-property', [AgentController::class, 'createProperty']);
