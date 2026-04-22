@@ -107,3 +107,9 @@ Route::get('/notary/add-AJB-successful', function () {
 Route::get('/notary/verification-approve', function () {
     return view('notary.verification-approve');
 });
+Route::get('/notary/verification-revision', function () {
+    return view('notary.verification-revision');
+});
+Route::get('/notary/verification-reject', function () {
+    return view('notary.verification-reject');
+});
