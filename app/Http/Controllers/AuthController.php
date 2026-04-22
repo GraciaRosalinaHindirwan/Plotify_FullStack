@@ -74,7 +74,7 @@ class AuthController extends Controller
                 case "agent":
                     return redirect("/agent/appointment");
                 case "users":
-                    return redirect("/users/home");
+                    return redirect("/users/property");
             }
         } else {
             // dd("LOGIN GAGAL");
