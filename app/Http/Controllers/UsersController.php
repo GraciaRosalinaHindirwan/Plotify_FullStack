@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Agent;
+use App\Models\Property;
 use Illuminate\Http\Request;
 use App\Models\Appoinment_schedule;
 use App\Models\Appoinment;
@@ -16,9 +17,20 @@ use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
-    public function property()
+    public function property(Request $request)
     {
-        return view('users/property');
+        $properties = Property::with([
+            'property_image'
+        ])
+        ->get();
+        
+        $search = $request->input('search');
+        $property = Property::where('name', 'like', '%' . $search . '%')->get();
+
+        return view('users.property',[
+            'properties' => $properties,
+            'search' => $search,
+        ]);
     }
 
     public function propertyDetail($id)

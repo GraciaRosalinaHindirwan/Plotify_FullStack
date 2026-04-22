@@ -40,7 +40,7 @@ Route::get('notary/home', function () {
 Route::prefix('/users')
 ->middleware("auth")
 ->group(function () {
-    Route::get('property', [UsersController::class, 'property']);
+    Route::get('property', [UsersController::class, 'property'])->name('users.property');
     Route::get('property/detail/{id}', [UsersController::class, 'propertyDetail'])->name('property.detail');
     Route::get('choose/agent', [UsersController::class, 'chooseAgent'])->name('users.chooseAgent');
     Route::post('choose/agent', [UsersController::class, 'chooseAgentAction'])->name('users.chooseAgentAction');
