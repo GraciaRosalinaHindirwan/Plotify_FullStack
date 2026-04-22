@@ -26,8 +26,8 @@
     <div class="flex w-[1280px] px-[80px] pt-[80px] pb-[64px] justify-between items-center">
         <img src="/img/Logo.png" class="w-[116px] h-[60px]" />
         <div class="flex items-center gap-8">
-            <a href="" class="text-xl font-bold text-[#B153D7]">Dokumen</a>
-            <a href="" class="text-xl font-bold text-[var(--color-text)]">Akta Jual Beli</a>
+            <a href="verification" class="text-xl font-bold text-[#B153D7]">Dokumen</a>
+            <a href="add-AJB" class="text-xl font-bold text-[var(--color-text)]">Akta Jual Beli</a>
         </div>
         <div class="w-[50px] h-[50px] bg-[#999] rounded-full flex items-center justify-center text-white text-[10px] tracking-widest">
             MK

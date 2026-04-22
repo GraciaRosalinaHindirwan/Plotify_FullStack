@@ -92,3 +92,6 @@ Route::get('/notary/home', function () {
 Route::get('/notary/verification', function () {
     return view('notary.verification');
 });
+Route::get('/notary/add-AJB', function () {
+    return view('notary.add-AJB');
+});
