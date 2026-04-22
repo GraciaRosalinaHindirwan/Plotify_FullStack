@@ -174,7 +174,7 @@
                         'slot' => 'REVISI'
                     ])
             @include('components/admin/button', [
-                        'href' => '/notary/verification-reject',
+                        'href' => '/notary/verification-final-reject',
                         'slot' => 'TOLAK'
                     ])
     </div>

@@ -119,3 +119,6 @@ Route::get('/notary/AJB-detail', function () {
 Route::get('/notary/verification-final', function () {
     return view('notary.verification-final');
 });
+Route::get('/notary/verification-final-reject', function () {
+    return view('notary.verification-final-reject');
+});
