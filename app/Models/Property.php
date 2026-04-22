@@ -12,19 +12,20 @@ class Property extends Model
         'name', 
         'address',
         'price',
+        'sold_date',
         'area_in_hectare',
         'description'
     ];
 
-    public function propertyImage(){
+    public function Property_image(){
         return $this->hasMany(Property_image::class);
     }
 
-    public function spesification(){
+    public function Spesification(){
         return $this->hasMany(Spesification::class);
     }
 
-    public function facilities(){
+    public function Facilities(){
         return $this->hasMany(Facilities::class);
     }
 

@@ -13,7 +13,6 @@ class Property_image extends Model
         'name',
         'url',
         'is_banner',
-        'sold_date',
     ];
 
     public function property()
