@@ -69,7 +69,7 @@ Route::prefix('/agent')
     ->middleware("auth")
     ->group(function () {
         Route::get('/appointment', [AgentController::class, 'appointment']);
-        Route::get('/appointment/{id}', [AgentController::class, 'appointmentDetail']);
+        Route::get('/appointment/{id}', [AgentController::class, 'appointmentDetail'])->name("agent.appointmentDetail");
         Route::post("/logout", [AuthController::class, 'logout']);
 
         Route::get('/appointment/{id}/create-property', [AgentController::class, 'createProperty']);
