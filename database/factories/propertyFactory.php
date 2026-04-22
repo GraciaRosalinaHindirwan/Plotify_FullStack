@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use app\Models\Property;
+use App\Models\Appoinment;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\property>
@@ -18,6 +19,7 @@ class propertyFactory extends Factory
     public function definition(): array
     {
         return [
+            'appoinment_id' => Appoinment::inRandomOrder()->value('id'),
             'name' => fake()->sentence(),
             'address' => fake()->address(),
             'price' => fake()->numberBetween(100000, 1000000),

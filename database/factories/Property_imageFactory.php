@@ -20,7 +20,7 @@ class Property_imageFactory extends Factory
             'name' => fake()->word(),
             'url' => fake()->imageUrl(),
             'is_banner' => fake()->boolean(),
-            'sold_date' => fake()->optional()->dateTime(),
+            'sold_date' => fake()->dateTime(),
         ];
     }
 }

@@ -17,7 +17,7 @@ class FacilitiesFactory extends Factory
     public function definition(): array
     {
         return [
-           'description' => fake()->paragraph()
+           'description' => fake()->text(20)
         ];
     }
 }
