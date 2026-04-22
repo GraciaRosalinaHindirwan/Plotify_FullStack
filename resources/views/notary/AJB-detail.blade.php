@@ -157,46 +157,14 @@
                     <p class="text-2xl font-bold">Status</p>
                     <p class="text-2xl">SELESAI</p>
                 </div>
-            </div>
-
-        </div>
-
-        <!-- UPLOAD CARD -->
-        <div class="w-[960px] p-8 bg-[#1E1E1E] rounded-[32px] border border-[#0E21A0] flex flex-col gap-8">
-
-            <div class="text-center text-3xl font-bold">Akta Jual Beli (AJB)</div>
-
-            <div class="h-20 p-2.5 bg-gray-500 flex flex-col justify-center">
-                <p class="text-sm text-gray-300">Format File : PDF</p>
-                <p class="text-sm text-gray-300">Ukuran Maksimal: 5MB</p>
-            </div>
-
-            <div class="flex justify-between">
-
                 
-                    @include('components/admin/uploadImg', [
-                'name' => 'gambar',
-                'label' => 'Unggah',
-                'required' => true])
-
-                <div class="flex flex-col gap-6 w-[300px]">
-                    <p class="text-2xl font-bold">Dokumen Terunggah</p>
-
-                    <div class="p-4 bg-gray-500 rounded-lg flex justify-between">
-                        <span>KTP.jpg</span>
-                        <span>Terunggah</span>
-                    </div>
-
-                    @include('components/admin/button', [
-                        'href' => route('upload.success'),
-                        'slot' => 'Konfirmasi Unggah'
-                    ])
-                </div>
-
             </div>
-
+                
         </div>
-
+            @include('components/admin/button', [
+                        'href' => '#',
+                        'slot' => 'BUAT AJB'
+                    ])
     </div>
 
 </div>
