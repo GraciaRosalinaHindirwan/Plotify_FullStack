@@ -89,3 +89,6 @@ Route::prefix('/agent')
 Route::get('/notary/home', function () {
     return view('notary/home');
 });
+Route::get('/notary/verification', function () {
+    return view('notary.verification');
+});
