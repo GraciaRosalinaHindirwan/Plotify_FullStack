@@ -95,15 +95,15 @@ Route::get('/notary/verification', function () {
 Route::get('/notary/add-AJB', function () {
     return view('notary.add-AJB');
 });
-Route::get('/notary/add-AJB-detail', function () {
-    return view('notary.add-AJB-detail');
+Route::get('/notary/upload-detail', function () {
+    return view('notary.upload-detail');
 });
-Route::get('/notary/add-AJB-invalid', function () {
-    return view('notary.add-AJB-invalid');
+Route::get('/notary/upload-invalid', function () {
+    return view('notary.upload-invalid');
 });
-Route::get('/notary/add-AJB-successful', function () {
-    return view('notary.add-AJB-successful');
-})->name('ajb.success');
+Route::get('/notary/upload-successful', function () {
+    return view('notary.upload-successful');
+})->name('upload.success');
 Route::get('/notary/verification-approve', function () {
     return view('notary.verification-approve');
 });

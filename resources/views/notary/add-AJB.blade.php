@@ -7,7 +7,7 @@
 
         <h1 class="text-[45px] font-bold">Daftar Dokumen</h1>
 
-        <a href="/notary/add-AJB-detail">
+        <a href="/notary/AJB-detail">
         <div class="w-full bg-[#1E1E1E] border border-[#0E21A0] rounded-lg p-4 flex flex-col gap-4">
             <div class="flex justify-between items-center">
 
