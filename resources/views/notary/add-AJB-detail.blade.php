@@ -188,8 +188,7 @@
                     </div>
 
                     @include('components/admin/button', [
-                        'type' => 'button',
-                        'id' => null,
+                        'href' => route('ajb.success'),
                         'slot' => 'Konfirmasi Unggah'
                     ])
                 </div>
