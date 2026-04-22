@@ -35,7 +35,10 @@ class UsersController extends Controller
 
     public function propertyDetail($id)
     {
-        return view('users/detail-property', compact('id'));
+        return view('users/detail-property', [
+            'link' => route("users.property"),
+            'title' => "Detail Property",
+        ]);
     }
 
     public function chooseAgent(Request $request)
