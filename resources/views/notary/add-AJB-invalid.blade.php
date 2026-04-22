@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add AJB Detail Correct</title>
+    <title>Add AJB Detail</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@400;700&display=swap" rel="stylesheet">
 
     @vite('resources/css/app.css')
 </head>
@@ -15,7 +16,6 @@
 
 <div class="w-[1280px] p-[80px] flex flex-col gap-[64px] mx-auto">
 
-    <!-- HEADER -->
     <div class="flex items-center justify-between w-full">
         <a href="/notary/add-AJB" class="w-3 h-6 flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-6" viewBox="0 0 12 24" fill="none">
@@ -30,13 +30,10 @@
         </div>
     </div>
 
-    <!-- WRAPPER -->
-    <div class="w-[1120px] px-[80px] py-[60px] flex flex-col gap-8 rounded-[20px]
-        shadow-[inset_4px_0px_3px_rgba(59,104,255,0.28),0px_4px_4px_rgba(59,104,255,0.10)]">
+    <div class="w-[1120px] px-[80px] py-[60px] flex flex-col gap-8 rounded-[20px] shadow-[inset_4px_0px_3px_rgba(59,104,255,0.28),0px_4px_4px_rgba(59,104,255,0.10)]">
 
         <h1 class="text-[45px] font-bold">Detail Dokumen</h1>
 
-        <!-- CARD -->
         <div class="w-[960px] p-8 bg-[#1E1E1E] rounded-[32px] border border-[#0E21A0] flex flex-col gap-8">
 
             <div class="text-center text-3xl font-bold">TOTAL PEMBAYARAN</div>
@@ -161,39 +158,61 @@
 
         </div>
 
-        <!-- UPLOAD CARD -->
         <div class="w-[960px] p-8 bg-[#1E1E1E] rounded-[32px] border border-[#0E21A0] flex flex-col gap-8">
 
             <div class="text-center text-3xl font-bold">Akta Jual Beli (AJB)</div>
 
-            <div class="h-20 p-2.5 bg-gray-500 flex flex-col justify-center">
-                <p class="text-sm text-gray-300">Format File : PDF</p>
-                <p class="text-sm text-gray-300">Ukuran Maksimal: 5MB</p>
+            <div class="self-stretch p-4 bg-[#F9C4C4] rounded-lg shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] outline outline-1 outline-offset-[-1px] outline-[#FF0000] inline-flex flex-col justify-center items-start gap-4 overflow-hidden">
+                <div class="inline-flex justify-center items-center gap-[5px]">
+                    <div class="w-5 h-5 relative overflow-hidden">
+                        <img src="/img/warning.png" alt="">
+                    </div>
+                    <div class="justify-start text-[#FF0000] text-xl font-normal font-['Balsamiq_Sans'] leading-4">Dokumen Tidak dapat diunggah</div>
+                </div>
+                <div class="self-stretch px-3.5 flex flex-col justify-start items-start gap-[5px]">
+                    <div class="inline-flex justify-center items-center gap-4">
+                        <div class="w-6 h-6 relative overflow-hidden">
+                            <div class="w-1 h-1 left-[10px] top-[10px] absolute bg-[#7B2323]"></div>
+                        </div>
+                        <div class="justify-start text-[#7B2323] text-xl font-normal font-['Balsamiq_Sans'] leading-4">Format file harus PDF</div>
+                    </div>
+                    <div class="inline-flex justify-center items-center gap-4">
+                        <div class="w-6 h-6 relative overflow-hidden">
+                            <div class="w-1 h-1 left-[10px] top-[10px] absolute bg-[#7B2323]"></div>
+                        </div>
+                        <div class="justify-start text-[#7B2323] text-xl font-normal font-['Balsamiq_Sans'] leading-4">Ukuran file melebihi 5MB</div>
+                    </div>
+                </div>
             </div>
 
-            <div class="flex justify-between">
-
-                
+            <div class="flex justify-between gap-8">
+                <div class="flex-1">
                     @include('components/admin/uploadImg', [
-                'name' => 'gambar',
-                'label' => 'Unggah',
-                'required' => true])
+                        'name' => 'gambar',
+                        'label' => 'Unggah',
+                        'required' => true
+                    ])
+                    <p class="text-[#FF0000] text-sm mt-2 font-['Balsamiq_Sans']">*File yang dipilih tidak valid</p>
+                </div>
 
                 <div class="flex flex-col gap-6 w-[300px]">
                     <p class="text-2xl font-bold">Dokumen Terunggah</p>
 
-                    <div class="p-4 bg-gray-500 rounded-lg flex justify-between">
-                        <span>KTP.jpg</span>
-                        <span>Terunggah</span>
+                    <div class="self-stretch p-4 bg-[#F9C4C4] rounded-lg shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] outline outline-1 outline-offset-[-1px] outline-[#FF0000] inline-flex justify-between items-center overflow-hidden">
+                        <div class="w-32 flex justify-center items-center gap-4">
+                            <div class="justify-start text-black text-xl font-normal font-['Poppins']">KTP.JPG</div>
+                        </div>
+                        <div class="w-32 flex justify-center items-center gap-4">
+                            <div class="justify-start text-[#FF0000] text-xl font-normal font-['Poppins']">Invalid</div>
+                        </div>
                     </div>
 
                     @include('components/admin/button', [
                         'type' => 'button',
                         'id' => null,
-                        'slot' => 'Konfirmasi Unggah'
+                        'slot' => 'Unggah ulang'
                     ])
                 </div>
-
             </div>
 
         </div>

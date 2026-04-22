@@ -98,3 +98,6 @@ Route::get('/notary/add-AJB', function () {
 Route::get('/notary/add-AJB-detail', function () {
     return view('notary.add-AJB-detail');
 });
+Route::get('/notary/add-AJB-invalid', function () {
+    return view('notary.add-AJB-invalid');
+});
