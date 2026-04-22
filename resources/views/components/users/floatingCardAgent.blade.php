@@ -7,7 +7,12 @@ w-[450px] bg-[#1E1E1E] rounded-[16px] p-6 shadow-xl z-50 border border-gray-700"
             <!-- avatar -->
             <div class="w-[50px] h-[50px] rounded-full text-[var(--color-text)] flex items-center justify-center font-semibold"
             style="background: var(--btn-gradient-logo);">
-                RP
+                @if(optional($agent->agent->user)->profile)
+                    <img src="{{ asset($agent->agent->user->profile) }}" 
+                        class="w-full h-full object-cover rounded-full">
+                @else
+                    {{ strtoupper(substr(optional($agent->agent->user)->fullname, 0, 1)) }}
+                @endif
             </div>
 
             <!-- text -->
