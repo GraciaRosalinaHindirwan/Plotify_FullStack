@@ -23,7 +23,7 @@
             </svg>
         </a>
 
-        <h1 class="text-[45px] font-bold">Detail Transaksi</h1>
+        <h1 class="text-[45px] font-bold">Detail Dokumen</h1>
 
         <div class="w-[50px] h-[50px] bg-gray-400 rounded-full flex items-center justify-center text-white text-[10px] tracking-widest">
             MK
@@ -157,13 +157,25 @@
                     <p class="text-2xl font-bold">Status</p>
                     <p class="text-2xl">SELESAI</p>
                 </div>
-                
-            </div>
-                
+                </div>
+            <div class="h-[1px] w-full bg-gray-500"></div>
+                <div class="text-3xl font-bold gap-8">Status Dokumen Sementara: 
+                    <div class="p-2 rounded-lg outline outline-1 outline-offset-[-1px] outline-Color-text inline-flex justify-center items-center gap-2.5 overflow-hidden">
+                    <p class="text-2xl">SETUJU</p>
+                </div>
+                </div>   
         </div>
             @include('components/admin/button', [
-                        'href' => '#',
-                        'slot' => 'BUAT AJB'
+                        'href' => '/notary/verification-approve',
+                        'slot' => 'SETUJU'
+                    ])
+            @include('components/admin/button', [
+                        'href' => '/notary/verification-revision',
+                        'slot' => 'REVISI'
+                    ])
+            @include('components/admin/button', [
+                        'href' => '/notary/verification-reject',
+                        'slot' => 'TOLAK'
                     ])
     </div>
 
