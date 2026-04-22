@@ -17,8 +17,8 @@ class Property_imageFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->word(),
-            'url' => fake()->imageUrl(),
+            'name' => fake()->words(3, true),
+            'url' => "img/property.jpg",
             'is_banner' => fake()->boolean(),
             'sold_date' => fake()->dateTime(),
         ];
