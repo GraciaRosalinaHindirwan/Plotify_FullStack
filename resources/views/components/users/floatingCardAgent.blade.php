@@ -52,6 +52,10 @@ window.addEventListener('scroll', function () {
         card.classList.remove('translate-y-10', 'opacity-0');
         card.classList.add('translate-y-0', 'opacity-100');
         shown = true;
+    } else {
+        // HILANG
+        card.classList.remove('translate-y-0', 'opacity-100');
+        card.classList.add('translate-y-10', 'opacity-0');
     }
 });
 </script>
