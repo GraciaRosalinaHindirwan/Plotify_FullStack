@@ -7,10 +7,7 @@ use App\Models\Property;
 use Illuminate\Http\Request;
 use App\Models\Appoinment_schedule;
 use App\Models\Appoinment;
-use App\Models\User;
-use App\Models\Agent_regency;
 use App\Models\Regency;
-use App\Models\Province;
 use App\Models\District;
 use Termwind\Components\Raw;
 use Illuminate\Support\Facades\Auth;
@@ -35,9 +32,16 @@ class UsersController extends Controller
 
     public function propertyDetail($id)
     {
+        $property = Property::with([
+            'property_image',
+            'facilities',
+            'spesification'
+        ])->find($id);
+
         return view('users/detail-property', [
             'link' => route("users.property"),
             'title' => "Detail Property",
+            'property' => $property,
         ]);
     }
 

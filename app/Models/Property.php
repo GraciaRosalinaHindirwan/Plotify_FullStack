@@ -12,6 +12,7 @@ class Property extends Model
         'name', 
         'address',
         'price',
+        'sold_date',
         'area_in_hectare',
         'description'
     ];

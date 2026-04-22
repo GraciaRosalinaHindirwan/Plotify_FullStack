@@ -6,7 +6,7 @@ style="background: linear-gradient(var(--color-surface)) padding-box, var(--btn-
 <h1 class="text-[var(--color-text)] mb-[16px] font-[var(--fw-bold)] text-[18px]">{{ $property->name }}</h1>
 <p class="line-clamp2 text-[var(--color-text)] mb-[16px] text-[14px] ">{{ Str::limit($property->description, 100) }}</p>
  @include("components/common/button", [
-      'href' => route('property.detail', ['id' => 1]),
+      'href' => route('property.detail', ['id' => $property->id]),
       'slot' => 'Lihat Selengkapnya'
     ])
 </div>

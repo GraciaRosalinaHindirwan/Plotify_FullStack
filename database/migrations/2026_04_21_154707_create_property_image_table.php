@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('url');
             $table->boolean('is_banner');
-            $table->timestamp('sold_date');
             $table->timestamps();
         });
     }
