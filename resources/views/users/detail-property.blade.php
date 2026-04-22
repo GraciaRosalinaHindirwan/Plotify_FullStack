@@ -19,7 +19,7 @@
             @endif
             <h1 class="text-[var(--color-text)] font-bold text-[32px]">{{ $property->name }}</h1>
         </div>
-        <p class="text-[var(--color-text)] font-normal text-[24px]">{{ $property->address }}</p>
+        <p class="text-[var(--color-text)] font-normal text-[24px]">{{ $property->address }}, {{ $property->appoinment->district->regency->province->name }},{{ $property->appoinment->district->regency->name }}, {{ $property->appoinment->district->name }}</p>
         <p class="text-[var(--color-text)] font-semibold text-[24px]">Rp {{ number_format($property->price, 0, ',', '.') }}</p>
     </div>
 </div>
@@ -51,5 +51,9 @@
         @endforeach
     </div>
 </div>
-@include("components.users.floatingCardAgent")
+<form action="{{ route('users.propertyAction') }}" method="get">
+    <input type="hidden" name="agent_id" value="{{ $agent->id }}">
+    <input type="hidden" name="property_id" value="{{ $property->id }}">
+    @include("components.users.floatingCardAgent", ['agent' => $agent])
+</form>
 @endsection

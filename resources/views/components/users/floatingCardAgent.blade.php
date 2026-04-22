@@ -12,9 +12,14 @@ w-[450px] bg-[#1E1E1E] rounded-[16px] p-6 shadow-xl z-50 border border-gray-700"
 
             <!-- text -->
             <div>
-                <h2 class="text-white font-bold text-lg">Rizky Pratama</h2>
-                <p class="text-gray-300">0812-3456-7890</p>
-                <p class="text-gray-400 text-sm">Jakarta Selatan & Depok</p>
+                @if ($agent)
+                    <h2 class="text-white font-bold text-lg">{{ $agent->agent->user->fullname }}</h2>
+                    <p class="text-gray-300">{{ $agent->agent->user->telp_number }}</p>
+                    <p class="text-gray-400 text-sm">{{ $agent->regency->name }}</p>
+                    
+                @else
+                    <h2 class="text-white font-bold text-lg">Agent belum tersedia</h2>
+                @endif
             </div>
         </div>
 
