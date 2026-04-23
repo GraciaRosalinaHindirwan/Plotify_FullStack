@@ -15,7 +15,8 @@
                                     <article class="bg-[#1E1E1E] flex justify-between items-center px-[1rem] py-[2rem] rounded-xl">
 
                                         <div>
-                                            <h2 class="text-2xl font-bold">{{ $appointment->propertyName }}</h2>
+                                            <p class="text-lg font-medium">{{ $appointment->appointmentSchedules[0]->schedule->translatedFormat('d F Y, H:i'); }}</p>
+                                            <h2 class="text-2xl font-bold mt-2">{{ $appointment->propertyName }}</h2>
                                             <h3 class="text-lg mt-1">{{ $appointment->seller->fullname }}</h3>
                                         </div>
                                         <i class="fa-solid fa-angle-right text-4xl"></i>
