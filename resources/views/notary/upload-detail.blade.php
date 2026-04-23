@@ -17,7 +17,7 @@
 
     <!-- HEADER -->
     <div class="flex items-center justify-between w-full">
-        <a href="/notary/add-AJB" class="w-3 h-6 flex items-center">
+        <a href="/notary/verification" class="w-3 h-6 flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-6" viewBox="0 0 12 24" fill="none">
                 <path d="M3.34299 12L10.414 19.071L8.99999 20.485L1.22199 12.707C1.03451 12.5195 0.929199 12.2652 0.929199 12C0.929199 11.7348 1.03451 11.4805 1.22199 11.293L8.99999 3.51501L10.414 4.92901L3.34299 12Z" fill="white"/>
             </svg>
@@ -187,7 +187,7 @@
                         <span>Terunggah</span>
                     </div>
 
-                    @include('components/admin/button', [
+                    @include('components/common/button', [
                         'href' => route('upload.success'),
                         'slot' => 'Konfirmasi Unggah'
                     ])

@@ -5,8 +5,8 @@ File berhasil diunggah
 @endsection
 
 @section('button')
-@include('components/admin/button', [
-    'href' => url('/menu'),
+@include('components/common/button', [
+    'href' => url('/notary/verification'),
     'slot' => 'Kembali ke MENU'
 ])
 @endsection

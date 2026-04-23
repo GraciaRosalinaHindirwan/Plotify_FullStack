@@ -47,7 +47,7 @@
     
 
         <div class="w-full flex justify-center">
-            @include('components/admin/button', [
+            @include('components/common/button', [
                 'href' => '/notary/verification-reject',
                 'slot' => 'Kirim'
             ])

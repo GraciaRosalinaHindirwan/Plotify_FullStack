@@ -6,10 +6,14 @@
     <div class="flex items-center gap-8">
         <div class="p-4 rounded-t-lg flex flex-col gap-8
             shadow-[inset_0px_4px_3px_rgba(59,104,255,0.28),0px_4px_4px_rgba(59,104,255,0.10)]">
-            <p class="text-xl font-bold text-[#B153D7]">Verifikasi Dokumen</p>
+            <a href="{{ url('/notary/verification') }}">
+                <p class="text-xl font-bold text-[#B153D7]">Verifikasi Dokumen</p>
+            </a>
         </div>
 
-        <p class="text-xl font-bold">Dokumen Final</p>
+        <a href="{{ url('/notary/verification-final') }}">
+            <p class="text-xl font-bold">Dokumen Final</p>
+        </a>
     </div>
 
     <div class="w-[1120px] px-[80px] py-[60px] flex flex-col gap-8 rounded-tr-[20px] rounded-br-[20px] rounded-bl-[20px]
@@ -17,6 +21,7 @@
 
         <h1 class="text-[45px] font-bold">Daftar Dokumen</h1>
 
+        <a href="{{ url('/notary/upload-detail') }}">
         <div class="w-full bg-[#1E1E1E] border border-[#0E21A0] rounded-lg p-4 flex flex-col gap-4">
             <div class="flex justify-between items-center">
 
@@ -38,7 +43,7 @@
 
             </div>
         </div>
-
+        </a>
     </div>
 
 </div>

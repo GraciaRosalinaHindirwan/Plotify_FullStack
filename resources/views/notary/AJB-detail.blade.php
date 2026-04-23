@@ -161,8 +161,8 @@
             </div>
                 
         </div>
-            @include('components/admin/button', [
-                        'href' => '#',
+            @include('components/common/button', [
+                        'href' => '/notary/add-AJB',
                         'slot' => 'BUAT AJB'
                     ])
     </div>
