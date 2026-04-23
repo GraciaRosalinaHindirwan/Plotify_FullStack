@@ -78,14 +78,11 @@ class AgentController extends Controller
     {
         $schedule = $request->input("schedule");
 
-        $appointmentScheduleDto = new AppointmentScheduleDTO(
-            "",
-            Carbon::parse($schedule),
-            true,
-            false,
-            Carbon::now(),
-            Carbon::now()
-        );
+        $appointmentScheduleDto = new AppointmentScheduleDTO();
+
+        $appointmentScheduleDto->schedule = Carbon::parse($schedule);
+        $appointmentScheduleDto->isAgentApprove = true;
+        $appointmentScheduleDto->isSellerApprove = false;
 
         $rescheduleResult = $this->appointmentRepository->rescheduleAppointment(
             $appointmentId,

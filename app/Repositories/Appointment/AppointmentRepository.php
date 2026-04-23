@@ -9,9 +9,9 @@ interface AppointmentRepository
 {
     public function getAll(): array;
 
-    public function getByAgentId(): array;
+    public function getByAgentId($agentId): array;
 
-    public function getById(): ?AppointmentDTO;
+    public function getById($id): ?AppointmentDTO;
 
     public function rescheduleAppointment($appointmentId, AppointmentScheduleDTO $appointmentSchedule): bool;
 
