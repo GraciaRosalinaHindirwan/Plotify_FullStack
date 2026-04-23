@@ -98,8 +98,11 @@ Route::prefix('/users')
 Route::prefix('/agent')
     ->middleware("auth")
     ->group(function () {
-        Route::get('/appointment', [AgentController::class, 'appointment']);
+        Route::get('/appointment', [AgentController::class, 'appointment'])->name("agent.appointmentList");
         Route::get('/appointment/{id}', [AgentController::class, 'appointmentDetail'])->name("agent.appointmentDetail");
+        Route::post('/appointment/{id}/apporve', [AgentController::class, 'approveAppointment'])->name("agent.approveAppointment");
+        Route::get('/reschedule-appointment/{id}', [AgentController::class, 'rescheduleAppointment'])->name("agent.rescheduleAppointment");
+        Route::post('/reschedule-appointment/{id}', [AgentController::class, 'rescheduleAppointmentAction'])->name("agent.rescheduleAppointmentAction");
         Route::post("/logout", [AuthController::class, 'logout']);
 
         Route::get('/appointment/{id}/create-property', [AgentController::class, 'createProperty']);
