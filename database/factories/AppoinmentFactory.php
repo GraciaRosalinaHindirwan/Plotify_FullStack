@@ -21,7 +21,7 @@ class AppoinmentFactory extends Factory
         return [
             'property_name' => fake()->words(3, true),
             'property_address' => fake()->address(),
-            'actual_time_schedule' => fake()->dateTime(),
+            'actual_time_schedule' => fake()->optional()->dateTime(),
             'is_approved_by_agen' => fake()->boolean(),
         ];
     }
