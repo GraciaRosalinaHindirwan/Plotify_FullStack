@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Repositories\Appointment\AppointmentRepository;
 use App\Repositories\Appointment\AppointmentRepositoryImpl;
+use App\Repositories\Appointment\EloquentAppointmentRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -13,7 +14,7 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton(AppointmentRepository::class, AppointmentRepositoryImpl::class);
+        $this->app->singleton(AppointmentRepository::class, EloquentAppointmentRepository::class);
     }
 
     /**

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Dto\AppointmentScheduleDTO;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AuthController;
 use App\Models\Appoinment;
 use App\Repositories\Appointment\AppointmentRepository;
+use Carbon\Carbon;
 
 class AgentController extends Controller
 {
@@ -30,8 +32,81 @@ class AgentController extends Controller
         }
 
         return view("agent/appointment-detail", [
+            "link" => route("agent.appointmentList"),
+            "title" => "Detail Pertemuan",
             "appointment" => $appointment
         ]);
+    }
+
+    public function approveAppointment($appointmentId)
+    {
+        $approveResult = $this->appointmentRepository->approveAppointment($appointmentId, true);
+
+        if ($approveResult) {
+            return redirect()
+                ->route("agent.appointmentDetail", $appointmentId)
+                ->with([
+                    "status" => true,
+                    "message" => "Berhasil Menyetujui Appointment"
+                ]);
+        } else {
+            return redirect()
+                ->route("agent.appointmentDetail", $appointmentId)
+                ->with([
+                    "status" => false,
+                    "message" => "Gagal Menyetujui Appointment"
+                ]);
+        }
+    }
+
+    public function rescheduleAppointment($id)
+    {
+        $appointment = $this->appointmentRepository->getbyId($id);
+
+        if (!$appointment) {
+            abort(404);
+        }
+
+        return view("agent.reschedule-appointment", [
+            "link" => route("agent.appointmentDetail", $id),
+            "title" => "Atur Ulang Pertemuan",
+            "appointment" => $appointment
+        ]);
+    }
+
+    public function rescheduleAppointmentAction($appointmentId, Request $request)
+    {
+        $schedule = $request->input("schedule");
+
+        $appointmentScheduleDto = new AppointmentScheduleDTO(
+            "",
+            Carbon::parse($schedule),
+            true,
+            false,
+            Carbon::now(),
+            Carbon::now()
+        );
+
+        $rescheduleResult = $this->appointmentRepository->rescheduleAppointment(
+            $appointmentId,
+            $appointmentScheduleDto
+        );
+
+        if ($rescheduleResult) {
+            return redirect()
+                ->route("agent.appointmentDetail", $appointmentId)
+                ->with([
+                    "status" => true,
+                    "message" => "Berhasil Reschedule"
+                ]);
+        } else {
+            return redirect()
+                ->route("agent.appointmentDetail", $appointmentId)
+                ->with([
+                    "status" => false,
+                    "message" => "Gagal Reschedule"
+                ]);
+        }
     }
 
     public function createProperty($id)

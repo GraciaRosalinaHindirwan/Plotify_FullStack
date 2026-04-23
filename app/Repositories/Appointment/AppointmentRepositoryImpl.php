@@ -55,22 +55,22 @@ class AppointmentRepositoryImpl implements AppointmentRepository
         $schedule2 = new AppointmentScheduleDTO();
         $schedule2->id = "schedule-2";
         $schedule2->schedule = Carbon::now()->addDays(3);
-        $schedule2->isAgentApprove = false;
-        $schedule2->isSellerApprove = null;
+        $schedule2->isAgentApprove = true;
+        $schedule2->isSellerApprove = true;
         $schedule2->createdAt = Carbon::now()->subDays(1);
         $schedule2->updatedAt = Carbon::now();
 
         // Appointment
         $appointment = new AppointmentDTO();
-        $appointment->id = "appointment-1";
+        $appointment->id = "1";
         $appointment->agent = $agent;
         $appointment->district = $district;
         $appointment->seller = $seller;
         $appointment->appointmentSchedules = [$schedule1, $schedule2];
         $appointment->propertyName = "Rumah Minimalis";
         $appointment->propertyAddress = "Jl. Malioboro No. 1";
-        $appointment->actualTimeSchedule = null;
-        $appointment->isApprovedByAgent = null;
+        $appointment->actualTimeSchedule = $schedule2->schedule;
+        $appointment->isApprovedByAgent = true;
         $appointment->createdAt = Carbon::now()->subDays(5);
         $appointment->updatedAt = Carbon::now();
 
@@ -92,5 +92,15 @@ class AppointmentRepositoryImpl implements AppointmentRepository
     {
         $data = $this->fakeData();
         return $data[0] ?? null;
+    }
+
+    public function rescheduleAppointment($appointmentId, AppointmentScheduleDTO $appointmentSchedule): bool
+    {
+        return true;
+    }
+
+    public function approveAppointment($appointmentId, $isApproveByAgent): bool
+    {
+        return true;
     }
 }

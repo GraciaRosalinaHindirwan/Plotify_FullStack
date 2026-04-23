@@ -21,6 +21,8 @@ class AppointmentDTO
 
     public function getAppointmentScheduleStatus(): AppointmentScheduleStatus
     {
+        return AppointmentScheduleStatus::WAITING_APPROVE_AGENT;
+
         if ($this->actualTimeSchedule) {
             return AppointmentScheduleStatus::APPROVED;
         }

@@ -3,6 +3,7 @@
 namespace App\Repositories\Appointment;
 
 use App\Dto\AppointmentDTO;
+use App\Dto\AppointmentScheduleDTO;
 
 interface AppointmentRepository
 {
@@ -11,4 +12,8 @@ interface AppointmentRepository
     public function getByAgentId(): array;
 
     public function getById(): ?AppointmentDTO;
+
+    public function rescheduleAppointment($appointmentId, AppointmentScheduleDTO $appointmentSchedule): bool;
+
+    public function approveAppointment($appointmentId, $isApproveByAgent): bool;
 }

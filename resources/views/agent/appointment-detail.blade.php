@@ -5,7 +5,7 @@
 @extends("layouts/agent")
 
 @section('content')
-    @include("components/common/navbar")
+    @include("components/users/header")
 
     <main>
         <section class="px-[80px]">
@@ -47,6 +47,19 @@
 
                             <p class="text-2xl font-medium text-[var(--color-highlight)]">Menunggu Persetujuan Agen</p>
                         </div>
+                    @elseif($appointment->getAppointmentScheduleStatus() == AppointmentScheduleStatus::APPROVED)
+                        <div class="bg-[var(--color-primary)] inline-block px-[24px] py-[8px] rounded-[8px] border border-lg">
+                            Disetujui
+                        </div>
+                    @else
+
+                        <div class="flex gap-[32px] items-center">
+                            <div class="bg-[var(--color-secondary)] inline-block px-[24px] py-[8px] rounded-[8px] border border-lg">
+                                Belum Diproses
+                            </div>
+
+                            <p class="text-2xl font-medium text-[var(--color-highlight)]">Menunggu Persetujuan Pemilik</p>
+                        </div>
                     @endif
                 </div>
             </div>
@@ -56,17 +69,20 @@
             <section class="px-[80px] pt-[1rem]">
                 <ul class="flex gap-[2rem]">
                     <li class="flex-1">
-                        <a class="bg-gradient-to-r from-[#0560E8] to-[#7000FF] rounded-lg p-[1px] w-full flex justify-center items-center" href="">
+                    <form method="post" action="{{ route("agent.approveAppointment", $appointment->id) }}">
+                    @csrf
+                        <button type="submit" class="bg-gradient-to-r from-[#0560E8] to-[#7000FF] rounded-lg p-[1px] w-full flex justify-center items-center" href="">
                             <span class="w-full flex justify-center bg-[#1E1E1E] items-center py-4 rounded-lg text-[#F375C2]">
-                                Tolak janji temu
+                                Setuju Janji Temu
                             </span>
-                        </a>
+                        </button>
+                    </form>
                     </li>
 
                     <li class="flex-1">
-                        <a class="bg-gradient-to-r from-[#0560E8] to-[#7000FF] rounded-lg p-[1px] w-full flex justify-center items-center" href="">
+                        <a class="bg-gradient-to-r from-[#0560E8] to-[#7000FF] rounded-lg p-[1px] w-full flex justify-center items-center" href="{{ route("agent.rescheduleAppointment", $appointment->id) }}">
                             <span class="w-full flex justify-center bg-[var(--color-bg)] items-center py-4 rounded-lg text-[#F375C2]">
-                                Tolak janji temu
+                                Tolak & Atur Ulang Jadwal
                             </span>
                         </a>
                     </li>
