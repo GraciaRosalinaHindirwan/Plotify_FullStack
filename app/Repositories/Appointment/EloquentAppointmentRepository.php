@@ -28,6 +28,25 @@ class EloquentAppointmentRepository implements AppointmentRepository
 
         return $mappedAppointments->toArray();
     }
+
+    public function getBySellerId($sellerId): array
+    {
+        $appointments = Appoinment::with([
+            "agent",
+            "seller",
+            "appoinment_schedules",
+            "district"
+        ])
+            ->where("seller_id", $sellerId)
+            ->get();
+
+        $mappedAppointments = $appointments->map(function ($item) {
+            return $this->mapAppointmentEloquentToDTO($item);
+        });
+
+        return $mappedAppointments->toArray();
+    }
+
     public function getByAgentId($agentId): array
     {
         $appointments = Appoinment::with([

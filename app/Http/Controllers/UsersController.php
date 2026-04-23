@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Dto\AppointmentScheduleDTO;
 use App\Models\Agent;
 use App\Models\Agent_regency;
 use App\Models\Property;
@@ -10,22 +11,28 @@ use App\Models\Appoinment_schedule;
 use App\Models\Appoinment;
 use App\Models\Regency;
 use App\Models\District;
+use App\Repositories\Appointment\AppointmentRepository;
+use Carbon\Carbon;
 use Termwind\Components\Raw;
 use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
+    public function __construct(
+        private AppointmentRepository $appointmentRepository
+    ) {}
+
     public function property(Request $request)
     {
         $properties = Property::with([
             'property_image'
         ])
-        ->get();
-        
+            ->get();
+
         $search = $request->input('search');
         $property = Property::where('name', 'like', '%' . $search . '%')->get();
 
-        return view('users.property',[
+        return view('users.property', [
             'properties' => $properties,
             'search' => $search,
         ]);
@@ -44,9 +51,9 @@ class UsersController extends Controller
         $agent = Agent_regency::with([
             'agent.user'
         ])
-        ->where('regency_id', $regencyId)
-        -> inRandomOrder()
-        -> first();
+            ->where('regency_id', $regencyId)
+            ->inRandomOrder()
+            ->first();
 
         return view('users/detail-property', [
             'link' => route("users.property"),
@@ -56,7 +63,8 @@ class UsersController extends Controller
         ]);
     }
 
-    public function propertyAction(Request $request){
+    public function propertyAction(Request $request)
+    {
         session([
             'propertyId' => $request->input('property_id'),
             'agentId' => $request->input('agent_id'),
@@ -166,7 +174,7 @@ class UsersController extends Controller
         $appoinmentId = session('appoinment_id');
         $appoinment = Appoinment::with([
             'agent',
-            'appoinment_schedules'=>function($q){
+            'appoinment_schedules' => function ($q) {
                 $q->latest()->limit(1);
             }
         ])->findorFail($appoinmentId);
@@ -186,50 +194,106 @@ class UsersController extends Controller
     public function listAppoinment()
     {
         $sellerId = Auth::user()->id;
-        $appoinments = Appoinment::with([
-            'agent',
-            'appoinment_schedules'=>function($q){
-                $q->latest()->limit(1);
-            }
-        ])->where('seller_id', $sellerId)->get();
-    
-        return view('users/listAppoinment',[
-            'appoinments' => $appoinments,
-            
+
+        $appointments = $this->appointmentRepository->getBySellerId($sellerId);
+
+        return view('users/listAppoinment', [
+            'appoinments' => $appointments,
+
         ]);
     }
 
     public function appoinmentDetail($appoinmentId)
     {
-        $appoinment = Appoinment::with([
-            'agent',
-            'appoinment_schedules'=>function($q){
-                $q->latest()->limit(1);
-            },
-            'district',
-            'seller',
-        ])->findOrFail($appoinmentId);
-        // dd($appoinment);
+        $appointment = $this->appointmentRepository->getById($appoinmentId);
 
-        return view('users/AppoinmentDetail', [
+        return view('users/appoinmentDetail', [
             "link" => route('users.listAppoinment'),
             "title" => 'Detail Negosiasi',
-            'appoinment' => $appoinment,
+            'appoinment' => $appointment,
         ]);
     }
 
-    public function appoinmentDetailPost($appoinmentId, Request $request){
+    public function appoinmentDetailPost($appoinmentId, Request $request)
+    {
         $status = $request->input('status');
         $appoinment = Appoinment::find($appoinmentId);
-        if($status == '0'){
+        if ($status == '0') {
             $appoinment->is_approved_by_agen = 0;
-        } else if($status == '1'){
+        } else if ($status == '1') {
             $appoinment->is_approved_by_agen = 1;
-        } else if($status == '2'){
+        } else if ($status == '2') {
             $appoinment->is_approved_by_agen = null;
         }
         $appoinment->save();
-        
+    }
+
+    public function rescheduleAppointment($id)
+    {
+        $appointment = $this->appointmentRepository->getbyId($id);
+
+        if (!$appointment) {
+            abort(404);
+        }
+
+        return view("users.reschedule-appointment", [
+            "link" => route("users.AppoinmentDetail", $id),
+            "title" => "Atur Ulang Pertemuan",
+            "appointment" => $appointment
+        ]);
+    }
+
+    public function rescheduleAppointmentAction($id, Request $request)
+    {
+        $schedule = $request->input("schedule");
+
+        $appointmentScheduleDto = new AppointmentScheduleDTO();
+
+        $appointmentScheduleDto->schedule = Carbon::parse($schedule);
+        $appointmentScheduleDto->isAgentApprove = false;
+        $appointmentScheduleDto->isSellerApprove = true;
+
+        $rescheduleResult = $this->appointmentRepository->rescheduleAppointment(
+            $id,
+            $appointmentScheduleDto
+        );
+
+        if ($rescheduleResult) {
+            return redirect()
+                ->route("users.AppoinmentDetail", $id)
+                ->with([
+                    "status" => true,
+                    "message" => "Berhasil Reschedule"
+                ]);
+        } else {
+            return redirect()
+                ->route("users.AppoinmentDetail", $id)
+                ->with([
+                    "status" => false,
+                    "message" => "Gagal Reschedule"
+                ]);
+        }
+    }
+
+    public function approveAppointment($appointmentId)
+    {
+        $approveResult = $this->appointmentRepository->approveAppointment($appointmentId, false);
+
+        if ($approveResult) {
+            return redirect()
+                ->route("users.AppoinmentDetail", $appointmentId)
+                ->with([
+                    "status" => true,
+                    "message" => "Berhasil Menyetujui Appointment"
+                ]);
+        } else {
+            return redirect()
+                ->route("users.AppoinmentDetail", $appointmentId)
+                ->with([
+                    "status" => false,
+                    "message" => "Gagal Menyetujui Appointment"
+                ]);
+        }
     }
 
     public function negotiation()
