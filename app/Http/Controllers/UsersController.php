@@ -3,27 +3,66 @@
 namespace App\Http\Controllers;
 
 use App\Models\Agent;
+use App\Models\Agent_regency;
+use App\Models\Property;
 use Illuminate\Http\Request;
 use App\Models\Appoinment_schedule;
 use App\Models\Appoinment;
-use App\Models\User;
-use App\Models\Agent_regency;
 use App\Models\Regency;
-use App\Models\Province;
 use App\Models\District;
 use Termwind\Components\Raw;
 use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
-    public function property()
+    public function property(Request $request)
     {
-        return view('users/property');
+        $properties = Property::with([
+            'property_image'
+        ])
+        ->get();
+        
+        $search = $request->input('search');
+        $property = Property::where('name', 'like', '%' . $search . '%')->get();
+
+        return view('users.property',[
+            'properties' => $properties,
+            'search' => $search,
+        ]);
     }
 
     public function propertyDetail($id)
     {
-        return view('users/detail-property', compact('id'));
+        $property = Property::with([
+            'property_image',
+            'facilities',
+            'spesification',
+            'appoinment'
+        ])->find($id);
+
+        $regencyId = $property->appoinment->district->regency->id;
+        $agent = Agent_regency::with([
+            'agent.user'
+        ])
+        ->where('regency_id', $regencyId)
+        -> inRandomOrder()
+        -> first();
+
+        return view('users/detail-property', [
+            'link' => route("users.property"),
+            'title' => "Detail Property",
+            'property' => $property,
+            'agent' => $agent,
+        ]);
+    }
+
+    public function propertyAction(Request $request){
+        session([
+            'propertyId' => $request->input('property_id'),
+            'agentId' => $request->input('agent_id'),
+        ]);
+
+        return redirect()->route('users.transactionMethod');
     }
 
     public function chooseAgent(Request $request)
@@ -190,7 +229,7 @@ class UsersController extends Controller
             $appoinment->is_approved_by_agen = null;
         }
         $appoinment->save();
-        return redirect()->route('users.AppoinmentDetail', ['id' => $appoinmentId]);
+        
     }
 
     public function negotiation()

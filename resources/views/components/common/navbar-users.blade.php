@@ -11,8 +11,8 @@ function isActive($route) {
         <img src="/img/Logo.png" alt="Plotify logo">
 
         <ul class="flex items-center gap-[2rem]">
-            <li><a class="font-bold text-xl {{ isActive('users/property') }} transition-all duration-300" href="/users/home">Properti</a></li>
-            <li><a class="font-bold text-xl {{ isActive('users/listAppoinment') }} transition-all duration-300" href="/users/appoinment/list">Pertemuan</a></li>
+            <li><a class="font-bold text-xl {{ isActive('users/property') }} transition-all duration-300" href="/users/property">Properti</a></li>
+            <li><a class="font-bold text-xl {{ isActive('users/appoinment/list') }} transition-all duration-300" href="/users/appoinment/list">Pertemuan</a></li>
             <li><a class="font-bold text-xl {{ isActive('users/negotiation') }} transition-all duration-300" href="/users/negotiation">Negosiasi</a></li>
             <li><a class="font-bold text-xl {{ isActive('users/transaction') }} transition-all duration-300" href="/users/transaction">Transaksi</a></li>
  
@@ -22,6 +22,11 @@ function isActive($route) {
                 </form>
             </li>
         </ul>
-        <div class="size-[50px] bg-[#999] rounded-full flex justify-center items-center">MK</div>
+        @php
+        $name = auth()->user()->fullname;
+        $initials = strtoupper(substr($name, 0, 1));
+        @endphp
+        <div class="size-[50px] bg-[#999] rounded-full flex justify-center items-center"
+        style="background: var(--btn-gradient-logo);">{{ $initials }}</div>
     </nav>
 </header>
