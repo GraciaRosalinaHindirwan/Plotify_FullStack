@@ -82,6 +82,8 @@ Route::prefix('/users')
     Route::get('appoinment/list', [UsersController::class, 'listAppoinment'])->name('users.listAppoinment');
     Route::get('appoinment/detail/{id}', [UsersController::class, 'appoinmentDetail'])->name('users.AppoinmentDetail');
     Route::post('appoinment/detail/{id}', [UsersController::class, 'appoinmentDetailPost'])->name('users.appoinmentDetailPost');
+    Route::get('/reschedule-appointment/{id}', [UsersController::class, 'rescheduleAppointment'])->name("users.rescheduleAppointment");
+    Route::post('/reschedule-appointment/{id}', [UsersController::class, 'rescheduleAppointmentAction'])->name("users.rescheduleAppointmentAction");
 
     Route::get('review', [UsersController::class, 'review'])->name('users.review');
 
@@ -91,8 +93,6 @@ Route::prefix('/users')
     Route::get('/transaction', [UsersController::class, 'transaction']);
     Route::get('/transaction/method', [UsersController::class, 'transactionMethod'])->name('users.transactionMethod');
 });
-
-
 
 
 Route::prefix('/agent')
