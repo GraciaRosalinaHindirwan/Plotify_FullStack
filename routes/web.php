@@ -3,7 +3,6 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -37,6 +36,38 @@ Route::get('notary/home', function () {
     return view('notary/home');
 });
 
+Route::prefix('/users')->group(function (){
+    Route::get('property', function () {
+        return view('users/property');
+    });
+     Route::get('property/detail/{id}', function ($id) {
+        return view('users/detail-property', compact('id'));
+    })->name('property.detail');
+
+    Route::get('/transaction', function () {
+        return view('users/transaction', [
+        "propertyName" => "Modern Building House",
+        "transactionType" => "Pembayaran Langsung",
+        "price" => "IDR 500.000.000,00"
+    ]);
+    });
+
+    Route::get('/transaction/method', function () {
+        return view('users/method-transaction');
+    });
+});
+
+
+Route::get('/users/choose/agent', function () {
+    return view('users/choose-agent');
+});
+
+Route::get('/users/property/add', function () {
+    return view('users/add-property');
+});
+
+Route::get('/users/appoinment', function () {
+    return view('users/appoinment');
 Route::prefix('/users')
 ->middleware("auth")
 ->group(function () {
@@ -81,4 +112,37 @@ Route::prefix('/agent')
 
 Route::get('/notary/home', function () {
     return view('notary/home');
+});
+Route::get('/notary/verification', function () {
+    return view('notary.verification');
+});
+Route::get('/notary/add-AJB', function () {
+    return view('notary.add-AJB');
+});
+Route::get('/notary/upload-detail', function () {
+    return view('notary.upload-detail');
+});
+Route::get('/notary/upload-invalid', function () {
+    return view('notary.upload-invalid');
+});
+Route::get('/notary/upload-successful', function () {
+    return view('notary.upload-successful');
+})->name('upload.success');
+Route::get('/notary/verification-approve', function () {
+    return view('notary.verification-approve');
+});
+Route::get('/notary/verification-revision', function () {
+    return view('notary.verification-revision');
+});
+Route::get('/notary/verification-reject', function () {
+    return view('notary.verification-reject');
+});
+Route::get('/notary/AJB-detail', function () {
+    return view('notary.AJB-detail');
+});
+Route::get('/notary/verification-final', function () {
+    return view('notary.verification-final');
+});
+Route::get('/notary/verification-final-reject', function () {
+    return view('notary.verification-final-reject');
 });
