@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UsersController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -37,6 +37,36 @@ Route::get('notary/home', function () {
     return view('notary/home');
 });
 
+Route::prefix('/users')->group(function (){
+    Route::get('property', function () {
+        return view('users/property');
+    });
+     Route::get('property/detail/{id}', function ($id) {
+        return view('users/detail-property', compact('id'));
+    })->name('property.detail');
+
+    Route::get('/transaction', function () {
+        return view('users/transaction', [
+        "propertyName" => "Modern Building House",
+        "transactionType" => "Pembayaran Langsung",
+        "price" => "IDR 500.000.000,00"
+    ]);
+    });
+
+    Route::get('/transaction/method', function () {
+        return view('users/method-transaction');
+    });
+});
+
+
+Route::get('/users/choose/agent', function () {
+    return view('users/choose-agent');
+});
+
+Route::get('/users/property/add', function () {
+    return view('users/add-property');
+});
+
 Route::prefix('/users')
     ->middleware("auth")
     ->group(function () {
@@ -46,12 +76,15 @@ Route::prefix('/users')
 
         Route::get('choose/agent', [UsersController::class, 'chooseAgent'])->name('users.chooseAgent');
         Route::post('choose/agent', [UsersController::class, 'chooseAgentAction'])->name('users.chooseAgentAction');
-
+  
         Route::get('appoinment', [UsersController::class, 'appoinment'])->name('users.appointment');
         Route::post('appoinment', [UsersController::class, 'appoinmentPost'])->name('users.appointmentAction');
+        Route::post('/appointment/{id}/apporve', [UsersController::class, 'approveAppointment'])->name("users.approveAppointment");
         Route::get('appoinment/list', [UsersController::class, 'listAppoinment'])->name('users.listAppoinment');
         Route::get('appoinment/detail/{id}', [UsersController::class, 'appoinmentDetail'])->name('users.AppoinmentDetail');
-        Route::post('/appointment/{id}/apporve', [UsersController::class, 'approveAppointment'])->name("users.approveAppointment");
+        Route::post('appoinment/detail/{id}', [UsersController::class, 'appoinmentDetailPost'])->name('users.appoinmentDetailPost');
+        Route::get('/reschedule-appointment/{id}', [UsersController::class, 'rescheduleAppointment'])->name("users.rescheduleAppointment");
+        Route::post('/reschedule-appointment/{id}', [UsersController::class, 'rescheduleAppointmentAction'])->name("users.rescheduleAppointmentAction");
 
         Route::get('reschedule-appointment/{id}', [UsersController::class, 'rescheduleAppointment'])->name('users.rescheduleAppointment');
         Route::post('reschedule-appointment/{id}', [UsersController::class, 'rescheduleAppointmentAction'])->name('users.rescheduleAppointmentAction');
@@ -66,8 +99,6 @@ Route::prefix('/users')
         Route::get('/transaction', [UsersController::class, 'transaction']);
         Route::get('/transaction/method', [UsersController::class, 'transactionMethod'])->name('users.transactionMethod');
     });
-
-
 
 
 Route::prefix('/agent')
@@ -87,6 +118,43 @@ Route::prefix('/agent')
         Route::get('/offer', [AgentController::class, 'offer']);
     });
 
-Route::get('/notary/home', function () {
-    return view('notary/home');
-});
+Route::prefix('/notary')
+    ->middleware("auth")
+    ->group(function() {
+        Route::get('/home', function () {
+            return view('notary/home');
+        });
+        Route::get('/verification', function () {
+            return view('notary.verification');
+        });
+        Route::get('/add-AJB', function () {
+            return view('notary.add-AJB');
+        });
+        Route::get('/upload-detail', function () {
+            return view('notary.upload-detail');
+        });
+        Route::get('/upload-invalid', function () {
+            return view('notary.upload-invalid');
+        });
+        Route::get('/upload-successful', function () {
+            return view('notary.upload-successful');
+        })->name('upload.success');
+        Route::get('/verification-approve', function () {
+            return view('notary.verification-approve');
+        });
+        Route::get('/verification-revision', function () {
+            return view('notary.verification-revision');
+        });
+        Route::get('/verification-reject', function () {
+            return view('notary.verification-reject');
+        });
+        Route::get('/AJB-detail', function () {
+            return view('notary.AJB-detail');
+        });
+        Route::get('/verification-final', function () {
+            return view('notary.verification-final');
+        });
+        Route::get('/verification-final-reject', function () {
+            return view('notary.verification-final-reject');
+        });
+    });
