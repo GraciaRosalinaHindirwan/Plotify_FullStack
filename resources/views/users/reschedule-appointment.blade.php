@@ -10,7 +10,7 @@
     <main>
         <section class="px-[80px]">
             <div class="py-[60px] px-[80px] border-2 border-[#1E1E1E] rounded-xl">
-            <form method="POST" action="{{ route("agent.rescheduleAppointmentAction", $appointment->id)  }}">
+            <form method="POST" action="{{ route("users.rescheduleAppointmentAction", $appointment->id)  }}">
             @csrf
 
                 @php

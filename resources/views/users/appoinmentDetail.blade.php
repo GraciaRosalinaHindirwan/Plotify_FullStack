@@ -1,3 +1,7 @@
+@php
+    use App\Enums\AppointmentScheduleStatus;
+@endphp
+
 @extends("layouts/detail")
 @section("content")
 <div class="flex backdrop-blur-md border border-white/20 shadow-lg rounded-2xl mx-[80px] py-[32px] px-[80px] flex-col gap-[32px]">
@@ -5,11 +9,11 @@
     <div class = "flex flex-col3 place-content-between">
         <div class="flex flex-col gap-[8px]">
              <p class="text-[18px] text-[var(--color-text)] font-semibold">Nama properti </p>
-             <p class="text-[18px] text-[var(--color-text)] font-normal">{{ $appoinment->property_name }}</p>
+             <p class="text-[18px] text-[var(--color-text)] font-normal">{{ $appoinment->propertyName }}</p>
         </div>
         <div class="flex flex-col gap-[8px]">
              <p class="text-[18px] text-[var(--color-text)] font-semibold">Nama Agen </p>
-             <p class="text-[18px] text-[var(--color-text)] font-normal">{{ $appoinment->agent->user->fullname }}</p>
+             <p class="text-[18px] text-[var(--color-text)] font-normal">{{ $appoinment->agent->fullname }}</p>
         </div>
         <div class="flex flex-col gap-[8px]">
              <p class="text-[18px] text-[var(--color-text)] font-semibold">Nama pemilik </p>
@@ -19,7 +23,7 @@
     <div class = "flex flex-col3 place-content-between">
         <div class="flex flex-col gap-[8px]">
              <p class="text-[18px] text-[var(--color-text)] font-semibold">Alamat properti </p>
-             <p class="text-[18px] text-[var(--color-text)] font-normal">{{ $appoinment->property_address }}</p>
+             <p class="text-[18px] text-[var(--color-text)] font-normal">{{ $appoinment->propertyAddress }}</p>
         </div>
         <div class="flex flex-col gap-[8px]">
              <p class="text-[18px] text-[var(--color-text)] font-semibold">Kecamatan </p>
@@ -27,29 +31,46 @@
         </div>
         <div class="flex flex-col gap-[8px]">
              <p class="text-[18px] text-[var(--color-text)] font-semibold">waktu temu </p>
-             <p class="text-[18px] text-[var(--color-text)] font-normal">{{ $appoinment->actual_time_schedule ?? 'No schedule set' }} </p>
-             @if($appoinment->actual_time_schedule == null && $appoinment->appoinment_schedules[0]->is_agen_approve_schedule == null)
-                <p class="text-[18px] text-[var(--color-text)] font-normal">Ajuan anda {{ $appoinment->appoinment_schedules[0]->schedule }}</p>
+             <p class="text-[18px] text-[var(--color-text)] font-normal">{{ $appoinment->actualTimeSchedule ?? 'No schedule set' }} </p>
+
+            @if($appoinment->getAppointmentScheduleStatus() == AppointmentScheduleStatus::WAITING_APPROVE_AGENT)
+                <p class="text-[18px] text-[var(--color-text)] font-normal">Ajuan anda {{ $appoinment->appointmentSchedules[0]->schedule }}</p>
                 <p class="text-[18px] text-[var(--color-text)] font-normal">Menunggu Persetujuan Agen</p>
              @endif
         </div>
     </div>
-    @if($appoinment->is_approved_by_agen)
-        @include('components.users.badge', ['status' => 'Disetujui'])
-    @elseif($appoinment->is_approved_by_agen == null)
-        @include('components.users.badge', ['status' => 'Belum diproses'])
+
+    <div class="mt-6">
+    @if($appoinment->getAppointmentScheduleStatus() == AppointmentScheduleStatus::APPROVED)
+        <div class="bg-[var(--color-secondary)] text-white inline-block px-[24px] py-[8px] rounded-[8px] border border-lg">
+            Disetujui
+        </div>
+    @elseif($appoinment->getAppointmentScheduleStatus() == AppointmentScheduleStatus::WAITING_APPROVE_AGENT)
+        <div class="flex gap-[32px] items-center">
+            <div class="bg-[var(--color-secondary)] text-white inline-block px-[24px] py-[8px] rounded-[8px] border border-lg">
+                Belum Diproses
+            </div>
+
+            <p class="text-2xl font-medium text-[var(--color-highlight)]">Menunggu Persetujuan Agen</p>
+        </div>
     @else
-        @include('components.users.badge', ['status' => 'Ditolak'])
+        <div class="flex gap-[32px] items-center">
+            <div class="bg-[var(--color-secondary)] text-white inline-block px-[24px] py-[8px] rounded-[8px] border border-lg">
+                Belum Diproses
+            </div>
+
+            <p class="text-2xl font-medium text-[var(--color-highlight)]">Menunggu Persetujuan Anda</p>
+        </div>
     @endif
+    </div>
 </div>
 
-@if($appoinment->is_approved_by_agen && $appoinment->actual_time_schedule != null && $appoinment->appoinment_schedules[0]->is_seller_approve_schedule == null)
+@if($appoinment->getAppointmentScheduleStatus() == AppointmentScheduleStatus::WAITING_APPROVE_USER)
+
 <section class="px-[80px] pt-[1rem]">
     <ul class="flex gap-2">
         <li class="flex-1">
-            <form action="{{ route('users.appoinmentDetailPost', ['id' => $appoinment->id])}}" method="post">
-                <input type="hidden" name="status" value="0">
-                @csrf
+            <form action="{{ route('users.rescheduleAppointment', ['id' => $appoinment->id])}}" method="get">
                 @include('components.common.button', [
                     'type' => 'submit',
                     'id' => '#',
@@ -59,8 +80,7 @@
                 </li>
 
                 <li class="flex-1">
-                <form action="{{ route('users.appoinmentDetailPost', ['id' => $appoinment->id])}}" method="post">
-                <input type="hidden" name="status" value="1">
+                <form action="{{ route('users.approveAppointment', ['id' => $appoinment->id])}}" method="post">
                 @csrf
                 @include('components.common.button', [
                     'type' => 'submit',
