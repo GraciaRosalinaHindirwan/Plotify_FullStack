@@ -154,7 +154,7 @@ class EloquentAppointmentRepository implements AppointmentRepository
         /*     $dto */
         /* ]); */
 
-        $appointmentSchedules = $appointmentSchedules->sortByDesc(fn($s) => $s->updatedAt);
+        $appointmentSchedules = $appointmentSchedules->sortByDesc(fn($s) => $s->id);
 
         $dto = new AppointmentDTO();
 
