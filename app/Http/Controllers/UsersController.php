@@ -141,6 +141,9 @@ class UsersController extends Controller
     {
         // kita butuh data agentId, sellerId, districtId, propertyName, propertyAddress, dll
         $schedule = $request->input('actual_time_schedule');
+        if (!session()->has('agentId')) {
+        return redirect()->route('users.chooseAgent');
+        }
 
         // get session
         // ngambil agentId dari session
