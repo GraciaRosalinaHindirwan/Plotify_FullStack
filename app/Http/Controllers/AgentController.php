@@ -6,7 +6,8 @@ use App\Dto\AppointmentScheduleDTO;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AuthController;
-use App\Models\Appoinment;
+use App\Models\Property;
+use App\Models\Property_image;
 use App\Repositories\Appointment\AppointmentRepository;
 use Carbon\Carbon;
 
@@ -111,9 +112,19 @@ class AgentController extends Controller
         return view("agent/create-property");
     }
 
-    public function property()
+    public function property(Request $request)
     {
-        return view("agent/property");
+        $search = $request->input('search');
+        $properties = Property::with('property_image')
+        ->when($search, function ($query) use ($search) {
+            $query->where('name', 'like', '%' . $search . '%');
+        })
+        ->get();
+        
+        return view("agent/property",[
+            'properties' => $properties,
+            'search' => $search,
+        ]);
     }
 
     public function detailProperty($id)
