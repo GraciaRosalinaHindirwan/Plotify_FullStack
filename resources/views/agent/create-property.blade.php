@@ -7,12 +7,24 @@
         ['type' => 'text','name' => 'propertyAddress', 'label' => 'Alamat Property' ],
         ['type' => 'text','name' => 'propertyPrice', 'label' => 'Harga Property' ],
         ['type' => 'text','name' => 'propertyArea', 'label' => 'Luas Property' ],
+        ['type' => 'datetime-local','name' => 'sold', 'label' => 'Tanggal Terjual' ],
+        ['type' => 'text','name' => 'description', 'label' => 'Deskripsi Property' ],
     ]
 @endphp
     <main>
-        <form action="" method="post" enctype="multipart/form-data">
-        <section class="px-[80px] py-[48px]">
-            <div class="py-[60px] px-[80px] border-2 border-[#1E1E1E] rounded-xl">
+        <form action="{{ route('agent.propertyStore', $appointment->id) }}" method="post" enctype="multipart/form-data">
+            @csrf
+            <section class="px-[80px] py-[48px]">
+                <div class="py-[60px] px-[80px] border-2 border-[#1E1E1E] rounded-xl">
+                @if ($errors->any())
+                    <div class="bg-red-100 text-red-600 p-4 rounded mb-4">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>• {{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="flex flex-col gap-[32px] mb-[32px]">
                     @foreach ($fields as $field)
                         @include('components.admin.field')

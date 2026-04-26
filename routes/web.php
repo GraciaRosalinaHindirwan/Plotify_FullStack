@@ -111,7 +111,8 @@ Route::prefix('/agent')
         Route::post('/reschedule-appointment/{id}', [AgentController::class, 'rescheduleAppointmentAction'])->name("agent.rescheduleAppointmentAction");
         Route::post("/logout", [AuthController::class, 'logout']);
 
-        Route::get('/appointment/{id}/property/create', [AgentController::class, 'createProperty']);
+        Route::get('/appointment/{id}/property/create', [AgentController::class, 'createProperty'])->name("agent.createProperty");
+        Route::post('/appointment/{id}/property/create', [AgentController::class, 'propertyStore'])->name("agent.propertyStore");
         Route::get('/property', [AgentController::class, 'property'])->name('agent.property');
         Route::get('/property/{id}', [AgentController::class, 'detailProperty']);
         Route::get('/property/{id}/publication', [AgentController::class, 'publication']);

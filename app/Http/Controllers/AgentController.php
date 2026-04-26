@@ -113,8 +113,56 @@ class AgentController extends Controller
         return view("agent/create-property",[
             'link' => route("agent.appointmentDetail", $id),
             "title" => "Publikasi Property",
-
+            'appointment' => $appointment
         ]);
+    }
+
+    public function propertyStore(Request $request, $appointmentId){
+        $request->merge([
+            'propertyPrice' => str_replace('.', '', $request->propertyPrice)
+        ]);
+
+        $validate = $request->validate([
+            'propertyName' => 'required|string|max:255',
+            'propertyAddress' => 'required|string',
+            'propertyPrice' => 'required|numeric|min:0',
+            'propertyArea' => 'required|numeric|min:0',
+            'sold' => 'nullable',
+            'description' => 'nullable|string|max:100',
+
+            // array field
+            'spesification' => 'nullable|array',
+            'spesification.*' => 'nullable|string',
+
+            'fasilitas' => 'nullable|array',
+            'fasilitas.*' => 'nullable|string',
+
+            // gambar
+            'images' => 'required',
+            'images.*' => 'image|mimes:jpg,jpeg,png|max:2048'
+        ]);
+
+        $property = Property::create([
+        'name' => $validate['propertyName'],
+        'address' => $validate['propertyAddress'],
+        'price' => $validate['propertyPrice'],
+        'area_in_hectare' => $validate['propertyArea'],
+        'sold_date' => $validate['sold'] ?? null,
+        'description' => $validate['description'],
+        'appoinment_id' => $appointmentId
+        ]); 
+
+        if($request->hasFile('images')){
+            foreach($request->file('images') as $index => $image){
+                $path = $image->store('properties', 'public');
+               $property->Property_image()->create([
+                    'name' => $image->getClientOriginalName(),
+                    'url' => $path,
+                    'is_banner' => $index === 0 ? 1 : 0
+                ]);
+            }
+        }
+        return redirect()->route('agent.property');
     }
 
     public function property(Request $request)
@@ -125,7 +173,7 @@ class AgentController extends Controller
             $query->where('name', 'like', '%' . $search . '%');
         })
         ->get();
-        
+
         return view("agent/property",[
             'properties' => $properties,
             'search' => $search,

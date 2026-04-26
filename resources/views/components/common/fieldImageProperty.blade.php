@@ -41,8 +41,20 @@ document.addEventListener('DOMContentLoaded', function () {
     area.addEventListener('click', () => input.click());
 
     // saat pilih file
+    let selectedFiles = [];
+
     input.addEventListener('change', function () {
-        handleFiles(this.files);
+    const newFiles = [...this.files];
+
+    selectedFiles = [...selectedFiles, ...newFiles];
+
+    const dataTransfer = new DataTransfer();
+    selectedFiles.forEach(file => dataTransfer.items.add(file));
+    input.files = dataTransfer.files;
+
+    console.log("FILES:", input.files.length);
+
+    handleFiles(newFiles); 
     });
 
     function handleFiles(files) {
@@ -70,6 +82,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 removeBtn.onclick = (ev) => {
                     ev.stopPropagation();
+                    wrapper.remove();
+
+                     // hapus dari array
+                    selectedFiles = selectedFiles.filter(f => f !== file);
+
+                    // update input lagi
+                    const dataTransfer = new DataTransfer();
+                    selectedFiles.forEach(f => dataTransfer.items.add(f));
+                    input.files = dataTransfer.files;
+
                     wrapper.remove();
 
                     if (preview.children.length === 0) {

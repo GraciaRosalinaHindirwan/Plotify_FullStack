@@ -22,7 +22,7 @@
                 <li>
                     <article class=" p-[1px] rounded-xl bg-gradient-to-r from-[#0560E8] to-[#7000FF]">
                         <div class="gap-3 flex flex-col rounded-xl bg-[var(--color-bg)] p-[10px]">
-                            <img src="{{ asset($property->property_image->first()->url) }}" alt="gambar" class="aspect-video">
+                            <img src="{{ asset('storage/' . $property->property_image->whereNotNull('url')->first()?->url) }}" alt="gambar" class="aspect-video">
                             <h1 class="font-bold text-lg">{{ $property->name }}</h1>
                             <p class="mt-2xl">{{ Str::limit($property->description, 100) }}</p>
 
