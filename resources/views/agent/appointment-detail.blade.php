@@ -51,6 +51,14 @@
                         <div class="bg-[var(--color-primary)] inline-block px-[24px] py-[8px] rounded-[8px] border border-lg">
                             Disetujui
                         </div>
+                        <div class="my-[32px]">
+                            @include('components.common.button',[
+                                'href' => route('agent.createProperty', $appointment->id),
+                                'id' => "#",
+                                'slot' => "Tambah Properti"
+
+                            ])
+                        </div>
                     @else
 
                         <div class="flex gap-[32px] items-center">
