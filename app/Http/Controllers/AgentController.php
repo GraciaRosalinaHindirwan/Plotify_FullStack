@@ -109,7 +109,12 @@ class AgentController extends Controller
 
     public function createProperty($id)
     {
-        return view("agent/create-property");
+        $appointment = $this->appointmentRepository->getbyId($id);
+        return view("agent/create-property",[
+            'link' => route("agent.appointmentDetail", $id),
+            "title" => "Publikasi Property",
+
+        ]);
     }
 
     public function property(Request $request)
