@@ -20,13 +20,13 @@
             <ul class="grid grid-cols-3 gap-[80px] ">
                 @foreach($properties as $property)
                 <li>
-                    <article class=" p-[1px] rounded-xl bg-gradient-to-r from-[#0560E8] to-[#7000FF]">
-                        <div class="gap-3 flex flex-col rounded-xl bg-[var(--color-bg)] p-[10px]">
+                    <article class="h-[400px] p-[1px] rounded-xl bg-gradient-to-r from-[#0560E8] to-[#7000FF]">
+                        <div class=" h-full gap-3 flex flex-col rounded-xl bg-[var(--color-bg)] p-[10px]">
                             <img src="{{ asset('storage/' . $property->property_image->whereNotNull('url')->first()?->url) }}" alt="gambar" class="aspect-video">
                             <h1 class="font-bold text-lg">{{ $property->name }}</h1>
                             <p class="mt-2xl">{{ Str::limit($property->description, 100) }}</p>
 
-                            <div class="grid grid-cols-2 place-content-between gap-[16px]">
+                            <div class="grid grid-cols-2 place-content-between gap-[16px] mt-auto">
                                 @include("components/common/button",[ 
                                     'href' => " ", 
                                     'id' => " ", 
