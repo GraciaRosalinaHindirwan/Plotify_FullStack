@@ -182,7 +182,96 @@ class AgentController extends Controller
 
     public function detailProperty($id)
     {
-        return view("agent/detail-property");
+        $property = Property::with([
+            'property_image',
+            'facilities',
+            'spesification',
+            'appoinment'
+        ])->find($id);
+
+        return view("agent/detail-property", [
+            'link' => route("agent.property"),
+            'title' => "Detail Property",
+            'property' => $property
+        ]);
+    }
+
+    public function editProperty($id){
+        $property = Property::with([
+            'property_image',
+            'facilities',
+            'spesification',
+            'appoinment'
+        ])->find($id);
+        return view("agent/edit-property",[
+            'link' => route("agent.detailProperty", $property->id),
+            'title' => "Edit Property",
+            'property' => $property
+        ]);
+    }
+
+    public function updateProperty(Request $request, $id){
+        $request->merge([
+            'propertyPrice' => str_replace('.', '', $request->propertyPrice)
+        ]);
+
+        $validate = $request->validate([
+            'propertyName' => 'required|string|max:255',
+            'propertyAddress' => 'required|string',
+            'propertyPrice' => 'required|numeric|min:0',
+            'propertyArea' => 'required|numeric|min:0',
+            'sold' => 'nullable',
+            'description' => 'nullable|string|max:1000',
+
+            // array field
+            'spesification' => 'nullable|array',
+            'spesification.*' => 'nullable|string',
+
+            'fasilitas' => 'nullable|array',
+            'fasilitas.*' => 'nullable|string',
+
+            // gambar
+            'images' => 'nullable|array|max:5',
+            'images.*' => 'image|mimes:jpg,jpeg,png|max:2048'
+        ]);
+
+        $property = Property::findOrFail($id);
+
+        $property->update([
+            'name' => $validate['propertyName'],
+            'address' => $validate['propertyAddress'],
+            'price' => $validate['propertyPrice'],
+            'area_in_hectare' => $validate['propertyArea'],
+            'sold_date' => $validate['sold'] ?? null,
+            'description' => $validate['description'],
+        ]);
+
+        // replace spesifikasi
+        $property->spesification()->delete();
+        foreach ($validate['spesification'] ?? [] as $spec) {
+            $property->spesification()->create(['description' => $spec]);
+        }
+
+        // replace fasilitas
+        $property->facilities()->delete();
+        foreach ($validate['fasilitas'] ?? [] as $fac) {
+            $property->facilities()->create(['description' => $fac]);
+        }
+
+        if($request->hasFile('images')){
+            foreach($request->file('images') as $index => $image){
+                $path = $image->store('properties', 'public');
+
+                $property->property_image()->create([
+                    'name' => $image->getClientOriginalName(),
+                    'url' => $path,
+                    'is_banner' => $index === 0 ? 1 : 0
+                ]);
+            }
+        }
+
+        return redirect()->route('agent.detailProperty', $property->id)
+        ->with('success', 'Property berhasil diupdate');
     }
 
     public function publication($id)

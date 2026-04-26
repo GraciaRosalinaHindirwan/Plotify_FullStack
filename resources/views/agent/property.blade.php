@@ -1,6 +1,7 @@
 @extends("layouts/agent")
 
 @section("content")
+@php use Illuminate\Support\Str; @endphp
     @include("components/common/navbar")
 
     <main class="py-8">
@@ -22,7 +23,8 @@
                 <li>
                     <article class="h-[400px] p-[1px] rounded-xl bg-gradient-to-r from-[#0560E8] to-[#7000FF]">
                         <div class=" h-full gap-3 flex flex-col rounded-xl bg-[var(--color-bg)] p-[10px]">
-                            <img src="{{ asset('storage/' . $property->property_image->whereNotNull('url')->first()?->url) }}" alt="gambar" class="aspect-video">
+                            <img src="{{ asset('storage/' . $property->property_image->whereNotNull('url')->first()?->url) }}" alt="gambar" 
+                            class="w-full h-[160px] object-cover rounded-[16px] mb-[16px]">
                             <h1 class="font-bold text-lg">{{ $property->name }}</h1>
                             <p class="mt-2xl">{{ Str::limit($property->description, 100) }}</p>
 
@@ -33,7 +35,7 @@
                                     'slot' => "Hapus", 
                                     ]) 
                                 @include("components/common/button",[
-                                     'href' => 'agent/property', 
+                                     'href' => route("agent.detailProperty", $property->id), 
                                      'id' => " ", 
                                      'slot' => "Edit", 
                                      ])
@@ -43,12 +45,6 @@
                 </li>
                 @endforeach
             </ul>
-        </section>
-
-        <section class="flex justify-end px-[80px] py-8">
-            <a class="size-[64px] bg-gradient-to-r from-[#0E21A0] via-[#B153D7] to-[#4D2FB2] rounded-full flex justify-center items-center" href="">
-                <i class="fa-solid fa-plus text-2xl"></i>
-            </a>
         </section>
     </main>
 @endsection

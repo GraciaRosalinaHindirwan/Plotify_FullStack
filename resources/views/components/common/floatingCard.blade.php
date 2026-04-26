@@ -4,22 +4,22 @@
     <div class="bg-[#1E1E1E] p-8 rounded-xl w-[400px] text-center border border-purple-500">
 
         <p class="text-white mb-6">
-            Apakah yakin ingin mempublikasikan properti?
+            {{ $message }}
         </p>
 
-        <div class="flex gap-4">
-            <div>
+        <div class="flex gap-4 w-full">
+            <div class="flex-1">
                 @include('components.common.button',[
                     'type' => 'button',
                     'id' => 'cancel-btn',
-                    'slot' => 'Ubah Data Properti'
+                    'slot' => $cancelText
                 ])
             </div>
-            <div>
+            <div class="flex-1">
                 @include('components.common.button',[
                     'type' => 'button',
                     'id' => 'confirm-btn',
-                    'slot' => 'Konfirmasi Publikasi Properti'
+                    'slot' => $confirmText
                 ])
             </div>
         </div>
