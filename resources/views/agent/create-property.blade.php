@@ -104,13 +104,14 @@
 
                 <div class="my-[32px]">
                     @include("components.common.button",[
-                        'type' => 'submit',
-                        'id' => "#",
+                        'type' => 'button',
+                        'id' => "open-confirm",
                         'slot' => 'Publikasikan Properti'
                     ])
                 </div>
             </div>
         </section>
+        @include("components.common.floatingCard")
     </main>
     </form>
 
@@ -147,6 +148,29 @@
             items[items.length - 1].remove();
         }
         });
+    });
+
+    const openBtn = document.getElementById('open-confirm');
+    const modal = document.getElementById('confirm-modal');
+    const cancelBtn = document.getElementById('cancel-btn');
+    const confirmBtn = document.getElementById('confirm-btn');
+
+    const form = document.querySelector('form');
+
+    // buka modal
+    openBtn.addEventListener('click', () => {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+    });
+
+    // cancel → tutup modal
+    cancelBtn.addEventListener('click', () => {
+        modal.classList.add('hidden');
+    });
+
+    // confirm → submit form
+    confirmBtn.addEventListener('click', () => {
+        form.submit();
     });
     </script>
 @endsection

@@ -138,7 +138,7 @@ class AgentController extends Controller
             'fasilitas.*' => 'nullable|string',
 
             // gambar
-            'images' => 'required',
+            'images' => 'required|array|max:5',
             'images.*' => 'image|mimes:jpg,jpeg,png|max:2048'
         ]);
 
