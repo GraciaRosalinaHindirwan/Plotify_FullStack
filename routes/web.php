@@ -115,10 +115,11 @@ Route::prefix('/agent')
         Route::post('/appointment/{id}/property/create', [AgentController::class, 'propertyStore'])->name("agent.propertyStore");
         Route::get('/property', [AgentController::class, 'property'])->name('agent.property');
         Route::get('/property/{id}/detail', [AgentController::class, 'detailProperty'])->name("agent.detailProperty");
-         Route::get('/property/{id}/edit', [AgentController::class, 'editProperty'])->name("agent.editProperty");
+        Route::get('/property/{id}/edit', [AgentController::class, 'editProperty'])->name("agent.editProperty");
         Route::put('/property/{id}/update', [AgentController::class, 'updateProperty'])->name("agent.propertyUpdate");
-        Route::get('/property/{id}/publication', [AgentController::class, 'publication']);
-        Route::get('/offer', [AgentController::class, 'offer']);
+        Route::delete('/property/{id}', [AgentController::class, 'deleteProperty'])->name('agent.propertyDelete');
+        // Route::get('/property/{id}/publication', [AgentController::class, 'publication']);
+        // Route::get('/offer', [AgentController::class, 'offer']);
     });
 
 Route::prefix('/notary')

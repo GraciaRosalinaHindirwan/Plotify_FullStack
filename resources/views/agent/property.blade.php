@@ -16,8 +16,13 @@
                 </div>
             @endif
         </form>
-
+        
         <section class="px-[80px] mt-[24px]">
+            @if(session('success'))
+                <div class="bg-green-500 text-white p-4 rounded mb-4">
+                    {{ session('success') }}
+                </div>
+            @endif
             <ul class="grid grid-cols-3 gap-[80px] ">
                 @foreach($properties as $property)
                 <li>
@@ -28,23 +33,78 @@
                             <h1 class="font-bold text-lg">{{ $property->name }}</h1>
                             <p class="mt-2xl">{{ Str::limit($property->description, 100) }}</p>
 
-                            <div class="grid grid-cols-2 place-content-between gap-[16px] mt-auto">
-                                @include("components/common/button",[ 
-                                    'href' => " ", 
-                                    'id' => " ", 
-                                    'slot' => "Hapus", 
+                            <div class="grid grid-cols-2 gap-[16px] mt-auto">
+                                <div class="">
+                                    @include("components/common/button",[ 
+                                        'type' => 'button', 
+                                        'id' => "open-delete-{$property->id}", 
+                                        'slot' => "Hapus", 
                                     ]) 
-                                @include("components/common/button",[
-                                     'href' => route("agent.detailProperty", $property->id), 
-                                     'id' => " ", 
-                                     'slot' => "Edit", 
-                                     ])
+                                </div>
+
+                                <div class="">
+                                    @include("components/common/button",[
+                                        'href' => route("agent.detailProperty", $property->id), 
+                                        'id' => "#", 
+                                        'slot' => "Edit", 
+                                    ])
+                                </div>
                             </div>
                         </div>
                     </article>
+                    {{-- FORM DELETE --}}
+                    <form id="delete-form-{{ $property->id }}" 
+                        action="{{ route('agent.propertyDelete', $property->id) }}" 
+                        method="POST">
+                        @csrf
+                        @method('DELETE')
+                    </form>
                 </li>
                 @endforeach
             </ul>
         </section>
+        @include("components.common.floatingCard",[
+            'message' => "Apakah yakin mau buang property?",
+            'cancelText' => 'tidak maw',
+            'confirmText' => 'maw'
+        ])            
     </main>
+   <script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    const modal = document.getElementById('confirm-modal');
+    const confirmBtn = document.getElementById('confirm-btn');
+    const cancelBtn = document.getElementById('cancel-btn');
+
+    let selectedId = null;
+
+    // ambil semua tombol yang id nya diawali open-delete-
+    document.querySelectorAll('[id^="open-delete-"]').forEach(btn => {
+
+        btn.addEventListener('click', () => {
+
+            // ambil id dari nama id
+            selectedId = btn.id.split('-').pop();
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        });
+
+    });
+
+    // cancel
+    cancelBtn.addEventListener('click', () => {
+        modal.classList.add('hidden');
+        selectedId = null;
+    });
+
+    // confirm delete
+    confirmBtn.addEventListener('click', () => {
+        if (selectedId) {
+            document.getElementById(`delete-form-${selectedId}`).submit();
+        }
+    });
+
+});
+</script>
 @endsection

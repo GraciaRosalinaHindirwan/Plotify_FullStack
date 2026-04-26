@@ -274,6 +274,19 @@ class AgentController extends Controller
         ->with('success', 'Property berhasil diupdate');
     }
 
+    public function deleteProperty($id)
+    {
+        $property = Property::findOrFail($id);
+
+        $property->spesification()->delete();
+        $property->facilities()->delete();
+        $property->property_image()->delete();
+        $property->delete();
+
+        return redirect()->route('agent.property')
+            ->with('success', 'Property berhasil dihapus');
+    }
+
     public function publication($id)
     {
         return view("agent/publication-property");
