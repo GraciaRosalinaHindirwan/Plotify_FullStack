@@ -60,11 +60,14 @@ Route::prefix('/users')
 
         Route::get('review', [UsersController::class, 'review'])->name('users.review');
 
-        Route::get('negotiation', [TransactionController::class, 'negotiation']);
+        Route::get('negotiation', [TransactionController::class, 'negotiation'])->name('users.negotiation');
         Route::get('negotiation/detail/{id}', [TransactionController::class, 'negotiationDetail'])->name('negotiation.detail');
 
-        Route::get('/transaction', [TransactionController::class, 'transaction']);
+        Route::get('/transaction', [TransactionController::class, 'transaction'])->name('users.transaction');
+        Route::get('/transaction/detail/{id}', [TransactionController::class, 'transactionDetail'])->name('users.detailTransaction');
         Route::get('/transaction/method', [TransactionController::class, 'transactionMethod'])->name('users.transactionMethod');
+        Route::get('/transaction/method/direct',[TransactionController::class, 'transactionDirect'])->name('users.direct');
+        Route::get('/transacation/method/negotiation', [TransactionController::class, 'transactionNegotiation'])->name('users.negotiation');
     });
 
 

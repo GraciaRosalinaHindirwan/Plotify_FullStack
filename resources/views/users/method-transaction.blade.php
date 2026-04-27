@@ -2,10 +2,8 @@
 
 @section("content")
 <div class="p-[80px] bg-black">
-    
     <div class="flex gap-10 justify-center">
-
-        <div class="w-[500px] bg-[#1E1E1E] border border-[#0E21A0] rounded-2xl p-6 flex flex-col gap-6">
+        <div class="w-[500px] bg-[#1E1E1E] border border-[#0E21A0] rounded-2xl p-6 flex flex-col gap-[16px] justify-between">
             <div>
                 <h2 class="text-2xl font-bold text-[#EFECE3]">Transaksi Langsung</h2>
                 <p class="text-sm text-gray-300 mt-2">
@@ -14,78 +12,75 @@
             </div>
 
             <div class="flex flex-col gap-2 text-[#EFECE3] text-sm">
-            <div class="flex items-center gap-2">
-                <img src="/img/star-icon.png" class="w-5 h-5">
-                <span>Harga transparan & final</span>
-            </div>
-
-            <div class="flex items-center gap-2">
-                <img src="/img/star-icon.png" class="w-5 h-5">
-                <span>Mempercepat legalitas</span>
-            </div>
-
-            <div class="flex items-center gap-2">
-                <img src="/img/star-icon.png" class="w-5 h-5">
-                <span>Proses lebih cepat</span>
-            </div>
-
-            <div class="flex items-center gap-2">
-                <img src="/img/star-icon.png" class="w-5 h-5">
-                <span>Cocok untuk pembeli serius</span>
-            </div>
-
+                <div class="flex items-center gap-2">
+                    <img src="/img/star-icon.png" class="w-5 h-5">
+                    <span>Harga transparan & final</span>
                 </div>
 
-            @include("components/admin/button", [
-            'type' => 'submit',
-            'id' => NULL,
-            'slot' => 'Lanjutkan'
-            ])
+                <div class="flex items-center gap-2">
+                    <img src="/img/star-icon.png" class="w-5 h-5">
+                    <span>Mempercepat legalitas</span>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <img src="/img/star-icon.png" class="w-5 h-5">
+                    <span>Proses lebih cepat</span>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <img src="/img/star-icon.png" class="w-5 h-5">
+                    <span>Cocok untuk pembeli serius</span>
+                </div>
+            </div>
+
+            <div class="mt-auto">
+                @include("components/common/button", [
+                'href' => route('users.direct'),
+                'id' => NULL,
+                'slot' => 'Pilih Metode'
+                ])
+            </div>
         </div>
 
-        <div class="w-[500px] bg-[#1E1E1E] border border-[#0E21A0] rounded-2xl p-6 flex flex-col gap-6">
+        <div class="w-[500px] bg-[#1E1E1E] border border-[#0E21A0] rounded-2xl p-6 flex flex-col gap-[16px] justify-between">
             <div>
                 <h2 class="text-2xl font-bold text-[#EFECE3]">Transaksi Negosiasi</h2>
                 <p class="text-sm text-gray-300 mt-2">
                     Setelah penawaran dikirim, penjual dapat menerima, menolak, atau memberikan penawaran balik.
-                </p>
             </div>
 
             <div class="flex flex-col gap-2 text-[#EFECE3] text-sm">
-                <div class="flex flex-col gap-2 text-[#EFECE3] text-sm">
-            <div class="flex items-center gap-2">
-                <img src="/img/star-icon.png" class="w-5 h-5">
-                <span>Fleksibel & transparan</span>
+                <div class="flex items-center gap-2">
+                    <img src="/img/star-icon.png" class="w-5 h-5">
+                    <span>Fleksibel & transparan</span>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <img src="/img/star-icon.png" class="w-5 h-5">
+                    <span>Bisa mendapatkan harga terbaik</span>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <img src="/img/star-icon.png" class="w-5 h-5">
+                    <span>Tersedia riwayat negosiasi</span>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <img src="/img/star-icon.png" class="w-5 h-5">
+                    <span>Cocok untuk pembeli yang ingin diskusi harga</span>
+                </div>
             </div>
 
-            <div class="flex items-center gap-2">
-                <img src="/img/star-icon.png" class="w-5 h-5">
-                <span>Bisa mendapatkan harga terbaik</span>
-            </div>
-
-            <div class="flex items-center gap-2">
-                <img src="/img/star-icon.png" class="w-5 h-5">
-                <span>Tersedia riwayat negosiasi</span>
-            </div>
-
-            <div class="flex items-center gap-2">
-                <img src="/img/star-icon.png" class="w-5 h-5">
-                <span>Cocok untuk diskusi harga</span>
-            </div>
-
-            </div>
-            
-            <div class="mt-8">
-                @include("components/admin/button", [
-                'type' => 'submit',
+            <div class="mt-auto">
+                @include("components/common/button", [
+                'href' => route('users.negotiation'),
                 'id' => NULL,
-                'slot' => 'Ajukan Penawaran'
+                'slot' => 'Pilih Metode'
                 ])
             </div>
-            
         </div>
 
+        
     </div>
-
 </div>
 @endsection

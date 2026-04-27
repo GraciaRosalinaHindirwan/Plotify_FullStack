@@ -21,4 +21,7 @@
         ])
     @endforeach
 </div>
+<div>
+    @include('components/users/btn-add')
+</div>
 @endsection
