@@ -9,7 +9,7 @@
 
         <div class="flex gap-4 w-full">
             <div class="flex-1">
-                @include('components.common.button',[
+                @include('components.common.errorBtn',[
                     'type' => 'button',
                     'id' => 'cancel-btn',
                     'slot' => $cancelText

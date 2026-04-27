@@ -35,7 +35,7 @@
 
                             <div class="grid grid-cols-2 gap-[16px] mt-auto">
                                 <div class="">
-                                    @include("components/common/button",[ 
+                                    @include("components/common/errorBtn",[ 
                                         'type' => 'button', 
                                         'id' => "open-delete-{$property->id}", 
                                         'slot' => "Hapus", 
@@ -65,8 +65,8 @@
         </section>
         @include("components.common.floatingCard",[
             'message' => "Apakah yakin mau buang property?",
-            'cancelText' => 'tidak maw',
-            'confirmText' => 'maw'
+            'cancelText' => 'tidak',
+            'confirmText' => 'iya'
         ])            
     </main>
    <script>
