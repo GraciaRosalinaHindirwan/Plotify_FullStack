@@ -26,4 +26,8 @@ class Agent extends Model
     public function appoinment(){
         return $this->hasMany(Appoinment::class);
     }
+
+    public function negotiation(){
+        return $this->hasMany(negotiation::class);
+    }
 }
