@@ -35,7 +35,7 @@
 
                             <div class="grid grid-cols-2 gap-[16px] mt-auto">
                                 <div class="">
-                                    @include("components/common/button",[ 
+                                    @include("components/common/errorBtn",[ 
                                         'type' => 'button', 
                                         'id' => "open-delete-{$property->id}", 
                                         'slot' => "Hapus", 

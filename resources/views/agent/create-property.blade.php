@@ -48,7 +48,7 @@
                             'id' => "add-spec",
                             'slot' => "Tambah spesifikasi"
                         ])
-                        @include('components.common.button',[
+                        @include('components.common.errorBtn',[
                             'type' => "button",
                             'id' => "remove-spec",
                             'slot' => "Hapus spesifikasi"
@@ -81,7 +81,7 @@
                             'id' => "add-facility",
                             'slot' => "Tambah fasilitas"
                         ])
-                        @include('components.common.button',[
+                        @include('components.common.errorBtn',[
                             'type' => "button",
                             'id' => "remove-facility",
                             'slot' => "Hapus fasilitas"
