@@ -55,4 +55,20 @@ class User extends Authenticatable
     public function agent(){
         return $this->hasOne(Agent::class, 'user_id');
     }
+
+    public function negotiationAsBuyer(){
+        return $this->hasMany(negotiation::class, 'buyer_id');
+    }
+
+    public function negotiationAsSeller(){
+        return $this->hasMany(negotiation::class, 'seller_id');
+    }
+
+    public function transactionsAsSeller(){
+    return $this->hasMany(Transaction::class, 'seller_id');
+    }
+
+    public function transactionsAsBuyer(){
+        return $this->hasMany(Transaction::class, 'buyer_id');
+    }
 }

@@ -19,6 +19,7 @@ return new class extends Migration
              $table->float('price');
              $table->float('area_in_hectare');
              $table->timestamp('sold_date')->nullable();
+             $table->float('deal_price')->nullable();
              $table->text('description')->nullable();
             $table->timestamps();
         });
