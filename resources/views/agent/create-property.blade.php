@@ -113,8 +113,8 @@
         </section>
         @include("components.common.floatingCard",[
             'message' => "Apakah yakin ingin mempublikasikan properti?",
-            'cancelText' => 'tidak maw',
-            'confirmText' => 'maw'
+            'cancelText' => 'tidak',
+            'confirmText' => 'iya'
         ])
     </main>
     </form>

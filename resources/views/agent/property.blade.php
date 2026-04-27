@@ -65,8 +65,8 @@
         </section>
         @include("components.common.floatingCard",[
             'message' => "Apakah yakin mau buang property?",
-            'cancelText' => 'tidak maw',
-            'confirmText' => 'maw'
+            'cancelText' => 'tidak',
+            'confirmText' => 'iya'
         ])            
     </main>
    <script>
