@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -59,11 +60,11 @@ Route::prefix('/users')
 
         Route::get('review', [UsersController::class, 'review'])->name('users.review');
 
-        Route::get('negotiation', [UsersController::class, 'negotiation']);
-        Route::get('negotiation/detail/{id}', [UsersController::class, 'negotiationDetail'])->name('negotiation.detail');
+        Route::get('negotiation', [TransactionController::class, 'negotiation']);
+        Route::get('negotiation/detail/{id}', [TransactionController::class, 'negotiationDetail'])->name('negotiation.detail');
 
-        Route::get('/transaction', [UsersController::class, 'transaction']);
-        Route::get('/transaction/method', [UsersController::class, 'transactionMethod'])->name('users.transactionMethod');
+        Route::get('/transaction', [TransactionController::class, 'transaction']);
+        Route::get('/transaction/method', [TransactionController::class, 'transactionMethod'])->name('users.transactionMethod');
     });
 
 

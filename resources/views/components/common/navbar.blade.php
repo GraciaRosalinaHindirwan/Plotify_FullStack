@@ -25,6 +25,13 @@ function isActive($route) {
                 </form>
             </li>
         </ul>
-        <div class="size-[50px] bg-[#999] rounded-full flex justify-center items-center">MK</div>
+        @php
+        $name = auth()->user()->fullname;
+        $initials = strtoupper(substr($name, 0, 1));
+        @endphp
+        <div class="w-[50px] h-[50px] rounded-full text-[var(--color-text)] flex items-center justify-center font-semibold"
+        style = "background: var(--btn-gradient-logo);">
+          {{ $initials }}
+        </div>
     </nav>
 </header>

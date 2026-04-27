@@ -1,4 +1,4 @@
-@extends("layouts/users") 
+@extends("layouts/detail") 
 
 @section("content")
 <div class="p-[80px] bg-black">

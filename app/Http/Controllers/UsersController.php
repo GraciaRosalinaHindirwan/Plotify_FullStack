@@ -24,15 +24,14 @@ class UsersController extends Controller
 
     public function property(Request $request)
     {
-        $properties = Property::with([
-            'property_image'
-        ])
-            ->get();
-
         $search = $request->input('search');
-        $property = Property::where('name', 'like', '%' . $search . '%')->get();
+        $properties = Property::with('property_image')
+        ->when($search, function ($query) use ($search) {
+            $query->where('name', 'like', '%' . $search . '%');
+        })
+        ->get();
 
-        return view('users.property', [
+        return view('users.property',[
             'properties' => $properties,
             'search' => $search,
         ]);
@@ -297,33 +296,5 @@ class UsersController extends Controller
                     "message" => "Gagal Menyetujui Appointment"
                 ]);
         }
-    }
-
-    public function negotiation()
-    {
-        return view('users/negotiation');
-    }
-
-    public function negotiationDetail($id)
-    {
-        return view('users/negotiation-detail', [
-            "link" => '/users/negotiation',
-            "title" => 'Detail Negosiasi',
-            "negotiationId" => $id
-        ]);
-    }
-
-    public function transaction()
-    {
-        return view('users/transaction', [
-            "propertyName" => "Modern Building House",
-            "transactionType" => "Pembayaran Langsung",
-            "price" => "IDR 500.000.000,00"
-        ]);
-    }
-
-    public function transactionMethod()
-    {
-        return view('users/method-transaction');
     }
 }
