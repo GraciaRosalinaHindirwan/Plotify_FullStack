@@ -24,8 +24,7 @@ class TransactionController extends Controller
     {
         return view('users/transaction', [
             "propertyName" => "Modern Building House",
-            "transactionType" => "Pembayaran Langsung",
-            "price" => "IDR 500.000.000,00"
+            "TanggalSoldOut" => "27/04/2026 22:32",
         ]);
     }
 

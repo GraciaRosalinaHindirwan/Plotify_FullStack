@@ -15,9 +15,9 @@ function isActive($route) {
             : 'text-[var(--color-text)] hover:opacity-70'; }} transition-all duration-300" href="/users/property">Properti</a></li>
             <li><a class="font-bold text-xl {{ request()->routeIs('users.listAppoinment') ? 'bg-clip-text text-transparent bg-gradient-to-t from-[#B153D7] via-[#4D2FB2] to-[#0E21A0]'
             : 'text-[var(--color-text)] hover:opacity-70'; }} transition-all duration-300" href="/users/appoinment/list">Pertemuan</a></li>
-            <li><a class="font-bold text-xl {{ request()->routeIs('users/negotiation') ? 'bg-clip-text text-transparent bg-gradient-to-t from-[#B153D7] via-[#4D2FB2] to-[#0E21A0]'
+            <li><a class="font-bold text-xl {{ request()->routeIs('users.negotiation') ? 'bg-clip-text text-transparent bg-gradient-to-t from-[#B153D7] via-[#4D2FB2] to-[#0E21A0]'
             : 'text-[var(--color-text)] hover:opacity-70'; }} transition-all duration-300" href="/users/negotiation">Negosiasi</a></li>
-            <li><a class="font-bold text-xl {{ request()->routeIs('users/transaction') ? 'bg-clip-text text-transparent bg-gradient-to-t from-[#B153D7] via-[#4D2FB2] to-[#0E21A0]'
+            <li><a class="font-bold text-xl {{ request()->routeIs('users.transaction') ? 'bg-clip-text text-transparent bg-gradient-to-t from-[#B153D7] via-[#4D2FB2] to-[#0E21A0]'
             : 'text-[var(--color-text)] hover:opacity-70'; }} transition-all duration-300" href="/users/transaction">Transaksi</a></li>
  
                 <form method="POST" action="/agent/logout">
