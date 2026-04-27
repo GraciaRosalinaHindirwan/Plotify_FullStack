@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Regency;
+use App\Models\District;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\District>
@@ -18,6 +19,7 @@ class DistrictFactory extends Factory
     public function definition(): array
     {
         return [
+                'regency_id' => Regency::factory(),
                 'postal_code' => fake()->postcode(),
                 'name' => fake()->unique()->city(),
         ];

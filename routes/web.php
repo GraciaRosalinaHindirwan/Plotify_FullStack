@@ -33,40 +33,6 @@ Route::prefix("/admin")->group(function () {
     Route::get('/user', [AdminController::class, 'user'])->middleware("auth");
 });
 
-Route::get('notary/home', function () {
-    return view('notary/home');
-});
-
-Route::prefix('/users')->group(function (){
-    Route::get('property', function () {
-        return view('users/property');
-    });
-     Route::get('property/detail/{id}', function ($id) {
-        return view('users/detail-property', compact('id'));
-    })->name('property.detail');
-
-    Route::get('/transaction', function () {
-        return view('users/transaction', [
-        "propertyName" => "Modern Building House",
-        "transactionType" => "Pembayaran Langsung",
-        "price" => "IDR 500.000.000,00"
-    ]);
-    });
-
-    Route::get('/transaction/method', function () {
-        return view('users/method-transaction');
-    });
-});
-
-
-Route::get('/users/choose/agent', function () {
-    return view('users/choose-agent');
-});
-
-Route::get('/users/property/add', function () {
-    return view('users/add-property');
-});
-
 Route::prefix('/users')
     ->middleware("auth")
     ->group(function () {
@@ -74,8 +40,8 @@ Route::prefix('/users')
         Route::get('property/detail/{id}', [UsersController::class, 'propertyDetail'])->name('property.detail');
         Route::get('property/detail', [UsersController::class, 'propertyAction'])->name('users.propertyAction');
 
-        Route::get('choose/agent', [UsersController::class, 'chooseAgent'])->name('users.chooseAgent');
-        Route::post('choose/agent', [UsersController::class, 'chooseAgentAction'])->name('users.chooseAgentAction');
+        Route::get('/choose/agent', [UsersController::class, 'chooseAgent'])->name('users.chooseAgent');
+        Route::post('/choose/agent', [UsersController::class, 'chooseAgentAction'])->name('users.chooseAgentAction');
   
         Route::get('appoinment', [UsersController::class, 'appoinment'])->name('users.appointment');
         Route::post('appoinment', [UsersController::class, 'appoinmentPost'])->name('users.appointmentAction');

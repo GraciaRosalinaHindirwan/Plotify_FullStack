@@ -18,6 +18,7 @@ class RegencyFactory extends Factory
     public function definition(): array
     {
         return [
+            'province_id' => Province::factory(),
             'name' => fake()->unique()->city(),
         ];
     }
