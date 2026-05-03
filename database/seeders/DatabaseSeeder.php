@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             AgentSeeder::class,
             AppoinmentSeeder::class,
             PropertySeeder::class,
+            TransactionSeeder::class,
         ]);
     }
 }

@@ -3,17 +3,19 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class negotiation extends Model
+class Negotiation extends Model
 {
+    use HasFactory;
     protected $fillable = [
         'property_id',
         'seller_id',
-        'agen_id',
+        'agent_id',
         'buyer_id',
         'offer_price',
         'description',
-        'is_agent_approve',
+        'is_agen_approve',
         'is_seller_approve',
     ];
 

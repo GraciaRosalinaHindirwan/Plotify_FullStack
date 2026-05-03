@@ -33,5 +33,9 @@ class Property extends Model
     public function appoinment(){
         return $this->belongsTo(Appoinment::class);
     }
+
+    public function transaction(){
+        return $this->hasOne(transaction::class);
+    }
 }
 
