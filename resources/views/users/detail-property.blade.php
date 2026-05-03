@@ -52,7 +52,7 @@
     </div>
 </div>
 <form action="{{ route('users.propertyAction') }}" method="get">
-    <input type="hidden" name="agent_id" value="{{ $agent->id }}">
+    <input type="hidden" name="agent_id" value="{{ $agent->agent->id }}">
     <input type="hidden" name="property_id" value="{{ $property->id }}">
     @include("components.users.floatingCardAgent", ['agent' => $agent])
 </form>

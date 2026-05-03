@@ -67,6 +67,7 @@ Route::prefix('/users')
         Route::get('/transaction/detail/{id}', [TransactionController::class, 'transactionDetail'])->name('users.detailTransaction');
         Route::get('/transaction/method', [TransactionController::class, 'transactionMethod'])->name('users.transactionMethod');
         Route::get('/transaction/method/direct',[TransactionController::class, 'transactionDirect'])->name('users.direct');
+        Route::post('transaction/method/direct', [TransactionController::class, 'transactionDirectStore'])->name('users.DirectStore');
         Route::get('/transacation/method/negotiation', [TransactionController::class, 'transactionNegotiation'])->name('users.negotiation');
     });
 
