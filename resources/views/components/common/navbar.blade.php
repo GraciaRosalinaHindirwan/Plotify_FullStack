@@ -17,7 +17,8 @@ function isActive($route) {
             : 'text-[var(--color-text)] hover:opacity-70'; }} transition-all duration-300" href="/agent/property">Properti</a></li>
              <li><a class="font-bold text-xl {{ request()->routeIs('agent.negotiationHistory') ? 'bg-clip-text text-transparent bg-gradient-to-t from-[#B153D7] via-[#4D2FB2] to-[#0E21A0]'
             : 'text-[var(--color-text)] hover:opacity-70'; }} transition-all duration-300" href="/agent/negotiation/history">Negosiasi</a></li>
-            <li><a class="font-bold text-xl" href="">Dokumen</a></li>
+            <li><a class="font-bold text-xl {{ request()->routeIs('agent.document') ? 'bg-clip-text text-transparent bg-gradient-to-t from-[#B153D7] via-[#4D2FB2] to-[#0E21A0]'
+            : 'text-[var(--color-text)] hover:opacity-70'; }} transition-all duration-300" href="/agent/document">Dokumen</a></li>
             <li>
                 <form method="POST" action="/agent/logout">
                     @csrf

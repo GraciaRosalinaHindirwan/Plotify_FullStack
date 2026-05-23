@@ -105,7 +105,9 @@ Route::prefix('/agent')
         Route::patch('negotiation/approve/{id}', [AgentController::class, 'approveNegotiation'])->name('agent.approveNegotiation');
         Route::patch('negotiation/reject/{id}', [AgentController::class, 'rejectNegotiation'])->name('agent.rejectNegotiation');
         Route::get('negotiation/rejection/reason/{id}', [AgentController::class, 'negotiationRejectionReason'])->name('agent.negotiationRejectionReason');
-
+        Route::get('/document', function () {
+            return view('agent.document');
+        });
     });
 
 Route::prefix('/notary')
