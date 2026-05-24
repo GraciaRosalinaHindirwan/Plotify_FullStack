@@ -108,6 +108,32 @@ Route::prefix('/agent')
         Route::get('/document', function () {
             return view('agent.document');
         });
+        Route::get('/document-detail', function () {
+        $documents = [
+            (object)[
+                'file_path' => 'uploads/documents/KTP.jpg'
+            ],
+            (object)[
+                'file_path' => 'uploads/documents/AJB.pdf'
+            ],
+        ];
+
+            return view('agent.document-detail', compact('documents'));
+        });
+        Route::get('/document-status', function () {
+        $documents = [
+            (object)[
+                'file_path' => 'uploads/documents/KTP.jpg',
+                'status' => 'approved'
+            ],
+            (object)[
+                'file_path' => 'uploads/documents/AJB.pdf',
+                'status' => 'rejected'
+            ],
+        ];
+
+    return view('agent.document-status', compact('documents'));
+    });
     });
 
 Route::prefix('/notary')
