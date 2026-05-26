@@ -112,35 +112,10 @@ Route::prefix('/agent')
         Route::patch('negotiation/approve/{id}', [AgentController::class, 'approveNegotiation'])->name('agent.approveNegotiation');
         Route::patch('negotiation/reject/{id}', [AgentController::class, 'rejectNegotiation'])->name('agent.rejectNegotiation');
         Route::get('negotiation/rejection/reason/{id}', [AgentController::class, 'negotiationRejectionReason'])->name('agent.negotiationRejectionReason');
-        Route::get('/document', function () {
-            return view('agent.document');
-        });
-        Route::get('/document-detail', function () {
-        $documents = [
-            (object)[
-                'file_path' => 'uploads/documents/KTP.jpg'
-            ],
-            (object)[
-                'file_path' => 'uploads/documents/AJB.pdf'
-            ],
-        ];
+        Route::get('/document', [DocumentController::class, 'documentAgent'])->name('agent.document');
+        Route::get('/document/detail/{id}', [DocumentController::class, 'detailDocumentAgent'])->name('agent.detailDocument');
+        Route::post('document/detail/status/{id}', [DocumentController::class, 'documentStatus'])->name('agent.documentStatus');
 
-            return view('agent.document-detail', compact('documents'));
-        });
-        Route::get('/document-status', function () {
-        $documents = [
-            (object)[
-                'file_path' => 'uploads/documents/KTP.jpg',
-                'status' => 'approved'
-            ],
-            (object)[
-                'file_path' => 'uploads/documents/AJB.pdf',
-                'status' => 'rejected'
-            ],
-        ];
-
-    return view('agent.document-status', compact('documents'));
-    });
     });
 
 Route::prefix('/notary')

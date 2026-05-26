@@ -36,15 +36,21 @@
                     </div>
                     
                     @php 
-                    $status = 'pending';
+                        if($document->is_approve_agen == 1){
+                            $status = 'approved';
+                        } elseif($document->is_approve_agen == 0){
+                            $status = 'rejected';
+                        } else {
+                            $status = 'pending';
+                        }
                     @endphp
         
-                <!-- Status -->
-                <div class="flex items-center gap-4">
-                    @include('components.common.negotiation-status', [
-                        'type' => $status
-                        ])
-                            </div>
+                    <!-- Status -->
+                    <div class="flex items-center gap-4">
+                        @include('components.common.negotiation-status', [
+                            'type' => $status
+                            ])
+                    </div>
                 </div>
             @endforeach
         </div>

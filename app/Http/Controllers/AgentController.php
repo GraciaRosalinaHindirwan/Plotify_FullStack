@@ -306,6 +306,8 @@ class AgentController extends Controller
         'seller',
     ])->findOrFail($id);
 
+    dd($negotiation);
+
         return view("agent/negotiationDetail",[
             "link" => '/agent/negotiationHistory',
             "title" => 'Detail Negosiasi',
