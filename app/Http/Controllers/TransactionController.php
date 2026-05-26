@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\transaction;
+use App\Models\Transaction;
 use App\Models\Agent;
 use App\Models\Property;
 use App\Models\Negotiation;
@@ -16,7 +16,7 @@ class TransactionController extends Controller
     {
         $negotiations = Negotiation::with([
             'property',
-        ])->get()->where('buyer_id', Auth::id());
+        ])->latest()->get()->where('buyer_id', Auth::id());
 
         return view('users/negotiation',[
             'negotiations' => $negotiations,
@@ -129,10 +129,11 @@ class TransactionController extends Controller
 
     public function transaction()
     {
-        $transaction = transaction::with([
-            'property.property_image'
+        $transaction = Transaction::with([
+            'property.property_image',
         ])
         ->where('buyer_id', Auth::id())
+        ->latest()
         ->get();
 
         return view('users/transaction', [
@@ -156,18 +157,23 @@ class TransactionController extends Controller
     }
 
     public function transactionDetail($id){
-        $transaction = transaction::with([
-            'property'
-        ])->findOrFail($id);
+        $transactions = Transaction::with([
+            'property',
+            'buyer_document',
+        ]) 
+        ->withCount('buyer_document')
+        ->where('buyer_id', Auth::id())
+       ->where('id', $id)
+        ->firstOrFail();
 
-        if ($transaction->buyer_id !== Auth::id()) {
+        if ($transactions->buyer_id !== Auth::id()) {
         abort(403);
         }
 
         return view('users/transactionDetail',[
-            'transaction' => $transaction,
             'link' => route('users.transaction'),
             'title' => 'Detail Transaksi',
+            'transaction' => $transactions,
         ]);
     }
 
@@ -205,15 +211,20 @@ class TransactionController extends Controller
             'Appoinment'
          ])->findOrFail($propertyId);
 
+         
          $transaction = Transaction::create([
-            'property_id' => $propertyId,
-            'seller_id' => $property->Appoinment->seller_id,
-            'agent_id' => $agentId,
-            'buyer_id' => Auth::id(),
-            'deal_price' => $property->price,
-            'transaction_type' => 'direct',
-            'negotiation_id' => null,
-         ]);
+             'property_id' => $propertyId,
+             'seller_id' => $property->Appoinment->seller_id,
+             'agent_id' => $agentId,
+             'buyer_id' => Auth::id(),
+             'deal_price' => $property->price,
+             'transaction_type' => 'direct',
+             'negotiation_id' => null,
+             ]);
+
+        $property->update([
+            'sold_date' => now()
+        ]);
 
         session()->forget(['agentId', 'propertyId']);
         return redirect()->route('users.transaction')

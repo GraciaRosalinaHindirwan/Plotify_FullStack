@@ -38,4 +38,12 @@ class transaction extends Model
         return $this->belongsTo(negotiation::class);
     }
 
+    public function buyer_document(){
+        return $this->hasMany(Buyer_Document::class, 'transaction_id');
+    }
+
+    public function seller_document(){
+        return $this->hasMany(Seller_Document::class, 'transaction_id');
+    }
+
 }

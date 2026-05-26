@@ -44,15 +44,32 @@ class UsersController extends Controller
             'facilities',
             'spesification',
             'appoinment'
-        ])->find($id);
+        ])->findOrFail($id);
 
-        $regencyId = $property->appoinment->district->regency->id;
-        $agent = Agent_regency::with([
-            'agent.user'
-        ])
-            ->where('regency_id', $regencyId)
-            ->inRandomOrder()
-            ->first();
+        $selectedAgentId = session('agentId');
+        if($selectedAgentId) {
+            $agent = Agent_regency::with('agent.user')
+                ->where('agent_id', $selectedAgentId)
+                ->first();
+
+            if(!$agent) {
+                $regencyId = $property->appoinment->district->regency->id;
+
+                $agent = Agent_regency::with('agent.user')
+                    ->where('regency_id', $regencyId)
+                    ->inRandomOrder()
+                    ->first();
+            }
+        } else{
+
+            $regencyId = $property->appoinment->district->regency->id;
+            $agent = Agent_regency::with([
+                'agent.user'
+            ])
+                ->where('regency_id', $regencyId)
+                ->inRandomOrder()
+                ->first();
+        }
 
         return view('users/detail-property', [
             'link' => route("users.property"),

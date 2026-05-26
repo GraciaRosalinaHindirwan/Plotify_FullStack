@@ -19,6 +19,18 @@ function isActive($route) {
             : 'text-[var(--color-text)] hover:opacity-70'; }} transition-all duration-300" href="/users/negotiation">Negosiasi</a></li>
             <li><a class="font-bold text-xl {{ request()->routeIs('users.transaction') ? 'bg-clip-text text-transparent bg-gradient-to-t from-[#B153D7] via-[#4D2FB2] to-[#0E21A0]'
             : 'text-[var(--color-text)] hover:opacity-70'; }} transition-all duration-300" href="/users/transaction">Transaksi</a></li>
+
+            @php
+                $showDocumentNavbar = \App\Models\Buyer_Document::whereHas('transaction', function ($query) {
+                    $query->where('seller_id', Auth::id());
+                })
+                ->count() >= 3;
+            @endphp
+
+            @if($showDocumentNavbar)
+                <li><a class="font-bold text-xl {{ request()->routeIs('users.document') ? 'bg-clip-text text-transparent bg-gradient-to-t from-[#B153D7] via-[#4D2FB2] to-[#0E21A0]'
+                : 'text-[var(--color-text)] hover:opacity-70'; }} transition-all duration-300" href="/users/document">Dokumen</a></li>
+            @endif
  
                 <form method="POST" action="/agent/logout">
                     @csrf

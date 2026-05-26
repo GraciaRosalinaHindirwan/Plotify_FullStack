@@ -38,6 +38,7 @@ class EloquentAppointmentRepository implements AppointmentRepository
             "district"
         ])
             ->where("seller_id", $sellerId)
+            ->latest()
             ->get();
 
         $mappedAppointments = $appointments->map(function ($item) {
