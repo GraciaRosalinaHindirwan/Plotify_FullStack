@@ -37,7 +37,7 @@
             </div>
 
     <div class="w-full flex flex-col gap-9 mt-[32px]">
-        <h1 class="text-[32px] font-bold text-[var(--color-text)]">Menunggu persetujuan</h1>
+        <h1 class="text-[24px] font-bold text-[var(--color-text)]">Menunggu persetujuan</h1>
         @foreach($negotiations as $negotiation)
         @if($negotiation->is_agen_approve === 1 && $negotiation->is_seller_approve === null && $negotiation->seller_id === Auth::id())
            <article class="bg-[#1E1E1E] flex justify-between items-center px-[16px] py-[16px] rounded-xl">

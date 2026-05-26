@@ -2,8 +2,8 @@
       <div class="flex items-center gap-6">
          <img src="{{ asset('storage/' . $transaction->property->property_image->whereNotNull('url')->first()?->url)}}" alt="building" class="w-[100px] rounded-[16px]">
          <div>
-            <p class="text-[18px] text-[var(--color-text)] pb-[8px]">{{ $transaction->sold_date }}</p>
-            <h2 class="text-2xl font-bold">{{$transaction->property->name}}</h2>
+            <p class="text-[18px] text-[var(--color-text)] pb-[8px]">{{ $transaction->property->sold_date }}</p>
+            <h2 class="text-2xl font-bold text-[var(--color-text)]">{{$transaction->property->name}}</h2>
          </div>
       </div>
       <a href="{{ route('users.detailTransaction', ['id' => $transaction->id]) }}">

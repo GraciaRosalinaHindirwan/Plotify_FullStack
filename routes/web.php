@@ -5,6 +5,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\DocumentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -68,7 +69,6 @@ Route::prefix('/users')
         Route::patch('negotiation/reject/{id}', [TransactionController::class, 'rejectNegotiation'])->name('users.rejectNegotiation');
         Route::get('negotiation/rejection/reason/{id}', [TransactionController::class, 'negotiationRejectionReason'])->name('users.negotiationRejectionReason');
 
-
         Route::get('/transaction', [TransactionController::class, 'transaction'])->name('users.transaction');
         Route::get('/transaction/detail/{id}', [TransactionController::class, 'transactionDetail'])->name('users.detailTransaction');
         Route::get('/transaction/method', [TransactionController::class, 'transactionMethod'])->name('users.transactionMethod');
@@ -79,6 +79,13 @@ Route::prefix('/users')
         Route::post('/negotiation/add', [TransactionController::class, 'negotiationStore'])->name('users.negotiationStore');
         Route::get('/renegotiation/{id}', [TransactionController::class, 'renegotiation'])->name('users.renegotiation');
         Route::patch('/renegotiation/{id}', [TransactionController::class, 'renegotiationUpdate'])->name('users.renegotiationUpdate');
+
+        Route::get('/document', [DocumentController::class, 'document'])->name('users.document');
+        Route::get('/document/detail/{id}', [DocumentController::class, 'detailDocument'])->name('users.detailDocument');
+        Route::get('add/document/{id}', [DocumentController::class, 'addDocument'])->name('users.addDocument');
+        Route::get('add/document/seller/{id}', [DocumentController::class, 'addDocumentSeller'])->name('users.addDocumentSeller');
+        Route::post('add/document/{id}', [DocumentController::class, 'storeDocument'])->name('users.storeDocument');
+        Route::post('add/document/seller/{id}', [DocumentController::class, 'storeDocumentSeller'])->name('users.storeDocumentSeller');
 });
 
 Route::prefix('/agent')

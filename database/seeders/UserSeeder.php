@@ -3,6 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Agent;
+use App\Models\Agent_regency;
+use App\Models\Province;
+use App\Models\Regency;
+use App\Models\District;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -23,7 +28,7 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => '12345678',]);
 
-        User::firstorCreate(
+        User::firstOrCreate(
             ['email' => 'catluminate@gmail.com'],
             [
                 'fullname' => 'Catluminate',
@@ -35,7 +40,7 @@ class UserSeeder extends Seeder
                 'password' => '12345',
             ]);
         
-        User::firstorCreate(
+        User::firstOrCreate(
             ['email' => 'notary@gmail.com'],
             [
                 'fullname' => 'Notary',
@@ -47,7 +52,7 @@ class UserSeeder extends Seeder
                 'password' => '12345',
             ]);
         
-            User::firstorCreate(
+            $user = User::firstOrCreate(
                 ['email' => 'agent@gmail.com'],
                 [
                     'fullname' => 'Agent',
@@ -58,5 +63,32 @@ class UserSeeder extends Seeder
                     'email_verified_at' => now(),
                     'password' => '12345',
                 ]);
-    }
+
+                if ($user->role === 'agent') {
+                    $agent = Agent::firstOrCreate([
+                        'user_id' => $user->id
+                    ]);
+
+                    $province = Province::create([
+                        'name' => 'Jawa Barat'
+                    ]);
+
+                    $regency = Regency::create([
+                        'province_id' => $province->id,
+                        'name' => 'Bandung'
+                    ]);
+
+                    $district = District::create([
+                        'regency_id' => $regency->id,
+                        'name' => 'Coblong',
+                        'postal_code' => '40135'
+                    ]);
+
+                    Agent_regency::firstOrCreate([
+                        'agent_id' => $agent->id,
+                        'regency_id' => $regency->id
+                    ]);
+
+                }
+            }
 }
