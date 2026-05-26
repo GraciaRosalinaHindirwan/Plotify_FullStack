@@ -174,12 +174,7 @@ class UserAppoinmentTest extends TestCase
 
     public function test_user_can_access_list_appointment_page(): void
     {
-        $fakeAppointments = collect([
-        (object)[
-            'id' => 1,
-            'propertyName' => 'Rumah A'
-        ]
-        ]);
+        $fakeAppointments = [];
         $this->mock(AppointmentRepository::class, function ($mock) use ($fakeAppointments) {
         $mock->shouldReceive('getBySellerId')
             ->once()

@@ -13,6 +13,8 @@ interface AppointmentRepository
 
     public function getById($id): ?AppointmentDTO;
 
+    public function getBySellerId($id): array;
+
     public function rescheduleAppointment($appointmentId, AppointmentScheduleDTO $appointmentSchedule): bool;
 
     public function approveAppointment($appointmentId, $isApproveByAgent): bool;

@@ -162,12 +162,13 @@ class TransactionController extends Controller
             'buyer_document',
         ]) 
         ->withCount('buyer_document')
-        ->where('buyer_id', Auth::id())
+        // ->where('buyer_id', Auth::id())
        ->where('id', $id)
         ->firstOrFail();
 
+        $transactions = Transaction::findOrFail($id); 
         if ($transactions->buyer_id !== Auth::id()) {
-        abort(403);
+            abort(403);
         }
 
         return view('users/transactionDetail',[
