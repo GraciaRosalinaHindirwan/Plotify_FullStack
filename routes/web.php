@@ -19,7 +19,7 @@ Route::get('/login', [AuthController::class, 'login'])->name("login");
 Route::post('/login', [AuthController::class, 'loginPost']);
 
 Route::prefix("/admin")->group(function () {
-    Route::get('/login', [AdminController::class, 'login'])->name("login");
+    Route::get('/login', [AdminController::class, 'login'])->name("agent.login");
     Route::post('/login', [AdminController::class, 'loginPost']);
     Route::post("/logout", [AdminController::class, 'logout']);
 
