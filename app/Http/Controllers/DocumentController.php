@@ -23,6 +23,10 @@ class DocumentController extends Controller
         ->latest()
         ->get();
 
+        if ($transaction->isEmpty()) {
+            abort(403);
+        }
+
         // dd($transaction);
 
         return view('users.document',[
