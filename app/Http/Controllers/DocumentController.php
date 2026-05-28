@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Transaction;
 use App\Models\Agent;
 use App\Models\Buyer_Document;
@@ -163,13 +164,21 @@ class DocumentController extends Controller
 
             // Ada reject?
             $hasRejected =
-                $buyerDocs->contains(fn($doc) => $doc->is_approve_agen == 0) ||
-                $sellerDocs->contains(fn($doc) => $doc->is_approve_agen == 0);
+                $buyerDocs->contains(fn($doc) => $doc->is_approve_agen === 0) ||
+                $sellerDocs->contains(fn($doc) => $doc->is_approve_agen === 0);
 
             // Semua approve?
             $allApproved =
-                $buyerDocs->every(fn($doc) => $doc->is_approve_agen == 1) &&
-                $sellerDocs->every(fn($doc) => $doc->is_approve_agen == 1);
+                $buyerDocs->every(fn($doc) => $doc->is_approve_agen === 1) &&
+                $sellerDocs->every(fn($doc) => $doc->is_approve_agen === 1);
+
+            if ($hasRejected) {
+                $transaction->status = 'rejected';
+            } elseif ($allApproved) {
+                $transaction->status = 'approved';
+            } else {
+                $transaction->status = 'pending';
+            }
 
             // Masih pending?
             $transaction->show_status =
@@ -226,6 +235,45 @@ class DocumentController extends Controller
         $document->save();
 
         return back()->with('success', 'Status dokumen berhasil diperbarui');
+    }
+
+    public function reuploadDocument($id){
+        $document = Buyer_Document::findOrFail($id);
+
+        return view('users.reupload',[
+            "link" => route("users.detailDocument", ["id" => $document->id]),
+            "title" => "Reupload Document Seller",
+            'document' => $document
+        ]);
+    }
+
+    public function reuploadDocumentStore(Request $request, $id)
+    {
+        $document = Buyer_Document::findOrFail($id);
+
+        $request->validate([
+            'document_file' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048'
+        ]);
+
+        // hapus file lama kalau ada
+        if ($document->file_path && Storage::disk('public')->exists($document->file_path)) {
+            Storage::disk('public')->delete($document->file_path);
+        }
+
+        // upload file baru
+        $path = $request->file('document_file')
+            ->store('buyer_documents', 'public');
+
+        // update database
+        $document->update([
+            'file_path' => $path,
+            'document_name' => $request->file('document_file')->getClientOriginalName(),
+            'is_approve_agen' => null,
+        ]);
+
+        return redirect()
+            ->route('users.detailDocument', ['id' => $document->transaction_id])
+            ->with('success', 'Dokumen berhasil diupload ulang');
     }
 }
 

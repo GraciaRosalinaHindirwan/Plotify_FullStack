@@ -10,10 +10,10 @@
 
             @php
                 $allBuyerApproved = $transaction->buyer_document
-                    ->every(fn($doc) => $doc->is_approve_agen == 1);
+                    ->every(fn($doc) => $doc->is_approve_agen === 1);
 
                 $allSellerApproved = $transaction->seller_document
-                    ->every(fn($doc) => $doc->is_approve_agen == 1);
+                    ->every(fn($doc) => $doc->is_approve_agen === 1);
             @endphp
 
                 @if($transaction->show_status)
@@ -26,7 +26,7 @@
                         </div>
                         <div class="flex items-center gap-4">
                             @include('components.common.negotiation-status', [
-                                'type' => $status
+                                'type' => $transaction->status
                             ])
                             <a href="{{ route('agent.detailDocument', ['id' => $transaction->id]) }}">
                                 <i class="fa-solid fa-angle-right text-[24px]"></i>

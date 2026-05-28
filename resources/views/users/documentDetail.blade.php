@@ -2,6 +2,11 @@
 @section('content')
     <div class="flex backdrop-blur-md border border-white/20 shadow-lg rounded-2xl mx-[80px] py-[32px] px-[80px] flex-col gap-[32px]">
         <div class="gap-[16px] items-center flex flex-col">
+            @if(session('success'))
+                <div class="bg-green-500 text-white px-4 py-3 rounded-xl mb-4">
+                    {{ session('success') }}
+                </div>
+            @endif
             <h1 class="text-[26px] font-bold text-[var(--color-text)]">Modern Building House</h1>
             <h1 class="text-[26px] font-bold text-[var(--color-text)]">Rp.500.000.000,00</h1>
         </div>
@@ -17,28 +22,38 @@
                             {{ $document->document_type }}
                         </h2>
                         
-                        <!-- File Card -->
-                        <a 
-                        href="{{ asset('storage/' . $document->file_path) }}"
-                        target="_blank"
-                        class="flex items-center gap-3 bg-white px-4 py-3 rounded-lg w-fit hover:scale-105 transition"
-                        >
-                        <!-- Icon -->
-                        <div class="text-black text-[20px]">
-                            <i class="fa-solid fa-image"></i>
-                        </div>
-                        
-                        <!-- File Name -->
-                        <p class="text-black font-medium">
-                            {{ strtoupper(basename($document->document_name)) }}
-                            </p>
-                        </a>
+                        @if($document->is_approve_agen !== 0)
+                            <!-- File Card -->
+                            <a 
+                            href="{{ asset('storage/' . $document->file_path) }}"
+                            target="_blank"
+                            class="flex items-center gap-3 bg-white px-4 py-3 rounded-lg w-fit hover:scale-105 transition"
+                            >
+                            <!-- Icon -->
+                            <div class="text-black text-[20px]">
+                                <i class="fa-solid fa-image"></i>
+                            </div>
+                            
+                            <!-- File Name -->
+                            <p class="text-black font-medium">
+                                {{ strtoupper(basename($document->document_name)) }}
+                                </p>
+                            </a>
+
+                        @else
+                            @include('components.common.button',[
+                                'href' => route('users.reuploadDocument', ['id' => $document->id]),
+                                'slot' => 'unggah ulang'
+                            ])
+
+                        @endif
                     </div>
                     
+                    
                     @php 
-                        if($document->is_approve_agen == 1){
+                        if($document->is_approve_agen === 1){
                             $status = 'approved';
-                        } elseif($document->is_approve_agen == 0){
+                        } elseif($document->is_approve_agen === 0){
                             $status = 'rejected';
                         } else {
                             $status = 'pending';

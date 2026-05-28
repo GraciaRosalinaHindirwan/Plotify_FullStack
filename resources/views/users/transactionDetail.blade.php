@@ -19,11 +19,11 @@
         </div>
 
         @include("components.common.button", [
-            'href' => $transaction->buyer_document_count == 3 
+            'href' => $transaction->buyer_document_count >= 3 
             ? route("users.detailDocument", ["id" => $transaction->id])
             : route("users.addDocument", ["id" => $transaction->id]),
 
-            'slot' => $transaction->buyer_document_count == 3 
+            'slot' => $transaction->buyer_document_count >= 3 
             ? 'Detail Dokumen'
             : 'Unggah Dokumen'
         ])

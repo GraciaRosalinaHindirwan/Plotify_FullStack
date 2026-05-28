@@ -86,6 +86,9 @@ Route::prefix('/users')
         Route::get('add/document/seller/{id}', [DocumentController::class, 'addDocumentSeller'])->name('users.addDocumentSeller');
         Route::post('add/document/{id}', [DocumentController::class, 'storeDocument'])->name('users.storeDocument');
         Route::post('add/document/seller/{id}', [DocumentController::class, 'storeDocumentSeller'])->name('users.storeDocumentSeller');
+        Route::get('/reupload/document/{id}', [DocumentController::class, 'reuploadDocument'])
+        ->name('users.reuploadDocument');
+        Route::post('/reupload/document/{id}',[DocumentController::class, 'reuploadDocumentStore'])->name('users.reuploadDocumentStore');
 });
 
 Route::prefix('/agent')
