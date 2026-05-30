@@ -1,6 +1,15 @@
 {
+  "resources/css/app.css": {
+    "file": "assets/app-C9XegIOT.css",
+    "src": "resources/css/app.css",
+    "isEntry": true,
+    "name": "app",
+    "names": [
+      "app.css"
+    ]
+  },
   "resources/css/design-system.css": {
-    "file": "assets/design-system-DfsiG3ie.css",
+    "file": "assets/design-system-quL9UYzt.css",
     "src": "resources/css/design-system.css",
     "isEntry": true,
     "name": "design-system",
