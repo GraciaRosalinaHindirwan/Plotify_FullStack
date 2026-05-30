@@ -6,7 +6,7 @@
     <title>Authentication Page</title>
     
     <!-- Link -->
-   @vite('resources/css/design-system.css')
+   @vite(['resources/css/design-system.css'])
 
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
