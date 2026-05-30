@@ -28,7 +28,7 @@
                 <li>
                     <article class="h-[400px] p-[1px] rounded-xl bg-gradient-to-r from-[#0560E8] to-[#7000FF]">
                         <div class=" h-full gap-3 flex flex-col rounded-xl bg-[var(--color-bg)] p-[10px]">
-                            <img src="{{ asset('storage/' . $property->property_image->whereNotNull('url')->first()?->url) }}" alt="gambar" 
+                            <img src="{{ asset('storage/' . trim($property->property_image->whereNotNull('url')->first()?->url, '"')) }}" alt="gambar" 
                             class="w-full h-[160px] object-cover rounded-[16px] mb-[16px]">
                             <h1 class="font-bold text-lg">{{ $property->name }}</h1>
                             <p class="mt-2xl">{{ Str::limit($property->description, 100) }}</p>
